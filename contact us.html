@@ -19,7 +19,7 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background-color: var(--bg-light); color: var(--text-dark); font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+    body { background-color: var(--bg-light); color: var(--text-dark); font-family: 'Montserrat', sans-serif; overflow-x: hidden; padding-top: 92px; }
     
     h2, h3, .logo, .nav-links a, .nav-button, .submit-btn, label, .info-item span, .footer-heading {
       font-family: 'Lilita One', cursive;
@@ -27,22 +27,38 @@
 
     /* Navigation Bar */
     .navbar { 
-      display: flex; justify-content: space-between; align-items: center; 
-      padding: 1rem 8%; background: var(--primary); border-bottom: 6px solid var(--accent);
-      position: sticky; top: 0; z-index: 100;
+      display: grid;
+      grid-template-columns: minmax(180px, 1fr) auto minmax(180px, 1fr);
+      align-items: center;
+      column-gap: 1.5rem;
+      padding: 1rem 8%;
+      background: var(--primary);
+      border-bottom: 6px solid var(--accent);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
     }
     
-    .logo { font-size: 2.2rem; color: var(--accent); text-shadow: 2px 2px 0px var(--text-dark); text-decoration: none; }
-    .nav-links { display: flex; list-style: none; gap: 2rem; }
-    .nav-links a { text-decoration: none; color: var(--white); font-size: 1.1rem; text-transform: uppercase; transition: 0.3s; }
+    .logo { font-size: 2.2rem; color: var(--accent); text-shadow: 2px 2px 0px var(--text-dark); text-decoration: none; justify-self: start; line-height: 1; white-space: nowrap; }
+    .nav-links { display: flex; list-style: none; gap: 2rem; justify-self: center; align-items: center; }
+    .nav-links a { text-decoration: none; color: var(--white); font-size: 1.1rem; text-transform: uppercase; transition: 0.3s; display: inline-flex; align-items: center; height: 44px; }
     .nav-links a:hover { color: var(--accent); }
     
     .nav-button { 
       text-decoration: none; background: var(--accent); color: var(--text-dark);
-      padding: 0.6rem 1.5rem; border-radius: 12px; border: 3px solid var(--text-dark);
-      box-shadow: 4px 4px 0px var(--text-dark); transition: 0.3s;
+      padding: 0 1.5rem; border-radius: 12px; border: 3px solid var(--text-dark);
+      box-shadow: 4px 4px 0px var(--text-dark); transition: background-color 0.2s, color 0.2s;
+      justify-self: end;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 130px;
+      height: 44px;
     }
-    .nav-button:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px var(--text-dark); background: var(--white); }
+    .nav-button:hover { background: var(--white); }
+    .nav-button:active { transform: none; }
 
     /* Contact Section */
     .contact-section {
@@ -150,6 +166,9 @@
     }
 
     @media (max-width: 1024px) {
+      .navbar { grid-template-columns: 1fr; row-gap: 0.7rem; padding: 1rem 5%; }
+      .logo, .nav-links, .nav-button { justify-self: center; }
+      .nav-links { gap: 1rem; flex-wrap: wrap; justify-content: center; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
@@ -163,14 +182,15 @@
     <li><a href="menu.html">Menu</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="contact us.html" style="color: var(--accent);">Contact</a></li>
+    <li><a href="history.html">History</a></li>
   </ul>
-  <a class="nav-button" href="index.html">LOGOUT</a>
+  <a class="nav-button" href="index.html" onclick="return logoutAndResetHistory(event)">LOGOUT</a>
 </nav>
 
 <section class="contact-section">
   <div class="contact-container">
     <div class="contact-info">
-      <h2>Talk to <br> the Chef</h2>
+      <h2>Talk to <br> Mima</h2>
       <p>Whether it's feedback or a giant party order, we're ready to flip it!</p>
       <div class="info-item">
         <span>📍 Find the Grill</span>
@@ -201,7 +221,7 @@
           <label>Special Requests / Feedback</label>
           <textarea placeholder="Tell us what's on your mind..." style="min-height: 120px;" required></textarea>
         </div>
-        <button class="submit-btn" type="submit">SEND TO KITCHEN</button>
+        <button class="submit-btn" type="submit">SEND</button>
       </form>
     </div>
   </div>
@@ -249,6 +269,16 @@
 </footer>
 
 <script>
+  const ORDER_HISTORY_KEY = "mimaliciousOrderHistory";
+
+  function logoutAndResetHistory(event) {
+    if (event) event.preventDefault();
+    localStorage.removeItem(ORDER_HISTORY_KEY);
+    sessionStorage.removeItem(ORDER_HISTORY_KEY);
+    window.location.href = "index.html";
+    return false;
+  }
+
   function sendMessage(e) {
     e.preventDefault();
     alert("Message received! We'll get back to you soon. 🍔");

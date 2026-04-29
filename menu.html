@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -34,8 +34,8 @@
     }
     
     .logo { font-size: 2.2rem; color: var(--accent); text-shadow: 2px 2px 0px var(--text-dark); text-decoration: none;}
-    .nav-links { display: flex; list-style: none; gap: 2rem; }
-    .nav-links a { text-decoration: none; color: var(--white); font-size: 1.1rem; text-transform: uppercase; transition: 0.3s; }
+    .nav-links { display: flex; list-style: none; gap: 2rem; align-items: center; flex-wrap: wrap; }
+    .nav-links a { text-decoration: none; color: var(--white); font-size: 1.1rem; text-transform: uppercase; transition: 0.3s; display: inline-flex; align-items: center; height: 44px; }
     .nav-links a:hover { color: var(--accent); }
     
     .nav-right { display: flex; align-items: center; gap: 1.5rem; }
@@ -45,12 +45,11 @@
       text-decoration: none; 
       background: var(--accent); 
       color: var(--text-dark);
-      padding: 0.8rem 2rem; 
-      border-radius: 20px; 
-      font-weight: 900; 
-      border: 4px solid var(--text-dark); 
-      box-shadow: 6px 6px 0px var(--text-dark); 
-      transition: 0.1s ease; 
+      padding: 0 1.5rem; 
+      border-radius: 12px; 
+      border: 3px solid var(--text-dark); 
+      box-shadow: 4px 4px 0px var(--text-dark); 
+      transition: background-color 0.2s, color 0.2s;
       text-transform: uppercase;
       font-size: 1.1rem;
       cursor: pointer;
@@ -58,17 +57,21 @@
       align-items: center;
       gap: 10px;
       position: relative;
+      min-width: 130px;
+      height: 44px;
+      justify-content: center;
+      font-weight: 900;
     }
 
     .nav-button:hover, .cart-icon:hover { 
       background: var(--white);
-      transform: translate(2px, 2px);
+      transform: none;
       box-shadow: 4px 4px 0px var(--text-dark); 
     }
 
     .nav-button:active, .cart-icon:active {
-      transform: translate(6px, 6px);
-      box-shadow: 0px 0px 0px var(--text-dark);
+      transform: none;
+      box-shadow: 4px 4px 0px var(--text-dark);
     }
 
     #cart-count {
@@ -78,6 +81,13 @@
       border-radius: 10px; 
       font-size: 0.9rem; 
       border: 2px solid var(--text-dark);
+    }
+
+    @media (max-width: 1024px) {
+      .navbar { flex-direction: column; row-gap: 0.7rem; padding: 1rem 5%; }
+      .logo, .nav-links, .nav-right { justify-self: center; }
+      .nav-links { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+      .nav-right { flex-wrap: wrap; justify-content: center; }
     }
 
     /* --- Hero Section --- */
@@ -139,31 +149,135 @@
     .price { font-size: 1.8rem; color: var(--text-dark); margin-bottom: 1rem; }
 
     .add-btn {
-      background: var(--accent); color: var(--text-dark); border: 4px solid var(--text-dark);
-      padding: 0.8rem; border-radius: 15px; font-size: 1.2rem; cursor: pointer;
-      box-shadow: 5px 5px 0px var(--text-dark); transition: 0.1s; width: 100%;
+      background: #e60023;
+      color: transparent;
+      border: 0;
+      padding: 0;
+      border-radius: 999px;
+      font-size: 0;
+      cursor: pointer;
+      box-shadow: 0 6px 0 #7f0015;
+      transition: transform 0.15s var(--nike-ease), box-shadow 0.15s var(--nike-ease), background-color 0.15s var(--nike-ease);
+      width: 136px;
+      height: 58px;
       text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: auto;
+      align-self: center;
+      letter-spacing: 0;
     }
-    .add-btn:hover { background: var(--white); transform: translate(1px, 1px); box-shadow: 4px 4px 0px var(--text-dark); }
-    .add-btn:active { transform: translate(5px, 5px); box-shadow: 0px 0px 0px var(--text-dark); }
-
-    .toast-notification {
-      position: fixed; bottom: 30px; right: 30px;
-      background: var(--accent); color: var(--text-dark);
-      padding: 1rem 2rem; border: 4px solid var(--text-dark);
-      box-shadow: 6px 6px 0px var(--text-dark); border-radius: 15px;
-      font-size: 1.2rem; z-index: 9999; display: flex; align-items: center; gap: 10px;
-      pointer-events: none;
-      animation: slideInUp 0.4s var(--nike-ease), fadeOut 0.4s 2.5s forwards;
+    .add-btn::before {
+      content: "\f07a";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.6rem;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+    .add-btn:hover {
+      background: #ff0f3a;
+      transform: translateY(-2px);
+      box-shadow: 0 7px 0 #7f0015;
+    }
+    .add-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 #7f0015;
     }
 
-    @keyframes slideInUp {
-      from { transform: translateY(100px) rotate(10deg); opacity: 0; }
-      to { transform: translateY(0) rotate(0deg); opacity: 1; }
+    .size-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(80, 35, 20, 0.6);
+      z-index: 2500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
     }
-
-    @keyframes fadeOut {
-      to { opacity: 0; transform: scale(0.9); }
+    .size-overlay.active { display: flex; }
+    .size-modal {
+      width: min(560px, 100%);
+      background: var(--white);
+      border-radius: 24px;
+      border: 4px solid var(--text-dark);
+      box-shadow: 14px 14px 0 var(--accent);
+      overflow: hidden;
+    }
+    .size-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.2rem 1.4rem;
+      border-bottom: 2px solid #e7dfd0;
+      font-family: 'Lilita One', cursive;
+      color: var(--text-dark);
+      font-size: 1.6rem;
+    }
+    .size-modal-body {
+      padding: 1.4rem;
+    }
+    .size-prompt {
+      font-weight: 800;
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+    .size-option {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.85rem 0.95rem;
+      border: 2px solid #e5ded1;
+      border-radius: 16px;
+      margin-bottom: 0.75rem;
+      cursor: pointer;
+      transition: 0.15s ease;
+    }
+    .size-option:hover { background: #fffdf8; }
+    .size-option input { accent-color: var(--primary); width: 18px; height: 18px; }
+    .size-option strong { font-family: 'Lilita One', cursive; font-size: 1.15rem; }
+    .size-option .size-price { margin-left: auto; font-weight: 900; font-size: 1.1rem; }
+    .size-option.active { background: #fff8f3; border-color: var(--primary); }
+    .size-modal-actions {
+      padding: 1.2rem 1.4rem 1.4rem;
+      border-top: 2px solid #e7dfd0;
+      display: flex;
+      gap: 0.8rem;
+    }
+    .size-confirm {
+      flex: 1;
+      background: var(--primary);
+      color: var(--white);
+      border: 4px solid var(--text-dark);
+      border-radius: 16px;
+      font-family: 'Lilita One', cursive;
+      font-size: 1.25rem;
+      padding: 0.95rem 1rem;
+      box-shadow: 6px 6px 0 var(--text-dark);
+      cursor: pointer;
+    }
+    .size-confirm:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .size-close {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      border: 4px solid var(--text-dark);
+      background: var(--accent);
+      color: var(--text-dark);
+      font-size: 1.4rem;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 6px 6px 0 var(--text-dark);
     }
 
     /* --- Side Cart & Payment Modal --- */
@@ -244,10 +358,11 @@
     <li><a href="menu.html">Menu</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="contact us.html">Contact</a></li>
+    <li><a href="history.html">History</a></li>
   </ul>
   <div class="nav-right">
     <div class="cart-icon" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div>
-    <a class="nav-button" href="index.html">LOGOUT</a>
+    <a class="nav-button" href="index.html" onclick="return logoutAndResetHistory(event)">LOGOUT</a>
   </div>
 </nav>
 
@@ -258,7 +373,7 @@
   </div>
 </section>
 
-<section class="deals-section">
+<section class="deals-section" id="order-here">
     <h2 class="section-title">Today's Sizzling Hits</h2>
     <div class="deals-grid">
         <div class="deal-card">
@@ -307,31 +422,189 @@
       <img src="images/Big.png" alt="Big" style="width:100%; height:180px; object-fit:contain;">
       <h3>THE BIG MIMA</h3>
       <p>Stacked high with double beef and triple the attitude.</p>
-      <div class="price">₱400</div>
-      <button class="add-btn" onclick="addToCart('The Big Mima', 400)">ADD TO TRAY</button>
+      <div class="price">₱150</div>
+      <button class="add-btn" onclick="addToCart('The Big Mima', 150)">ADD TO TRAY</button>
     </div>
+     <div class="menu-item">
+      <img src="images/Heat.png" alt="Big" style="width:100%; height:180px; object-fit:contain;">
+      <h3>MIMA SWEET HEAT</h3>
+      <p>Sweet and spicy flavor with a fiery kick.</p>
+      <div class="price">₱150</div>
+      <button class="add-btn" onclick="addToCart('Mima Sweet Heat', 150)">ADD TO TRAY</button>
+    </div>
+     <div class="menu-item">
+      <img src="images/Loaded.png" alt="Loaded" style="width:100%; height:180px; object-fit:contain;">
+      <h3>MIMA LOADED STACK</h3>
+      <p>Packed with beef, cheese, and extra toppings.</p>
+      <div class="price">₱150</div>
+      <button class="add-btn" onclick="addToCart('Mima Loaded Stack', 150)">ADD TO TRAY</button>
+    </div>
+     <div class="menu-item">
+      <img src="images/melt.png" alt="Big" style="width:100%; height:180px; object-fit:contain;">
+      <h3>MIMA ULTIMATE MELT</h3>
+      <p>Rich, juicy burger with perfectly melted cheese.</p>
+      <div class="price">₱150</div>
+      <button class="add-btn" onclick="addToCart('Mima Ultimate Melt', 150)">ADD TO TRAY</button>
+    </div>
+     <div class="menu-item">
+      <img src="images/bbq.png" alt="Big" style="width:100%; height:180px; object-fit:contain;">
+      <h3>MIMA BBQ BLAST</h3>
+      <p>Smoky BBQ beef with caramelized onions.</p>
+      <div class="price">₱100</div>
+      <button class="add-btn" onclick="addToCart('Mima BBQ BLAST', 100)">ADD TO TRAY</button>
+    </div>
+     <div class="menu-item">
+      <img src="images/cheesy.png" alt="Big" style="width:100%; height:180px; object-fit:contain;">
+      <h3>Mima Cheesy Overload</h3>
+      <p>Loaded with gooey, melted cheese layers.</p>
+      <div class="price">₱110</div>
+      <button class="add-btn" onclick="addToCart('Mima Cheesy Overload', 110)">ADD TO TRAY</button>
+    </div>
+     <div class="menu-item">
+      <img src="images/crunchy.png" alt="Big" style="width:100%; height:180px; object-fit:contain;">
+      <h3>Mima Crunchy Stack</h3>
+      <p>Crispy chicken and fresh veggies in every bite.</p>
+      <div class="price">₱110</div>
+      <button class="add-btn" onclick="addToCart('Mima Crunchy Stack', 110)">ADD TO TRAY</button>
+    </div>
+     <div class="menu-item">
+      <img src="images/fire-removebg-preview.png" alt="Big" style="width:100%; height:180px; object-fit:contain;">
+      <h3>MIMA FIRE CRUNCH</h3>
+      <p>Crispy chicken with a spicy crunch.</p>
+      <div class="price">₱99</div>
+      <button class="add-btn" onclick="addToCart('Mima Fire Crunch', 99)">ADD TO TRAY</button>
+    </div>
+     <div class="menu-item">
+      <img src="images/smokey.png" alt="Big" style="width:100%; height:180px; object-fit:contain;">
+      <h3>MIMA SMOKY MELT</h3>
+      <p>Beef with smoky sauce and melted cheese.</p>
+      <div class="price">₱99</div>
+      <button class="add-btn" onclick="addToCart('Mima Smoky Melt', 99)">ADD TO TRAY</button>
+    </div>
+     <div class="menu-item">
+      <img src="images/zing.png" alt="Big" style="width:100%; height:180px; object-fit:contain;">
+      <h3>MIMA ZING STACK</h3>
+      <p>Tangy, juicy layers with a zesty bite.</p>
+      <div class="price">₱99</div>
+      <button class="add-btn" onclick="addToCart('Mima Zing Stack', 99)">ADD TO TRAY</button>
+    </div>
+     <div class="menu-item">
+      <img src="images/peper.png" alt="Big" style="width:100%; height:180px; object-fit:contain;">
+      <h3>MIMA PEPPER BLAST</h3>
+      <p>Peppery beef with bold, rich flavor.</p>
+      <div class="price">₱99</div>
+      <button class="add-btn" onclick="addToCart('Mima Pepper Blast', 99)">ADD TO TRAY</button>
+    </div>
+    
   </div>
 
   <div id="menu-fries" class="sub-menu">
     <div class="menu-item">
-      <img src="images/fries.png" alt="Fries" style="width:100%; height:180px; object-fit:contain;">
-      <h3>Salty Wings Fries</h3>
-      <p>Golden, crispy, and perfectly salted.</p>
+      <img src="images/1.png" alt="Fries" style="width:100%; height:180px; object-fit:contain;">
+      <h3>MIMA CLASSIC CRISP FRIES</h3>
+      <p>Golden, thin-cut fries with a light salt seasoning for a simple, satisfying crunch.</p>
       <div class="price">₱50</div>
-      <button class="add-btn" onclick="addToCart('Salty Wings Fries', 50)">ADD TO TRAY</button>
+      <button class="add-btn" onclick="openSizeModal('MIMA CLASSIC CRISP FRIES', 50, 'fries')">ADD TO TRAY</button>
     </div>
+    <div class="menu-item">
+      <img src="images/cheese.png" alt="Fries" style="width:100%; height:180px; object-fit:contain;">
+      <h3>MIMA CHEESY MELT FRIES</h3>
+      <p>Fries loaded with rich melted cheese sauce that’s creamy and savory in every bite.</p>
+      <div class="price">₱50</div>
+      <button class="add-btn" onclick="openSizeModal('MIMA CHEESY MELT FRIES', 50, 'fries')">ADD TO TRAY</button>
+    </div>
+    <div class="menu-item">
+      <img src="images/garlic.png" alt="Fries" style="width:100%; height:180px; object-fit:contain;">
+      <h3>MIMA GARLIC PARM FRIES</h3>
+      <p>Crispy fries tossed in garlic butter and sprinkled with parmesan cheese for a bold, aromatic flavor.</p>
+      <div class="price">₱50</div>
+      <button class="add-btn" onclick="openSizeModal('MIMA GARLIC PARM FRIES', 50, 'fries')">ADD TO TRAY</button>
+    </div>
+    <div class="menu-item">
+      <img src="images/sour.png" alt="Fries" style="width:100%; height:180px; object-fit:contain;">
+      <h3>MIMA SWEET HEAT FRIES</h3>
+      <p>A mix of sweet glaze and spicy chili powder for a sweet-spicy kick.</p>
+      <div class="price">₱50</div>
+      <button class="add-btn" onclick="openSizeModal('MIMA SWEET HEAT FRIES', 50, 'fries')">ADD TO TRAY</button>
+    </div>
+    <div class="menu-item">
+      <img src="images/chili.png" alt="Fries" style="width:100%; height:180px; object-fit:contain;">
+      <h3>MIMA BBQ SMOKE FRIES</h3>
+      <p>Fries coated with smoky barbecue seasoning giving a rich, grilled flavor.</p>
+      <div class="price">₱50</div>
+      <button class="add-btn" onclick="openSizeModal('MIMA BBQ SMOKE FRIES', 50, 'fries')">ADD TO TRAY</button>
+    </div>
+    <div class="menu-item">
+      <img src="images/last.png" alt="Fries" style="width:100%; height:180px; object-fit:contain;">
+      <h3>MIMA CHILI CHEESE FRIES</h3>
+      <p>Hearty fries topped with spicy chili sauce and melted cheese for a heavy, filling snack.</p>
+      <div class="price">₱50</div>
+      <button class="add-btn" onclick="openSizeModal('MIMA CHILI CHEESE FRIES', 50, 'fries')">ADD TO TRAY</button>
+    </div>
+    
   </div>
 
   <div id="menu-drinks" class="sub-menu">
     <div class="menu-item">
       <img src="images/coke.png" alt="Coke" style="width:100%; height:180px; object-fit:contain;">
-      <h3>Mima-Cooler</h3>
+      <h3>COKE</h3>
+      <p>Sweet, dark soda with caffeine.</p>
+      <div class="price">₱20</div>
+      <button class="add-btn" onclick="openSizeModal('COKE', 20, 'drinks')">ADD TO TRAY</button>
+    </div>
+      <div class="menu-item">
+      <img src="images/sprite.png" alt="Sprite" style="width:100%; height:180px; object-fit:contain;">
+      <h3>SPRITE</h3>
+      <p>Lemon-lime soda, caffeine-free.</p>
+      <div class="price">₱20</div>
+      <button class="add-btn" onclick="openSizeModal('SPRITE', 20, 'drinks')">ADD TO TRAY</button>
+    </div>
+      <div class="menu-item">
+      <img src="images/royal.png" alt="Royal" style="width:100%; height:180px; object-fit:contain;">
+      <h3>ROYAL</h3>
+      <p>Sweet, fruity soda (usually orange).</p>
+      <div class="price">₱20</div>
+      <button class="add-btn" onclick="openSizeModal('ROYAL', 20, 'drinks')">ADD TO TRAY</button>
+    </div>
+      <div class="menu-item">
+      <img src="images/springwater.png" alt="Spring Water" style="width:100%; height:180px; object-fit:contain;">
+      <h3>SPRING WATER</h3>
+      <p>Natural, non-carbonated drinking water.</p>
+      <div class="price">₱10</div>
+      <button class="add-btn" onclick="openSizeModal('SPRING WATER', 10, 'drinks')">ADD TO TRAY</button>
+    </div>
+      <div class="menu-item">
+      <img src="images/Lemon.png" alt="Coke" style="width:100%; height:180px; object-fit:contain;">
+      <h3>LEMONADE</h3>
       <p>Icy cold refreshment to put out the fire.</p>
-      <div class="price">₱40</div>
-      <button class="add-btn" onclick="addToCart('Mima-Cooler', 40)">ADD TO TRAY</button>
+      <div class="price">₱25</div>
+      <button class="add-btn" onclick="openSizeModal('LEMONADE', 25, 'drinks')">ADD TO TRAY</button>
+    </div>
+      <div class="menu-item">
+      <img src="images/Tea.png" alt="Coke" style="width:100%; height:180px; object-fit:contain;">
+      <h3>ICED TEA</h3>
+      <p>Chilled tea, slightly sweet and refreshing.</p>
+      <div class="price">₱25</div>
+      <button class="add-btn" onclick="openSizeModal('ICED TEA', 25, 'drinks')">ADD TO TRAY</button>
     </div>
   </div>
 </section>
+
+<div class="size-overlay" id="sizeOverlay" onclick="closeSizeModal(event)">
+  <div class="size-modal" onclick="event.stopPropagation()">
+    <div class="size-modal-header">
+      <span id="sizeModalTitle">Choose Size</span>
+      <button class="size-close" type="button" onclick="closeSizeModal()">&times;</button>
+    </div>
+    <div class="size-modal-body">
+      <div class="size-prompt" id="sizeModalPrompt">Select a size:</div>
+      <div id="sizeOptions"></div>
+    </div>
+    <div class="size-modal-actions">
+      <button class="size-confirm" id="sizeConfirmBtn" type="button" onclick="confirmSizeSelection()">Add to Cart</button>
+    </div>
+  </div>
+</div>
 
 <div class="backdrop" id="cartBackdrop" onclick="closeAllModals()"></div>
 
@@ -378,11 +651,63 @@
 
 <script>
 let cartData = {};
+const ORDER_HISTORY_KEY = "mimaliciousOrderHistory";
+const PRICE_MAP = {
+  "Mima-namnam Deluxe": 150,
+  "Mima-mazing Bite": 190,
+  "Mima-sarap Supreme": 220,
+  "Mima Classic": 70,
+  "The Big Mima": 150,
+  "Mima Sweet Heat": 150,
+  "Mima Loaded Stack": 150,
+  "Mima Ultimate Melt": 150,
+  "Mima BBQ BLAST": 100,
+  "Mima Cheesy Overload": 110,
+  "Mima Crunchy Stack": 110,
+  "Mima Fire Crunch": 99,
+  "Mima Smoky Melt": 99,
+  "Mima Zing Stack": 99,
+  "Mima Pepper Blast": 99,
+  "MIMA CLASSIC CRISP FRIES": 50,
+  "MIMA CHEESY MELT FRIES": 50,
+  "MIMA GARLIC PARM FRIES": 50,
+  "MIMA SWEET HEAT FRIES": 50,
+  "MIMA BBQ SMOKE FRIES": 50,
+  "MIMA CHILI CHEESE FRIES": 50,
+  "COKE": 20,
+  "SPRITE": 20,
+  "ROYAL": 20,
+  "SPRING WATER": 10,
+  "LEMONADE": 25,
+  "ICED TEA": 25
+};
+const SIZE_CONFIG = {
+  fries: [
+    { label: "Regular", multiplier: 1 },
+    { label: "Medium", multiplier: 1.5 },
+    { label: "Large", multiplier: 2 }
+  ],
+  drinks: [
+    { label: "Regular", multiplier: 1 },
+    { label: "Medium", multiplier: 1.5 },
+    { label: "Large", multiplier: 2 }
+  ]
+};
+
+let activeSizeChoice = null;
+
+function logoutAndResetHistory(event) {
+  if (event) event.preventDefault();
+  localStorage.removeItem(ORDER_HISTORY_KEY);
+  sessionStorage.removeItem(ORDER_HISTORY_KEY);
+  window.location.href = "index.html";
+  return false;
+}
 
 function showSubMenu(menuId) {
   document.querySelectorAll('.sub-menu').forEach(m => m.classList.remove('active'));
   document.querySelectorAll('.category-card').forEach(c => c.classList.remove('active'));
-  if(document.getElementById('menu-' + menuId)) document.getElementById('menu-' + menuId).classList.add('active');
+  if (document.getElementById('menu-' + menuId)) document.getElementById('menu-' + menuId).classList.add('active');
   document.getElementById('card-' + menuId).classList.add('active');
 }
 
@@ -395,56 +720,107 @@ function closeAllModals() {
   document.getElementById("sideCart").classList.remove("open");
   document.getElementById("paymentModal").classList.remove("open");
   document.getElementById("cartBackdrop").classList.remove("active");
+  closeSizeModal();
 }
 
-function addToCart(name, price) {
-  if (cartData[name]) cartData[name].qty++;
-  else cartData[name] = { price: price, qty: 1 };
-  
+function buildCartKey(name, size) {
+  return size ? name + "||" + size : name;
+}
+
+function priceWithMultiplier(price, multiplier) {
+  return Math.round(Number(price) * multiplier);
+}
+
+function openSizeModal(name, price, category) {
+  const options = SIZE_CONFIG[category] || SIZE_CONFIG.fries;
+  activeSizeChoice = { name: name, price: Number(price), category: category, size: options[0].label };
+
+  const overlay = document.getElementById("sizeOverlay");
+  const title = document.getElementById("sizeModalTitle");
+  const prompt = document.getElementById("sizeModalPrompt");
+  const optionsContainer = document.getElementById("sizeOptions");
+  const confirmBtn = document.getElementById("sizeConfirmBtn");
+
+  title.textContent = category === "drinks" ? "Choose Size for Drinks" : "Choose Size for Fries";
+  prompt.textContent = "Select a size:";
+  optionsContainer.innerHTML = options.map(function (option, index) {
+    const optionPrice = priceWithMultiplier(price, option.multiplier);
+    return `
+      <label class="size-option ${index === 0 ? 'active' : ''}" data-size="${option.label}">
+        <input type="radio" name="size-option" value="${option.label}" ${index === 0 ? 'checked' : ''} onchange="chooseSizeOption('${option.label}')">
+        <strong>${option.label}</strong>
+        <span class="size-price">₱${optionPrice}</span>
+      </label>`;
+  }).join("");
+  overlay.classList.add("active");
+  if (confirmBtn) confirmBtn.disabled = false;
+}
+
+function chooseSizeOption(size) {
+  if (!activeSizeChoice) return;
+  activeSizeChoice.size = size;
+  document.querySelectorAll("#sizeOptions .size-option").forEach(function (label) {
+    label.classList.toggle("active", label.getAttribute("data-size") === size);
+  });
+}
+
+function closeSizeModal(event) {
+  if (event) event.stopPropagation();
+  const overlay = document.getElementById("sizeOverlay");
+  if (overlay) overlay.classList.remove("active");
+  const confirmBtn = document.getElementById("sizeConfirmBtn");
+  if (confirmBtn) confirmBtn.disabled = true;
+  activeSizeChoice = null;
+}
+
+function confirmSizeSelection() {
+  if (!activeSizeChoice) return;
+  const selected = activeSizeChoice.size || "Regular";
+  const selectedOption = (SIZE_CONFIG[activeSizeChoice.category] || SIZE_CONFIG.fries).find(function (option) {
+    return option.label === selected;
+  }) || SIZE_CONFIG.fries[0];
+  const selectedPrice = priceWithMultiplier(activeSizeChoice.price, selectedOption.multiplier);
+  addToCart(activeSizeChoice.name, selectedPrice, selected);
+  closeSizeModal();
+}
+
+function addToCart(name, price, size) {
+  const fixedPrice = PRICE_MAP[name] ?? price;
+  const actualPrice = Number(price || fixedPrice);
+  const key = buildCartKey(name, size || null);
+  if (cartData[key]) cartData[key].qty++;
+  else cartData[key] = { item: name, price: actualPrice, qty: 1, size: size || null };
   updateUI();
-  showToast(name);
 }
 
-function showToast(name) {
-  const toast = document.createElement('div');
-  toast.className = 'toast-notification';
-  toast.innerHTML = `🔥 <span>${name.toUpperCase()} ADDED!</span>`;
-  document.body.appendChild(toast);
-  setTimeout(() => { toast.remove(); }, 3000);
-}
-
-function changeQty(name, val) {
-  cartData[name].qty += val;
-  if (cartData[name].qty <= 0) delete cartData[name];
+function changeQty(key, val) {
+  cartData[key].qty += val;
+  if (cartData[key].qty <= 0) delete cartData[key];
   updateUI();
 }
 
-/* UPDATED: Opens payment selection modal */
 function processCheckout() {
   if (Object.keys(cartData).length === 0) {
     alert("Your tray is empty!");
     return;
   }
-  
-  // Fill summary in payment modal
+
   const summaryList = document.getElementById("payment-summary-list");
   let total = 0;
   summaryList.innerHTML = "";
-  
-  Object.keys(cartData).forEach(name => {
-    let item = cartData[name];
-    let subtotal = item.price * item.qty;
+
+  Object.keys(cartData).forEach(function (key) {
+    const item = cartData[key];
+    const subtotal = item.price * item.qty;
     total += subtotal;
     summaryList.innerHTML += `
       <div class="summary-item">
-        <span>${item.qty}x ${name}</span>
+        <span>${item.qty}x ${item.item}${item.size ? ` (${item.size})` : ""}</span>
         <span>₱${subtotal}</span>
       </div>`;
   });
-  
+
   document.getElementById("payment-total-value").innerText = "₱" + total;
-  
-  // Close cart, open payment
   document.getElementById("sideCart").classList.remove("open");
   document.getElementById("paymentModal").classList.add("open");
 }
@@ -454,11 +830,47 @@ function closePaymentModal() {
   document.getElementById("cartBackdrop").classList.remove("active");
 }
 
+function saveOrderToHistory(paymentMethod) {
+  const orderItems = Object.keys(cartData).map(function (key) {
+    const item = cartData[key];
+    return {
+      item: item.item,
+      quantity: item.qty,
+      price: item.price,
+      size: item.size || null
+    };
+  });
+
+  if (orderItems.length === 0) return;
+  const orderTotal = orderItems.reduce(function (sum, item) {
+    return sum + (Number(item.price) * Number(item.quantity));
+  }, 0);
+
+  let savedOrders = [];
+  try {
+    const existingHistory = sessionStorage.getItem(ORDER_HISTORY_KEY);
+    savedOrders = existingHistory ? JSON.parse(existingHistory) : [];
+    if (!Array.isArray(savedOrders)) savedOrders = [];
+  } catch (error) {
+    savedOrders = [];
+  }
+
+  savedOrders.push({
+    date: new Date().toISOString(),
+    total: orderTotal,
+    status: "Pending",
+    paymentMethod: paymentMethod,
+    items: orderItems
+  });
+
+  sessionStorage.setItem(ORDER_HISTORY_KEY, JSON.stringify(savedOrders));
+}
+
 function confirmOrder() {
   const method = document.querySelector('input[name="pay-method"]:checked').value;
+  saveOrderToHistory(method);
   alert(`Order Confirmed via ${method}! Grilling in progress... 🍔`);
-  
-  cartData = {}; 
+  cartData = {};
   updateUI();
   closePaymentModal();
 }
@@ -467,23 +879,25 @@ function updateUI() {
   const container = document.getElementById("cart-items-container");
   const totalDisplay = document.getElementById("cart-total-value");
   const countDisplay = document.getElementById("cart-count");
-  let total = 0, totalItems = 0;
+  let total = 0;
+  let totalItems = 0;
   container.innerHTML = "";
-  
-  Object.keys(cartData).forEach(name => {
-    let item = cartData[name];
+
+  Object.keys(cartData).forEach(function (key) {
+    const item = cartData[key];
     total += item.price * item.qty;
     totalItems += item.qty;
     container.innerHTML += `
       <div style="background:var(--white); border-radius:12px; padding:1rem; margin-bottom:1rem; display:flex; justify-content:space-between; align-items:center; border:2px solid var(--text-dark);">
-        <div><strong>${name}</strong><br>₱${item.price}</div>
+        <div><strong>${item.item}</strong>${item.size ? `<br>Size: ${item.size}` : ""}<br>₱${item.price}</div>
         <div style="display:flex; align-items:center; background:var(--bg-light); border:1px solid var(--text-dark); border-radius:6px; overflow:hidden;">
-          <button style="background:var(--accent); border:none; width:28px; height:28px; font-weight:900; cursor:pointer;" onclick="changeQty('${name}',-1)">-</button>
+          <button style="background:var(--accent); border:none; width:28px; height:28px; font-weight:900; cursor:pointer;" onclick="changeQty('${key}',-1)">-</button>
           <span style="width:30px; text-align:center; font-weight:800;">${item.qty}</span>
-          <button style="background:var(--accent); border:none; width:28px; height:28px; font-weight:900; cursor:pointer;" onclick="changeQty('${name}',1)">+</button>
+          <button style="background:var(--accent); border:none; width:28px; height:28px; font-weight:900; cursor:pointer;" onclick="changeQty('${key}',1)">+</button>
         </div>
       </div>`;
   });
+
   totalDisplay.innerText = "₱" + total;
   countDisplay.innerText = totalItems;
 }

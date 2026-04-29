@@ -25,6 +25,7 @@
       color: var(--text-dark); 
       font-family: 'Montserrat', sans-serif;
       overflow-x: hidden;
+      padding-top: 92px;
     }
 
     h1, h2, h3, .logo, .nav-links a, .nav-button, .order-btn, .eyebrow, .stat-number {
@@ -33,22 +34,38 @@
 
     /* Navigation Bar */
     .navbar { 
-      display: flex; justify-content: space-between; align-items: center; 
-      padding: 1rem 8%; background: var(--primary); border-bottom: 6px solid var(--accent);
-      position: sticky; top: 0; z-index: 100;
+      display: grid;
+      grid-template-columns: minmax(180px, 1fr) auto minmax(180px, 1fr);
+      align-items: center;
+      column-gap: 1.5rem;
+      padding: 1rem 8%;
+      background: var(--primary);
+      border-bottom: 6px solid var(--accent);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
     }
     
-    .logo { font-size: 2.2rem; color: var(--accent); text-shadow: 2px 2px 0px var(--text-dark); text-decoration: none;}
-    .nav-links { display: flex; list-style: none; gap: 2rem; }
-    .nav-links a { text-decoration: none; color: var(--white); font-size: 1.2rem; text-transform: uppercase; transition: 0.2s; }
+    .logo { font-size: 2.2rem; color: var(--accent); text-shadow: 2px 2px 0px var(--text-dark); text-decoration: none; justify-self: start; line-height: 1; white-space: nowrap; }
+    .nav-links { display: flex; list-style: none; gap: 2rem; justify-self: center; align-items: center; }
+    .nav-links a { text-decoration: none; color: var(--white); font-size: 1.2rem; text-transform: uppercase; transition: 0.2s; display: inline-flex; align-items: center; height: 44px; }
     .nav-links a:hover { color: var(--accent); }
     
     .nav-button { 
       text-decoration: none; background: var(--accent); color: var(--text-dark);
-      padding: 0.6rem 1.5rem; border-radius: 12px; border: 3px solid var(--text-dark);
-      box-shadow: 4px 4px 0px var(--text-dark); transition: 0.3s; 
+      padding: 0 1.5rem; border-radius: 12px; border: 3px solid var(--text-dark);
+      box-shadow: 4px 4px 0px var(--text-dark); transition: background-color 0.2s, color 0.2s;
+      justify-self: end;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 130px;
+      height: 44px;
     }
-    .nav-button:hover { background: var(--white); transform: translate(-2px, -2px); box-shadow: 6px 6px 0px var(--text-dark); }
+    .nav-button:hover { background: var(--white); }
+    .nav-button:active { transform: none; }
 
     /* Hero Section */
     .hero-section { 
@@ -127,6 +144,9 @@
     .footer-bottom { border-top: 3px solid var(--bg-light); padding-top: 2rem; text-align: center; font-weight: 800; font-size: 0.9rem; color: #888; }
 
     @media (max-width: 992px) {
+      .navbar { grid-template-columns: 1fr; row-gap: 0.7rem; padding: 1rem 5%; }
+      .logo, .nav-links, .nav-button { justify-self: center; }
+      .nav-links { gap: 1rem; flex-wrap: wrap; justify-content: center; }
       .hero-section { flex-direction: column; text-align: center; padding: 4rem 5%; clip-path: none; }
       .hero-content { padding-right: 0; margin-bottom: 4rem; }
       .hero-content h1 { font-size: 3.5rem; }
@@ -155,8 +175,9 @@
     <li><a href="menu.html">Menu</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="contact us.html">Contact</a></li>
+    <li><a href="history.html">History</a></li>
   </ul>
-  <a class="nav-button" href="index.html">LOGOUT</a>
+  <a class="nav-button" href="index.html" onclick="return logoutAndResetHistory(event)">LOGOUT</a>
 </nav>
 
 <section class="hero-section">
@@ -200,29 +221,42 @@
     <div class="deals-grid">
         <div class="deal-card">
             <div class="deal-tag">HOT DEAL</div>
-            <img src="images/deal-1.png" alt="Deal" style="width: 150px; margin-bottom: 1rem;">
-            <h3>The Morning After</h3>
-            <p>Double patty, sunny side up, and enough cheese to make you forget your ex.</p>
-            <button class="nav-button" style="width: 100%;">GRAB IT</button>
-        </div>
-        <div class="deal-card">
-            <div class="deal-tag">BFF BUNDLE</div>
-            <img src="images/deal-2.png" alt="Deal" style="width: 150px; margin-bottom: 1rem;">
-            <h3>Quad Squad</h3>
-            <p>4 Classic Burgers + 2 Large Fries. Perfect for your squad (o sayo lang kung gutom ka talaga).</p>
-            <button class="nav-button" style="width: 100%;">GRAB IT</button>
+            <img src="images/deluxe.png" alt="Deal" style="width: 150px; margin-bottom: 1rem;">
+            <h3>Mima-namnam Deluxe</h3>
+           <a href="menu.html#order-here" style="text-decoration: none;">
+    <button class="nav-button" style="width: 100%;">GRAB IT</button>
+</a>
         </div>
         <div class="deal-card">
             <div class="deal-tag">LIMITED</div>
-            <img src="images/deal-3.png" alt="Deal" style="width: 150px; margin-bottom: 1rem;">
-            <h3>Ghost Pepper Inferno</h3>
-            <p>Warning: Spicy level is "Tumawag ka na sa bumbero." Are you brave enough?</p>
-            <button class="nav-button" style="width: 100%;">GRAB IT</button>
+            <img src="images/bite.png" alt="Deal" style="width: 150px; margin-bottom: 1rem;">
+            <h3>Mima-amazing- Bite</h3>
+           <a href="menu.html#order-here" style="text-decoration: none;">
+    <button class="nav-button" style="width: 100%;">GRAB IT</button>
+</a>
+        </div>
+        <div class="deal-card">
+            <div class="deal-tag">LIMITED</div>
+            <img src="images/supreme.png" alt="Deal" style="width: 150px; margin-bottom: 1rem;">
+            <h3>Mima-sarap Supreme</h3>
+            <a href="menu.html#order-here" style="text-decoration: none;">
+    <button class="nav-button" style="width: 100%;">GRAB IT</button>
+</a>
         </div>
     </div>
 </section>
 
 <script>
+  const ORDER_HISTORY_KEY = "mimaliciousOrderHistory";
+
+  function logoutAndResetHistory(event) {
+    if (event) event.preventDefault();
+    localStorage.removeItem(ORDER_HISTORY_KEY);
+    sessionStorage.removeItem(ORDER_HISTORY_KEY);
+    window.location.href = "index.html";
+    return false;
+  }
+
   let currentSlide = 0;
   const slides = document.querySelectorAll('.slide');
   setInterval(() => {
