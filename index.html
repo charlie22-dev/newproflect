@@ -3,220 +3,651 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mimalicious - Landing</title>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <meta name="description" content="Mimalicious — Flame-grilled burgers with sizzling flavor. Order now and taste the difference.">
+  <title>Mimalicious — Flame-Grilled Since 2026</title>
+
+  <!-- Shared Design System -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
   <style>
-    :root {
-      --red: #D62300;
-      --yellow: #F5AF19;
-      --beige: #F2EBD9;
-      --brown: #502314;
-      --white: #FFFFFF;
-      --nike-ease: cubic-bezier(0.16, 1, 0.3, 1);
-    }
+    /* ---- Page-specific: Index / Landing ---- */
+    body { padding-top: 0; }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    body { 
-      background-color: var(--beige); 
-      color: var(--brown); 
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-    
-    h1, h2, h3, .logo, .eyebrow, .order-btn, .submit-btn, .close-btn, .footer-heading { 
-      font-family: 'Titan One', cursive; 
-      text-transform: uppercase; 
-    }
-
-    /* --- Navbar --- */
-    .navbar { 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      padding: 1rem 5%; 
-      background: var(--red); 
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    
-    .logo { font-size: 1.5rem; color: var(--yellow); text-shadow: 2px 2px 0px var(--brown); text-decoration: none; }
-    
-    .nav-button { 
-      text-decoration: none; background: var(--yellow); color: var(--brown);
-      padding: 0.6rem 1.2rem; border-radius: 50px; font-weight: 900; 
-      transition: 0.3s var(--nike-ease); box-shadow: 0 4px 0px #C48D14; cursor: pointer; border: none;
-      text-transform: uppercase; font-size: 0.8rem;
-    }
-    .nav-button:hover { background: var(--white); transform: translateY(-2px); box-shadow: 0 6px 0px #ddd; }
-
-    .header-spacer { height: 20px; background: var(--beige); }
-
-    /* --- Hero Carousel --- */
+    /* HERO CAROUSEL */
     .hero-container {
       position: relative;
-      height: 80vh; 
-      width: 92vw; 
-      margin: 0 auto;
+      height: 100dvh;
+      min-height: 560px;
+      width: 100%;
       background: var(--brown);
       overflow: hidden;
       display: flex;
       align-items: center;
-      border-radius: 30px;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.2);
     }
 
-    .carousel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+    /* Parallax wrapper — moves at 0.6x speed via JS */
+    .carousel {
+      position: absolute;
+      inset: -15% 0;    /* extra space for parallax travel */
+      z-index: 1;
+      will-change: transform;
+    }
+
     .carousel-item {
-      position: absolute; width: 100%; height: 100%; opacity: 0;
+      position: absolute;
+      inset: 0;
+      opacity: 0;
       transition: opacity 1.2s ease-in-out;
-      background-size: cover; background-repeat: no-repeat; background-position: center; 
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
     }
     .carousel-item.active { opacity: 1; }
 
+    /* Dark gradient overlay — left-aligned hero layout */
     .hero-overlay {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8));
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        rgba(59, 26, 8, 0.82) 0%,
+        rgba(59, 26, 8, 0.5) 55%,
+        rgba(59, 26, 8, 0.1) 100%
+      );
       z-index: 2;
     }
 
-    .hero-content { 
-        position: relative; 
-        z-index: 10; 
-        padding: 0 10%; 
-        color: var(--white); 
-        text-align: center;
-        width: 100%;
+    /* Dot pattern texture on hero */
+    .hero-texture {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+      z-index: 3;
     }
 
-    .eyebrow { 
-      display: inline-block; background: var(--yellow); color: var(--brown); 
-      padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.7rem; 
-      margin-bottom: 1.5rem; letter-spacing: 1px;
+    /* Hero content — LEFT ALIGNED (anti-center-bias rule from design-taste-frontend) */
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      padding: 0 6%;
+      color: var(--white);
+      max-width: 700px;
     }
 
-    .hero-content h1 { font-size: 2.8rem; margin-bottom: 1rem; line-height: 1; text-shadow: 3px 3px 0px rgba(0,0,0,0.5); }
-    .hero-content p { font-size: 1rem; color: var(--beige); margin-bottom: 2.5rem; font-weight: 600; line-height: 1.4; }
-    
-    .order-btn { 
-      background: var(--yellow); color: var(--brown); padding: 1.2rem 2.5rem; 
-      font-size: 1.2rem; border-radius: 60px; cursor: pointer; 
-      transition: 0.4s var(--nike-ease); box-shadow: 0 6px 0px #C48D14;
-      text-decoration: none; display: inline-block;
+    .hero-content h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      line-height: 0.92;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      text-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+      margin-bottom: 1.2rem;
     }
 
-    .hero-image-wrapper { 
-      width: 90%; border-radius: 30px; overflow: hidden; 
-      margin: 4rem auto; border: 8px solid var(--white); background-color: var(--white); 
+    .hero-content p {
+      font-size: clamp(1rem, 2.2vw, 1.3rem);
+      color: var(--cream);
+      margin-bottom: 2.5rem;
+      font-weight: 600;
+      line-height: 1.5;
+      max-width: 480px;
+    }
+
+    /* Hero spacer at top for no-navbar pages */
+    .hero-top-nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 20;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 6%;
+    }
+
+    .hero-top-nav .logo {
+      color: var(--yellow);
+      text-shadow: 2px 2px 0 var(--brown);
+    }
+
+    /* Landing hero button */
+    .order-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--yellow);
+      color: var(--brown);
+      border: 3px solid var(--brown);
+      border-radius: 50px;
+      padding: 1rem 2.4rem;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 200ms var(--ease-out),
+                  color 200ms var(--ease-out),
+                  transform 160ms var(--ease-out),
+                  box-shadow 200ms var(--ease-out);
+      box-shadow: 0 6px 0 var(--brown),
+                  0 0 0 rgba(245,166,35,0);
+    }
+    .order-btn:hover {
+      background: var(--white);
+      color: var(--red);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 0 var(--brown),
+                  0 6px 28px rgba(245, 166, 35, 0.5);
+    }
+    .order-btn:active {
+      transform: translateY(1px) scale(0.97);
+      box-shadow: 0 3px 0 var(--brown);
+    }
+
+    /* Carousel dot indicators */
+    .carousel-dots {
+      position: absolute;
+      bottom: 4.5rem;
+      left: 6%;
+      z-index: 20;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(245, 237, 214, 0.4);
+      border: 2px solid rgba(245, 237, 214, 0.6);
+      cursor: pointer;
+      transition: background 250ms var(--ease-out),
+                  transform 250ms var(--ease-out);
+    }
+    .carousel-dot.active {
+      background: var(--yellow);
+      border-color: var(--yellow);
+      transform: scale(1.3);
+    }
+
+    /* Hero image showcase below hero */
+    .hero-image-wrapper {
+      width: 90%;
+      border-radius: 28px;
+      overflow: hidden;
+      margin: 4rem auto;
+      border: 8px solid var(--white);
+      background-color: var(--white);
+      box-shadow: 0 30px 60px rgba(59, 26, 8, 0.15);
+      position: relative;
     }
     .hero-image-wrapper img { width: 100%; height: auto; display: block; }
 
-    /* --- Footer --- */
-    .site-footer {
-      background-color: var(--white);
-      border-top: 6px solid var(--yellow);
-      padding: 4rem 8% 2rem;
-      color: var(--brown);
+    /* IMAGE TEXTURE OVERLAY */
+    .hero-image-wrapper::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 60%,
+        rgba(59, 26, 8, 0.15) 100%
+      );
+      pointer-events: none;
     }
 
-    .footer-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 2.5rem;
-      text-align: center;
-    }
-
-    .footer-brand .logo { font-size: 2rem; color: var(--red); margin-bottom: 0.5rem; }
-    .footer-brand p { font-weight: 600; margin: 0 auto; line-height: 1.6; font-size: 1rem; max-width: 300px; }
-    .footer-heading { font-size: 1.4rem; color: var(--red); margin-bottom: 1rem; }
-    .footer-list { list-style: none; }
-    .footer-list li { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 0.8rem; }
-    .footer-list a, .footer-list span { color: #007bff; text-decoration: none; font-weight: 800; font-size: 1rem; }
-    .social-icons { display: flex; justify-content: center; gap: 1.5rem; }
-    .social-icons a { font-size: 1.8rem; color: #007bff; }
-
-    .footer-bottom {
-      border-top: 2px solid var(--beige);
-      padding-top: 2rem; text-align: center;
-      font-weight: 800; font-size: 0.8rem; color: #888;
-      text-transform: uppercase; line-height: 1.6; margin-top: 2rem;
-    }
-
-    /* --- DESKTOP ADJUSTMENTS (Screens wider than 768px) --- */
-    @media (min-width: 768px) {
-      .navbar { padding: 1.5rem 8%; }
-      .logo { font-size: 2.2rem; }
-      .nav-button { padding: 0.8rem 2.2rem; font-size: 1rem; }
-      
-      .hero-container { height: 90vh; border-radius: 50px; width: 94vw; }
-      .hero-content { text-align: left; max-width: 900px; padding: 0 8%; }
-      .hero-content h1 { font-size: clamp(3rem, 8vw, 6rem); }
-      .hero-content p { font-size: 1.4rem; max-width: 550px; }
-      .eyebrow { font-size: 0.9rem; margin-bottom: 2rem; }
-      
-      .hero-overlay { background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 20%, transparent 100%); }
-      
-      .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; text-align: left; }
-      .footer-list li { justify-content: flex-start; }
-      .social-icons { justify-content: flex-start; }
-      .footer-brand p { margin: 0; }
-      
-      .hero-image-wrapper { width: 85%; border-radius: 50px; border-width: 15px; }
-    }
-
-    /* --- Modal --- */
+    /* ---- LOGIN MODAL (upgraded) ---- */
     .modal-overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.85); display: none; 
-      justify-content: center; align-items: center; z-index: 9999; backdrop-filter: blur(8px);
+      position: fixed;
+      inset: 0;
+      background: rgba(59, 26, 8, 0.75);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 1rem;
     }
+
     .modal-card {
-      background: var(--white); width: 90%; max-width: 450px; padding: 2.5rem 1.5rem;
-      border-radius: 30px; text-align: center; position: relative;
+      background: var(--white);
+      width: 100%;
+      max-width: 440px;
+      padding: 3rem 2.5rem;
+      border-radius: 28px;
+      text-align: center;
+      position: relative;
+      border: 4px solid var(--yellow);
+      box-shadow: 8px 8px 0 var(--brown),
+                  0 30px 60px rgba(59, 26, 8, 0.2);
+      /* Enter from scale(0.95) — Emil rule */
+      animation: modal-enter 280ms var(--ease-out) forwards;
     }
-    .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; }
-    .form-group { text-align: left; margin-bottom: 1rem; }
-    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 900; font-size: 0.7rem; text-transform: uppercase; }
-    .form-group input { width: 100%; padding: 1rem; border: 2px solid var(--beige); border-radius: 12px; }
-    .submit-btn { background: var(--red); color: white; border: none; padding: 1rem; width: 100%; border-radius: 50px; cursor: pointer; font-family: 'Titan One'; }
+
+    @keyframes modal-enter {
+      from { opacity: 0; transform: scale(0.95) translateY(12px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      cursor: pointer;
+      color: var(--brown);
+      background: none;
+      border: none;
+      line-height: 1;
+      transition: color 160ms var(--ease-out),
+                  transform 160ms var(--ease-out);
+    }
+    .close-btn:hover { color: var(--red); transform: scale(1.15) rotate(8deg); }
+
+    .modal-card h2 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      color: var(--red);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.04em;
+    }
+
+    .modal-card p {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--brown-mid);
+      margin-bottom: 2rem;
+    }
+
+    .submit-btn {
+      background: var(--red);
+      color: var(--white);
+      border: 3px solid var(--brown);
+      padding: 1rem;
+      width: 100%;
+      border-radius: 50px;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      margin-top: 0.8rem;
+      transition: background 200ms var(--ease-out),
+                  color 200ms var(--ease-out),
+                  transform 160ms var(--ease-out),
+                  box-shadow 200ms var(--ease-out);
+      box-shadow: 0 5px 0 var(--red-deep);
+    }
+    .submit-btn:hover {
+      background: var(--yellow);
+      color: var(--brown);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 0 var(--yellow-deep),
+                  0 4px 20px rgba(245,166,35,0.4);
+    }
+    .submit-btn:active {
+      transform: scale(0.97) translateY(2px);
+      box-shadow: 0 2px 0 var(--red-deep);
+    }
+
+    /* Showcase section below hero */
+    .showcase-section {
+      padding: 1rem 5% 4rem;
+      position: relative;
+    }
+
+    .showcase-label {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .showcase-label h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--brown);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .showcase-label p {
+      font-weight: 600;
+      color: var(--brown-mid);
+      font-size: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content h1 { font-size: clamp(3rem, 12vw, 5rem); }
+    }
+
+    /* ══ TESTIMONIALS SECTION ══════════════════════════════════════════ */
+    .testimonials-section {
+      background: var(--red);
+      background-image: radial-gradient(circle, rgba(255,255,255,0.09) 1px, transparent 1px);
+      background-size: 22px 22px;
+      padding: 6rem 6%;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Background blobs for depth */
+    .testimonials-section::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: rgba(245,166,35,0.08);
+      top: -160px; right: -160px; pointer-events: none;
+    }
+    .testimonials-section::after {
+      content: '';
+      position: absolute;
+      width: 350px; height: 350px; border-radius: 50%;
+      background: rgba(0,0,0,0.06);
+      bottom: -100px; left: -100px; pointer-events: none;
+    }
+    .reviews-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--cream);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.5rem;
+      position: relative; z-index: 2;
+    }
+    .reviews-heading span { color: var(--yellow); }
+    .reviews-sub {
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: rgba(245,237,214,0.65);
+      margin-bottom: 3rem;
+      position: relative; z-index: 2;
+    }
+    /* Carousel track */
+    .rev-track {
+      position: relative;
+      max-width: 760px;
+      margin: 0 auto;
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+    /* Glassmorphism card */
+    .rev-card {
+      position: absolute;
+      width: 100%;
+      background: rgba(245,237,214,0.11);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1.5px solid rgba(245,166,35,0.4);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.16),
+        0 24px 56px rgba(59,26,8,0.28),
+        0 4px 18px rgba(0,0,0,0.10);
+      border-radius: 28px;
+      padding: 2.5rem 2.5rem 2rem;
+      opacity: 0;
+      transform: translateX(48px) scale(0.97);
+      transition: opacity 480ms var(--ease-out), transform 480ms var(--ease-out);
+      pointer-events: none;
+      /* Float animation */
+      animation: rev-float 5s ease-in-out infinite;
+    }
+    .rev-card.active {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      pointer-events: auto;
+    }
+    .rev-card.exit {
+      opacity: 0;
+      transform: translateX(-48px) scale(0.97);
+      animation: none;
+    }
+    @keyframes rev-float {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-9px); }
+    }
+    .rev-card:not(.active) { animation: none; }
+    /* Giant quote mark */
+    .rev-quote-mark {
+      font-family: Georgia, serif;
+      font-size: 8rem;
+      line-height: 0;
+      color: var(--yellow);
+      opacity: 0.28;
+      position: absolute;
+      top: 2rem; left: 1.8rem;
+      pointer-events: none;
+      user-select: none;
+    }
+    /* Stars */
+    .rev-stars {
+      font-size: 1.25rem;
+      color: var(--yellow);
+      letter-spacing: 0.1em;
+      display: block;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 10px rgba(245,166,35,0.55);
+    }
+    /* Quote text */
+    .rev-text {
+      font-style: italic;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1.7;
+      margin-bottom: 1.6rem;
+      position: relative; z-index: 1;
+      max-width: 58ch;
+    }
+    /* Customer row */
+    .rev-customer {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .rev-avatar {
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      border: 2.5px solid var(--yellow);
+      background: var(--brown);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: var(--yellow);
+      box-shadow: 0 0 0 4px rgba(245,166,35,0.2);
+    }
+    .rev-name {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--yellow);
+      letter-spacing: 0.04em;
+      display: block;
+      line-height: 1.1;
+    }
+    .rev-tag {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: rgba(245,237,214,0.6);
+      display: block;
+      margin-top: 0.2rem;
+    }
+    /* Dots */
+    .rev-dots {
+      display: flex; gap: 0.55rem;
+      justify-content: center;
+      margin-top: 2rem;
+      position: relative; z-index: 2;
+    }
+    .rev-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: rgba(245,237,214,0.3);
+      border: 2px solid rgba(245,166,35,0.35);
+      cursor: pointer;
+      transition: background 250ms var(--ease-out), transform 250ms var(--ease-out), border-color 250ms var(--ease-out);
+    }
+    .rev-dot.active {
+      background: var(--yellow);
+      border-color: var(--yellow);
+      transform: scale(1.4);
+    }
+    /* Progress bar */
+    .rev-progress {
+      width: 180px; height: 3px;
+      background: rgba(245,237,214,0.18);
+      border-radius: 99px;
+      margin: 0.9rem auto 0;
+      overflow: hidden;
+      position: relative; z-index: 2;
+    }
+    .rev-progress-bar {
+      height: 100%; border-radius: 99px;
+      background: var(--yellow);
+      width: 0%;
+    }
+    @media (max-width: 600px) {
+      .testimonials-section { padding: 4rem 4%; }
+      .rev-card { padding: 2rem 1.6rem 1.6rem; }
+      .rev-text { font-size: 0.95rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .rev-card { animation: none !important; transition: opacity 200ms ease !important; }
+    }
   </style>
 </head>
 <body>
 
-<nav class="navbar">
-  <a href="#" class="logo">MIMALICIOUS</a>
-  <button class="nav-button" onclick="openModal()">Login / Sign Up</button>
-</nav>
+<!-- HERO — Full viewport with floating nav -->
+<section class="hero-container" id="hero">
 
-<div class="header-spacer"></div>
-
-<section class="hero-container">
-  <div class="carousel">
+  <!-- Parallax carousel -->
+  <div class="carousel" id="parallaxCarousel">
     <div class="carousel-item active" style="background-image: url('images/carousel1.jpg');"></div>
     <div class="carousel-item" style="background-image: url('images/carousel2.jpg');"></div>
     <div class="carousel-item" style="background-image: url('images/carousel3.png');"></div>
   </div>
-  
-  <div class="hero-overlay"></div>
 
+  <!-- Overlays -->
+  <div class="hero-overlay"></div>
+  <div class="hero-texture"></div>
+
+  <!-- Floating top nav bar on landing -->
+  <nav class="hero-top-nav">
+    <a href="#" class="logo">MIMALICIOUS</a>
+    <button class="nav-button" onclick="openModal()" id="landing-login-btn">Login / Sign Up</button>
+  </nav>
+
+  <!-- Left-aligned hero content -->
   <div class="hero-content">
     <span class="eyebrow">Flame-Grilled Since 2026</span>
     <h1>Welcome to<br>Mimalicious</h1>
     <p>Order your favorite burger now and enjoy sizzling flavors built exactly the way you want it.</p>
-    <button class="order-btn" onclick="openModal()">GET STARTED</button>
+    <button class="order-btn" onclick="openModal()" id="hero-cta-btn">GET STARTED <i class="fa-solid fa-arrow-right"></i></button>
+  </div>
+
+  <!-- Carousel dot indicators -->
+  <div class="carousel-dots" id="carouselDots">
+    <div class="carousel-dot active" onclick="goToSlide(0)"></div>
+    <div class="carousel-dot" onclick="goToSlide(1)"></div>
+    <div class="carousel-dot" onclick="goToSlide(2)"></div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-indicator" onclick="document.getElementById('testimonials').scrollIntoView({behavior:'smooth'})">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </section>
 
-<div class="hero-image-wrapper">
-  <img src="images/landing.jpg" alt="Our Signature Burger">
-</div>
+<!-- TESTIMONIALS / REVIEWS SECTION -->
+<section class="testimonials-section" id="testimonials">
+  <h2 class="reviews-heading">What Our <span>Hungry</span> Fams Say</h2>
+  <p class="reviews-sub">Real orders. Real reactions. All sizzling.</p>
 
+  <div class="rev-track" id="revTrack" aria-live="polite" aria-atomic="true">
+
+    <!-- Card 1 -->
+    <article class="rev-card active" aria-label="Review from Marvie Santos">
+      <span class="rev-quote-mark" aria-hidden="true">&ldquo;</span>
+      <span class="rev-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <p class="rev-text">&ldquo;Grabe yung Big Mima, kaya na nyang pumalit sa aking ex! Hindi ako nag-regret kahit isang segundo. Solid ang lasa, bes — babalik na naman ako bukas!&rdquo;</p>
+      <div class="rev-customer">
+        <div class="rev-avatar" aria-hidden="true">M</div>
+        <div>
+          <span class="rev-name">Marvie Santos</span>
+          <span class="rev-tag">Verified Burger Addict &bull; Quezon City</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 2 -->
+    <article class="rev-card" aria-label="Review from Karlo Reyes">
+      <span class="rev-quote-mark" aria-hidden="true">&ldquo;</span>
+      <span class="rev-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <p class="rev-text">&ldquo;Yung Mima Cheesy Overload? Bro, four layers ng cheese. FOUR. I called my mom after just to tell her I&rsquo;m okay. Kinain ko ulit pagkatapos. 10/10 no regrets.&rdquo;</p>
+      <div class="rev-customer">
+        <div class="rev-avatar" aria-hidden="true">K</div>
+        <div>
+          <span class="rev-name">Karlo Reyes</span>
+          <span class="rev-tag">Regular Customer &bull; Makati</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 3 -->
+    <article class="rev-card" aria-label="Review from Lovely Dela Cruz">
+      <span class="rev-quote-mark" aria-hidden="true">&ldquo;</span>
+      <span class="rev-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <p class="rev-text">&ldquo;Pina-order ko 'tong Mima BBQ Blast sa first date ko. Third date na kami ngayon, and he said &lsquo;the burger sealed the deal.&rsquo; Hindi ko sure kung ako yung ibig sabihin — basta ayaw ko malaman.&rdquo;</p>
+      <div class="rev-customer">
+        <div class="rev-avatar" aria-hidden="true">L</div>
+        <div>
+          <span class="rev-name">Lovely Dela Cruz</span>
+          <span class="rev-tag">Suki ng Mimalicious &bull; Pasig</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 4 -->
+    <article class="rev-card" aria-label="Review from Andro Bautista">
+      <span class="rev-quote-mark" aria-hidden="true">&ldquo;</span>
+      <span class="rev-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <p class="rev-text">&ldquo;Tinry ko yung Mima Fire Crunch isang beses. Isang beses lang — kasi every day na ako mag-uuwi ng lima. Doc said my blood type is now BBQ. Absolutely worth it.&rdquo;</p>
+      <div class="rev-customer">
+        <div class="rev-avatar" aria-hidden="true">A</div>
+        <div>
+          <span class="rev-name">Andro Bautista</span>
+          <span class="rev-tag">Power Customer &bull; Mandaluyong</span>
+        </div>
+      </div>
+    </article>
+
+  </div><!-- /rev-track -->
+
+  <!-- Dot indicators -->
+  <div class="rev-dots" id="revDots" role="tablist" aria-label="Review navigation">
+    <button class="rev-dot active" role="tab" aria-selected="true"  aria-label="Review 1" onclick="revGoTo(0)"></button>
+    <button class="rev-dot"        role="tab" aria-selected="false" aria-label="Review 2" onclick="revGoTo(1)"></button>
+    <button class="rev-dot"        role="tab" aria-selected="false" aria-label="Review 3" onclick="revGoTo(2)"></button>
+    <button class="rev-dot"        role="tab" aria-selected="false" aria-label="Review 4" onclick="revGoTo(3)"></button>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="rev-progress" aria-hidden="true">
+    <div class="rev-progress-bar" id="revProgressBar"></div>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
 <footer class="site-footer">
   <div class="footer-grid">
     <div class="footer-brand">
@@ -224,74 +655,151 @@
       <p>Serving up the boldest flavors and the cheesiest smiles since 2024.</p>
     </div>
 
-    <div class="footer-column">
+    <div>
       <h3 class="footer-heading">Get In Touch</h3>
-      <ul class="footer-list">
+      <ul class="footer-contact-list">
         <li><i class="fa-solid fa-envelope"></i><a href="mailto:service@mima.com.ph">service@mima.com.ph</a></li>
         <li><i class="fa-solid fa-phone"></i><span>8-533-3333</span></li>
       </ul>
     </div>
 
-    <div class="footer-column">
+    <div>
       <h3 class="footer-heading">Explore</h3>
-      <ul class="footer-list">
-        <li><a href="#" style="color: var(--brown)">Home</a></li>
-        <li><a href="#" style="color: var(--brown)">Full Menu</a></li>
-        <li><a href="#" style="color: var(--brown)">Our Story</a></li>
+      <ul class="footer-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="menu.html">Full Menu</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="contact us.html">Find Us</a></li>
       </ul>
     </div>
 
-    <div class="footer-column">
+    <div>
       <h3 class="footer-heading">Get Social</h3>
-      <div class="social-icons">
-        <a href="#"><i class="fa-brands fa-facebook"></i></a>
-        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+      <div class="footer-social">
+        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
       </div>
     </div>
   </div>
 
   <div class="footer-bottom">
-    © 2026 MIMALICIOUS. ALL RIGHTS RESERVED.<br>
+    &copy; 2026 MIMALICIOUS. ALL RIGHTS RESERVED.<br>
     DEVELOPED BY PROGRAMIZ
   </div>
 </footer>
 
+<!-- LOGIN MODAL -->
 <div class="modal-overlay" id="loginModal">
   <div class="modal-card">
-    <span class="close-btn" onclick="closeModal()">&times;</span>
-    <h2 style="color: var(--red);">Welcome!</h2>
-    <form id="authForm" style="margin-top: 1.5rem;">
+    <button class="close-btn" onclick="closeModal()" aria-label="Close">&times;</button>
+    <h2>Welcome!</h2>
+    <p>Sign in to start your order</p>
+    <form id="authForm">
       <div class="form-group">
-        <label>Email Address</label>
-        <input type="email" placeholder="you@example.com" required>
+        <label for="login-email">Email Address</label>
+        <input id="login-email" type="email" placeholder="you@example.com" required>
       </div>
       <div class="form-group">
-        <label>Password</label>
-        <input id="password" type="password" placeholder="••••••••" required>
+        <label for="login-password">Password</label>
+        <input id="login-password" type="password" placeholder="••••••••" required>
       </div>
-      <button type="submit" class="submit-btn">Login / Sign Up</button>
+      <button type="submit" class="submit-btn">LOGIN / SIGN UP</button>
     </form>
   </div>
 </div>
 
 <script>
+  /* ---- Carousel with dot sync ---- */
   let currentSlide = 0;
   const slides = document.querySelectorAll('.carousel-item');
-  setInterval(() => {
-    slides[currentSlide].classList.remove('active');
-    currentSlide = (currentSlide + 1) % slides.length;
-    slides[currentSlide].classList.add('active');
-  }, 5000);
+  const dots   = document.querySelectorAll('.carousel-dot');
 
-  function openModal() { document.getElementById('loginModal').style.display = 'flex'; }
-  function closeModal() { document.getElementById('loginModal').style.display = 'none'; }
-  window.onclick = (e) => { if(e.target.id == 'loginModal') closeModal(); }
+  function goToSlide(index) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = index;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
+
+  setInterval(() => goToSlide((currentSlide + 1) % slides.length), 5000);
+
+  /* ---- Parallax on hero scroll ---- */
+  const carousel = document.getElementById('parallaxCarousel');
+  if (window.matchMedia('(pointer: fine)').matches) {
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      carousel.style.transform = `translateY(${scrollY * 0.4}px)`;
+    }, { passive: true });
+  }
+
+  /* ---- Modal ---- */
+  function openModal() {
+    const modal = document.getElementById('loginModal');
+    modal.style.display = 'flex';
+  }
+  function closeModal() {
+    document.getElementById('loginModal').style.display = 'none';
+  }
+  window.addEventListener('click', (e) => { if (e.target.id === 'loginModal') closeModal(); });
 
   document.getElementById('authForm').addEventListener('submit', (e) => {
     e.preventDefault();
     window.location.href = 'home.html';
   });
+
+  /* ---- Testimonials Carousel ---- */
+  (function() {
+    const DELAY = 4000, DUR = 480;
+    const cards = Array.from(document.querySelectorAll('.rev-card'));
+    const dots  = Array.from(document.querySelectorAll('.rev-dot'));
+    const bar   = document.getElementById('revProgressBar');
+    let cur = 0, timer = null, busy = false;
+
+    function revGoTo(idx) {
+      if (busy || idx === cur) return;
+      busy = true;
+      const prev = cur; cur = idx;
+      cards[prev].classList.remove('active');
+      cards[prev].classList.add('exit');
+      cards[cur].classList.add('active');
+      dots.forEach((d,i) => { d.classList.toggle('active', i===cur); d.setAttribute('aria-selected', i===cur?'true':'false'); });
+      setTimeout(() => { cards[prev].classList.remove('exit'); busy = false; }, DUR);
+      resetBar();
+    }
+    window.revGoTo = revGoTo;
+
+    function resetBar() {
+      bar.style.transition = 'none'; bar.style.width = '0%';
+      void bar.offsetWidth;
+      bar.style.transition = `width ${DELAY}ms linear`; bar.style.width = '100%';
+    }
+    function startPlay() { timer = setInterval(() => revGoTo((cur+1)%cards.length), DELAY); }
+    function stopPlay()  { clearInterval(timer); bar.style.transition='none'; }
+
+    const track = document.getElementById('revTrack');
+    track.addEventListener('mouseenter', stopPlay);
+    track.addEventListener('mouseleave', () => { startPlay(); resetBar(); });
+    document.addEventListener('keydown', e => {
+      if (e.key==='ArrowRight') { stopPlay(); revGoTo((cur+1)%cards.length); startPlay(); }
+      if (e.key==='ArrowLeft')  { stopPlay(); revGoTo((cur-1+cards.length)%cards.length); startPlay(); }
+    });
+    startPlay(); resetBar();
+  })();
+
+  /* ---- Scroll Reveal (Intersection Observer) ---- */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 </script>
 </body>
 </html>

@@ -3,213 +3,670 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login / Sign Up - Mimalicious</title>
-  <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
-  
+  <meta name="description" content="Login or sign up to Mimalicious — flame-grilled burgers delivered to your door.">
+  <title>Login — Mimalicious</title>
+
+  <!-- Shared design system (tokens, fonts, form-group, etc.) -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Poppins for body per user spec -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+
   <style>
-    /* Burger King Official Palette */
-    :root {
-      --red: #D62300;
-      --yellow: #F5AF19;
-      --beige: #F2EBD9;
-      --brown: #502314;
-      --white: #FFFFFF;
-      --nike-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    /* ── Base override ───────────────────────────────────────────── */
+    body {
+      padding-top: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100dvh;
+      margin: 0;
+      font-family: 'Poppins', var(--font-body);
     }
 
-    /* Reset & Base Styles */
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
-    
-    body { 
-      background-color: var(--beige); 
-      color: var(--brown); 
-      font-family: 'Inter', sans-serif;
-      display: flex; 
-      flex-direction: column; 
-      min-height: 100vh; 
-    }
-    
-    h2, .logo, .submit-btn {
-      font-family: 'Titan One', cursive;
-      text-transform: uppercase;
+    /* ── Two-column grid ─────────────────────────────────────────── */
+    .login-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      flex: 1;
+      min-height: 100dvh;
     }
 
-    /* --- Navigation Bar --- */
-    .navbar { 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      padding: 1.2rem 8%; 
-      background: var(--red); 
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    
-    .logo { 
-      font-size: 2.2rem; 
-      color: var(--yellow); 
-      text-shadow: 2px 2px 0px var(--brown); 
-      text-decoration: none;
-    }
-    
-    .nav-button { 
-      text-decoration: none; 
-      background: var(--yellow); 
-      color: var(--brown);
-      padding: 0.7rem 2.2rem; 
-      border-radius: 50px; 
-      font-weight: 900; 
-      font-size: 0.85rem; 
-      transition: all 0.3s var(--nike-ease); 
-      text-transform: uppercase;
-      box-shadow: 0 4px 0px #C48D14;
-    }
-    
-    .nav-button:hover { 
-      background: var(--white); 
-      transform: translateY(-2px);
-      box-shadow: 0 4px 0px #ddd;
-    }
-
-    /* --- Centered Authentication Section --- */
-    .auth-wrapper {
-      flex: 1; 
-      display: flex; 
-      justify-content: center; 
-      align-items: center; 
-      padding: 4rem 5%; 
-      background-color: var(--beige);
+    /* ════════════════════════════════════════════════════════════════
+       LEFT SIDE — Login form
+    ════════════════════════════════════════════════════════════════ */
+    .login-form-side {
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 3rem;
+      position: relative;
+      /* Subtle cream dot texture */
+      background-image: radial-gradient(circle, rgba(59,26,8,0.05) 1px, transparent 1px);
+      background-size: 20px 20px;
     }
 
     .auth-card {
-      background: var(--white);
       width: 100%;
-      max-width: 500px;
-      padding: 3.5rem;
-      border-radius: 40px;
-      box-shadow: 0 25px 60px rgba(80, 35, 20, 0.15);
-      text-align: center;
-      border: 8px solid var(--white);
+      max-width: 420px;
+      background: var(--white);
+      border-radius: 28px;
+      padding: 3rem 2.5rem;
+      border: 4px solid var(--yellow);
+      box-shadow:
+        8px 8px 0 var(--brown),
+        0 30px 60px rgba(59, 26, 8, 0.1);
+      /* Card float-in on load */
+      animation: card-enter 400ms var(--ease-out) both;
+    }
+
+    @keyframes card-enter {
+      from { opacity: 0; transform: translateY(20px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0)    scale(1);    }
+    }
+
+    /* Brand mark above form */
+    .form-brand-mark {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+    }
+
+    .form-brand-mark .logo-small {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--red);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      line-height: 1;
+    }
+
+    .form-brand-mark .badge-pill {
+      background: var(--yellow);
+      color: var(--brown);
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      border-radius: 50px;
+      padding: 0.25rem 0.75rem;
+      border: 2px solid var(--brown);
     }
 
     .auth-card h2 {
-      font-size: 2.8rem;
+      font-family: var(--font-display);
+      font-size: 2.2rem;
       color: var(--red);
-      margin-bottom: 0.8rem;
-      text-shadow: 2px 2px 0px var(--yellow);
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.04em;
+      line-height: 1;
     }
 
-    .auth-card p {
-      color: var(--brown);
-      font-size: 1.1rem;
-      margin-bottom: 3rem;
+    .auth-card > p {
       font-weight: 600;
-      opacity: 0.8;
+      color: var(--brown-mid);
+      font-size: 0.92rem;
+      margin-bottom: 2rem;
     }
 
-    /* --- Form Fields --- */
-    .form-group {
-      text-align: left;
-      margin-bottom: 1.5rem;
-    }
-
+    /* Form fields inherit from styles.css .form-group */
     .form-group label {
-      display: block;
-      margin-bottom: 0.8rem;
-      font-weight: 900;
-      color: var(--brown);
-      font-size: 0.9rem;
-      text-transform: uppercase;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
     }
 
     .form-group input {
-      width: 100%;
-      padding: 1.2rem;
-      border: 3px solid var(--beige);
-      border-radius: 15px;
-      background: #FAFAFA;
-      font-size: 1.1rem;
-      color: var(--brown);
-      transition: all 0.3s ease;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
     }
 
-    .form-group input:focus {
-      outline: none;
-      border-color: var(--yellow);
-      background: var(--white);
-    }
-
-    /* --- Submit Button --- */
+    /* Submit button */
     .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 50px;
+      border: 3px solid var(--brown);
       background: var(--red);
       color: var(--white);
-      border: none;
-      padding: 1.2rem;
-      font-size: 1.5rem;
-      border-radius: 50px;
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      letter-spacing: 0.06em;
       cursor: pointer;
-      width: 100%;
-      margin-top: 1rem;
-      transition: all 0.3s var(--nike-ease);
-      box-shadow: 0 6px 0px #A01B00;
+      margin-top: 0.8rem;
+      transition:
+        background 200ms var(--ease-out),
+        color      200ms var(--ease-out),
+        transform  160ms var(--ease-out),
+        box-shadow 200ms var(--ease-out);
+      box-shadow: 0 5px 0 var(--red-deep);
     }
-
     .submit-btn:hover {
       background: var(--yellow);
       color: var(--brown);
-      transform: translateY(-3px);
-      box-shadow: 0 6px 0px #C48D14;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 0 var(--yellow-deep), 0 4px 20px rgba(245,166,35,0.4);
+    }
+    .submit-btn:active {
+      transform: scale(0.97);
+      box-shadow: 0 2px 0 var(--red-deep);
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 1.5rem;
+      color: var(--brown-mid);
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none;
+      transition: color 200ms var(--ease-out);
+    }
+    .back-link:hover { color: var(--red); }
+
+    /* ════════════════════════════════════════════════════════════════
+       RIGHT SIDE — Testimonials panel
+    ════════════════════════════════════════════════════════════════ */
+    .reviews-panel {
+      background: var(--red);
+      /* Dot/grain texture matching site-wide pattern */
+      background-image: radial-gradient(circle, rgba(255,255,255,0.10) 1px, transparent 1px);
+      background-size: 22px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative background blobs — depth without distraction */
+    .reviews-panel::before {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: rgba(245, 166, 35, 0.10);
+      top: -120px;
+      right: -120px;
+      pointer-events: none;
+    }
+    .reviews-panel::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.07);
+      bottom: -80px;
+      left: -80px;
+      pointer-events: none;
+    }
+
+    /* Section heading */
+    .reviews-heading {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      color: var(--cream);
+      letter-spacing: 0.06em;
+      text-align: center;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 2;
+    }
+
+    .reviews-heading span {
+      color: var(--yellow);
+    }
+
+    /* ── Carousel track ────────────────────────────────────────── */
+    .carousel-track {
+      position: relative;
+      width: 100%;
+      max-width: 460px;
+      z-index: 2;
+      /* Fixed height to prevent layout shift during transitions */
+      min-height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Individual review card — Glassmorphism ──────────────── */
+    .review-card {
+      position: absolute;
+      width: 100%;
+      /* Glassmorphism: semi-transparent cream with warm blur */
+      background: rgba(245, 237, 214, 0.13);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(245, 166, 35, 0.45);
+      /* Liquid glass refraction — inner highlight (design-taste-frontend rule) */
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        0 20px 50px rgba(59, 26, 8, 0.25),
+        0 4px 16px rgba(0, 0, 0, 0.12);
+      border-radius: 24px;
+      padding: 2.2rem 2rem 1.8rem;
+      text-align: left;
+      /* Float animation — gentle, perpetual */
+      animation: card-float 4s ease-in-out infinite;
+      /* Visibility state */
+      opacity: 0;
+      transform: translateX(40px) scale(0.97);
+      transition:
+        opacity  500ms var(--ease-out),
+        transform 500ms var(--ease-out);
+      pointer-events: none;
+    }
+
+    /* Active / visible card */
+    .review-card.active {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      pointer-events: auto;
+    }
+
+    /* Exiting card (slide left) */
+    .review-card.exit {
+      opacity: 0;
+      transform: translateX(-40px) scale(0.97);
+    }
+
+    /* Subtle perpetual float — Emil: only on decorative elements */
+    @keyframes card-float {
+      0%,  100% { transform: translateY(0);    }
+      50%        { transform: translateY(-7px); }
+    }
+    /* Override float when entering/exiting (transition takes precedence) */
+    .review-card.exit,
+    .review-card:not(.active) {
+      animation: none;
+    }
+
+    /* Giant quote mark — visual depth behind text */
+    .quote-mark {
+      font-family: Georgia, serif;
+      font-size: 7rem;
+      color: var(--yellow);
+      opacity: 0.35;
+      line-height: 0;
+      position: absolute;
+      top: 1.6rem;
+      left: 1.4rem;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Star rating */
+    .review-stars {
+      font-size: 1.2rem;
+      color: var(--yellow);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.9rem;
+      display: block;
+      /* Text shadow for glow on stars */
+      text-shadow: 0 0 8px rgba(245, 166, 35, 0.6);
+    }
+
+    /* Review quote text */
+    .review-quote {
+      font-family: 'Poppins', sans-serif;
+      font-style: italic;
+      font-size: 0.97rem;
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1.65;
+      margin-bottom: 1.4rem;
+      position: relative;
+      z-index: 1;
+      /* Cap at 65ch for readability (impeccable rule) */
+      max-width: 52ch;
+    }
+
+    /* Customer info row */
+    .review-customer {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    /* Avatar circle */
+    .avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 2.5px solid var(--yellow);
+      background: var(--brown);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      /* Initial letter as avatar */
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--yellow);
+      letter-spacing: 0;
+      box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.25);
+    }
+
+    .customer-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--yellow);
+      letter-spacing: 0.04em;
+      display: block;
+      line-height: 1.1;
+    }
+
+    .customer-tag {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: rgba(245, 237, 214, 0.65);
+      display: block;
+      margin-top: 0.15rem;
+    }
+
+    /* ── Dot indicators ──────────────────────────────────────── */
+    .carousel-dots {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1.8rem;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(245, 237, 214, 0.35);
+      border: 2px solid rgba(245, 166, 35, 0.4);
+      cursor: pointer;
+      transition:
+        background  250ms var(--ease-out),
+        transform   250ms var(--ease-out),
+        border-color 250ms var(--ease-out);
+    }
+
+    .dot.active {
+      background: var(--yellow);
+      border-color: var(--yellow);
+      transform: scale(1.35);
+    }
+
+    /* Progress bar under dots — auto-advance visual cue */
+    .carousel-progress {
+      width: 100%;
+      max-width: 200px;
+      height: 3px;
+      background: rgba(245, 237, 214, 0.2);
+      border-radius: 99px;
+      margin-top: 0.8rem;
+      overflow: hidden;
+      position: relative;
+      z-index: 2;
+    }
+
+    .carousel-progress-bar {
+      height: 100%;
+      background: var(--yellow);
+      border-radius: 99px;
+      width: 0%;
+      transition: width 0ms linear;
+    }
+
+    /* ── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .login-wrap { grid-template-columns: 1fr; }
+      .reviews-panel { min-height: 420px; }
     }
 
     @media (max-width: 600px) {
-      .auth-card { padding: 2rem; }
-      .auth-card h2 { font-size: 2.2rem; }
+      .login-form-side { padding: 2.5rem 1.5rem; }
+      .auth-card { padding: 2rem 1.5rem; }
+      .reviews-panel { padding: 3rem 1.5rem; }
+      .review-card { padding: 1.8rem 1.5rem 1.4rem; }
+    }
+
+    /* ── Reduced motion ─────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .review-card { animation: none !important; transition: opacity 200ms ease !important; }
+      .auth-card { animation: none !important; }
     }
   </style>
 </head>
 <body>
 
+<!-- Redirect if already logged in -->
 <script>
-  if (localStorage.getItem('loggedIn') === 'true') {
-    window.location.href = 'home.html';
-  }
+  if (localStorage.getItem('loggedIn') === 'true') window.location.href = 'home.html';
 </script>
 
-<nav class="navbar">
-  <div class="logo">MIMALICIOUS</div>
-  <a class="nav-button" href="index.html">← Back</a>
-</nav>
+<div class="login-wrap">
 
-<div class="auth-wrapper">
-  <div class="auth-card">
-    <h2>Welcome!</h2>
-    <p>Sign in to start your order</p>
+  <!-- ═══════════════════════════════════════════════════════════
+       LEFT — Login Form
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="login-form-side">
+    <div class="auth-card">
 
-    <form id="authForm">
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input id="email" type="email" placeholder="you@example.com" required>
+      <!-- Mini brand mark -->
+      <div class="form-brand-mark">
+        <a href="index.html" class="logo-small">MIMALICIOUS</a>
+        <span class="badge-pill">EST. 2026</span>
       </div>
-      
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input id="password" type="password" placeholder="••••••••" required>
-      </div>
-      
-      <button type="submit" class="submit-btn">Login / Sign Up</button>
-    </form>
+
+      <h2>Welcome Back!</h2>
+      <p>Sign in to start your order</p>
+
+      <form id="authForm">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input id="email" type="email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="submit-btn" id="login-submit-btn">LOGIN / SIGN UP</button>
+      </form>
+
+      <a href="index.html" class="back-link">← Back to Landing</a>
+    </div>
   </div>
-</div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       RIGHT — Testimonials / Reviews Panel
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="reviews-panel">
+
+    <p class="reviews-heading">What Our <span>Hungry</span> Fams Say</p>
+
+    <!-- Carousel track -->
+    <div class="carousel-track" id="carouselTrack" aria-live="polite" aria-atomic="true">
+
+      <!-- Card 1 -->
+      <article class="review-card active" aria-label="Review from Marvie Santos">
+        <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+        <span class="review-stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <p class="review-quote">
+          "Grabe yung Big Mima, kaya na nyang pumalit sa aking ex! Hindi ako nag-regret kahit isang segundo. Solid ang lasa, bes!"
+        </p>
+        <div class="review-customer">
+          <div class="avatar" aria-hidden="true">M</div>
+          <div>
+            <span class="customer-name">Marvie Santos</span>
+            <span class="customer-tag">Verified Burger Addict &bull; Quezon City</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="review-card" aria-label="Review from Karlo Reyes">
+        <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+        <span class="review-stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <p class="review-quote">
+          "Yung Mima Cheesy Overload? Bro, four layers ng cheese. FOUR. I called my mom after just to tell her I'm okay. Sobrang sarap!"
+        </p>
+        <div class="review-customer">
+          <div class="avatar" aria-hidden="true">K</div>
+          <div>
+            <span class="customer-name">Karlo Reyes</span>
+            <span class="customer-tag">Regular Customer &bull; Makati</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="review-card" aria-label="Review from Lovely Dela Cruz">
+        <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+        <span class="review-stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <p class="review-quote">
+          "Pina-order ko 'tong Mima BBQ Blast sa first date ko. Third date na kami ngayon, and he said 'the burger sealed the deal.' I'm not sure if he means me or the food."
+        </p>
+        <div class="review-customer">
+          <div class="avatar" aria-hidden="true">L</div>
+          <div>
+            <span class="customer-name">Lovely Dela Cruz</span>
+            <span class="customer-tag">Suki ng Mimalicious &bull; Pasig</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="review-card" aria-label="Review from Andro Bautista">
+        <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+        <span class="review-stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <p class="review-quote">
+          "Tinry ko yung Mima Fire Crunch isang beses. Isang beses lang — kasi every day na ako nag-uuwi ng lima. Doc said my blood type is now BBQ. Worth it."
+        </p>
+        <div class="review-customer">
+          <div class="avatar" aria-hidden="true">A</div>
+          <div>
+            <span class="customer-name">Andro Bautista</span>
+            <span class="customer-tag">Power Customer &bull; Mandaluyong</span>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /carousel-track -->
+
+    <!-- Dot indicators -->
+    <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Review navigation">
+      <button class="dot active" role="tab" aria-selected="true"  aria-label="Review 1" onclick="goTo(0)"></button>
+      <button class="dot"        role="tab" aria-selected="false" aria-label="Review 2" onclick="goTo(1)"></button>
+      <button class="dot"        role="tab" aria-selected="false" aria-label="Review 3" onclick="goTo(2)"></button>
+      <button class="dot"        role="tab" aria-selected="false" aria-label="Review 4" onclick="goTo(3)"></button>
+    </div>
+
+    <!-- Auto-advance progress bar -->
+    <div class="carousel-progress" aria-hidden="true">
+      <div class="carousel-progress-bar" id="progressBar"></div>
+    </div>
+
+  </div><!-- /reviews-panel -->
+
+</div><!-- /login-wrap -->
+
 
 <script>
-  document.getElementById('authForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+  /* ── Login form ──────────────────────────────────────────────── */
+  document.getElementById('authForm').addEventListener('submit', function(e) {
+    e.preventDefault();
     localStorage.setItem('loggedIn', 'true');
     window.location.href = 'home.html';
   });
+
+  /* ── Testimonial carousel ────────────────────────────────────── */
+  const AUTOPLAY_MS  = 4000;  // rotate every 4 s
+  const TRANSITION_MS = 500;  // must match CSS transition duration
+
+  const cards    = Array.from(document.querySelectorAll('.review-card'));
+  const dots     = Array.from(document.querySelectorAll('.dot'));
+  const progressBar = document.getElementById('progressBar');
+
+  let current    = 0;
+  let timer      = null;
+  let progTimer  = null;
+  let isAnimating = false;
+
+  /* Navigate to a specific card index */
+  function goTo(index) {
+    if (isAnimating || index === current) return;
+    isAnimating = true;
+
+    const prev = current;
+    current = index;
+
+    /* Slide previous card out (left) */
+    cards[prev].classList.remove('active');
+    cards[prev].classList.add('exit');
+
+    /* Bring new card in (from right) */
+    cards[current].classList.add('active');
+
+    /* Update dots */
+    dots.forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+      d.setAttribute('aria-selected', i === current ? 'true' : 'false');
+    });
+
+    /* Clean exit class after transition completes */
+    setTimeout(() => {
+      cards[prev].classList.remove('exit');
+      isAnimating = false;
+    }, TRANSITION_MS);
+
+    /* Restart progress bar */
+    resetProgress();
+  }
+
+  /* Auto-advance */
+  function next() {
+    goTo((current + 1) % cards.length);
+  }
+
+  function startAutoplay() {
+    timer = setInterval(next, AUTOPLAY_MS);
+  }
+
+  function stopAutoplay() {
+    clearInterval(timer);
+    clearInterval(progTimer);
+  }
+
+  /* Progress bar fill — visual timer indicator */
+  function resetProgress() {
+    progressBar.style.transition = 'none';
+    progressBar.style.width = '0%';
+    /* Force reflow so transition resets cleanly */
+    void progressBar.offsetWidth;
+    progressBar.style.transition = `width ${AUTOPLAY_MS}ms linear`;
+    progressBar.style.width = '100%';
+  }
+
+  /* Pause on hover — Emil: avoid animating over user's attention */
+  const track = document.getElementById('carouselTrack');
+  track.addEventListener('mouseenter', stopAutoplay);
+  track.addEventListener('mouseleave', () => {
+    startAutoplay();
+    resetProgress();
+  });
+
+  /* Keyboard navigation */
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { stopAutoplay(); next(); startAutoplay(); }
+    if (e.key === 'ArrowLeft')  { stopAutoplay(); goTo((current - 1 + cards.length) % cards.length); startAutoplay(); }
+  });
+
+  /* Boot */
+  startAutoplay();
+  resetProgress();
 </script>
 
 </body>

@@ -1,0 +1,772 @@
+/* ============================================================
+   MIMALICIOUS — SHARED PREMIUM DESIGN SYSTEM
+   Skills applied: design-taste-frontend, emil-design-eng, impeccable
+   ============================================================ */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+/* --- Design Tokens --- */
+:root {
+  --red:    #CC1F0A;
+  --yellow: #F5A623;
+  --brown:  #3B1A08;
+  --cream:  #F5EDD6;
+  --white:  #FFFFFF;
+  --red-deep:    #9e1500;
+  --yellow-deep: #C47F00;
+  --brown-mid:   #6B3A1F;
+
+  /* Typography */
+  --font-display: 'Bebas Neue', 'Arial Black', sans-serif;
+  --font-body:    'Nunito', 'Segoe UI', sans-serif;
+
+  /* Easing — Emil Kowalski approved */
+  --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-io:     cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* --- Reset --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--brown);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+h1, h2, h3, h4,
+.logo, .eyebrow, .section-title,
+.stat-number, .stat-label,
+.order-btn, .deal-btn, .footer-heading {
+  font-family: var(--font-display);
+  letter-spacing: 0.03em;
+}
+
+/* ============================================================
+   NAVBAR — PREMIUM PILL LINKS + GLASSMORPHISM ON SCROLL
+   ============================================================ */
+.navbar {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) auto minmax(160px, 1fr);
+  align-items: center;
+  column-gap: 1.5rem;
+  padding: 1rem 6%;
+  background: var(--red);
+  border-bottom: 4px solid var(--yellow);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  /* Smooth transition for glassmorphism state */
+  transition: background 0.4s var(--ease-out),
+              box-shadow 0.4s var(--ease-out),
+              backdrop-filter 0.4s var(--ease-out);
+  will-change: transform;
+}
+
+/* Glassmorphism state when scrolled */
+.navbar.scrolled {
+  background: rgba(204, 31, 10, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 30px rgba(59, 26, 8, 0.25);
+  border-bottom-color: rgba(245, 166, 35, 0.7);
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--yellow);
+  text-shadow: 2px 2px 0 var(--brown);
+  text-decoration: none;
+  justify-self: start;
+  line-height: 1;
+  white-space: nowrap;
+  letter-spacing: 0.05em;
+  transition: transform 200ms var(--ease-out),
+              text-shadow 200ms var(--ease-out);
+}
+.logo:hover {
+  transform: scale(1.04);
+  text-shadow: 3px 3px 0 var(--brown);
+}
+
+/* --- Nav Links Container --- */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 0.6rem;
+  justify-self: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* --- PILL NAV LINKS (matching LOGOUT button style) --- */
+.nav-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--brown);
+  background: var(--yellow);
+  border: 2.5px solid var(--brown);
+  border-radius: 50px;
+  padding: 0.45rem 1.1rem;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  height: 40px;
+  /* Smooth transitions — specific props only (Emil rule: never 'all') */
+  transition: background 200ms var(--ease-out),
+              color 200ms var(--ease-out),
+              box-shadow 200ms var(--ease-out),
+              transform 200ms var(--ease-out);
+  box-shadow: 3px 3px 0 var(--brown);
+  will-change: transform;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.nav-links a:hover {
+  background: var(--white);
+  color: var(--red);
+  box-shadow: 4px 4px 0 var(--brown),
+              0 4px 16px rgba(245, 166, 35, 0.35);
+}
+
+/* Active/current page link */
+.nav-links a.active {
+  background: var(--red);
+  color: var(--white);
+  border-color: var(--yellow);
+  box-shadow: 3px 3px 0 var(--brown);
+}
+
+.nav-links a:active {
+  transform: scale(0.97) !important;
+  box-shadow: 1px 1px 0 var(--brown) !important;
+}
+
+/* --- LOGOUT / NAV BUTTON --- */
+.nav-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background: var(--yellow);
+  color: var(--brown);
+  padding: 0 1.4rem;
+  border-radius: 50px;
+  border: 2.5px solid var(--brown);
+  box-shadow: 4px 4px 0 var(--brown);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  height: 40px;
+  min-width: 110px;
+  justify-self: end;
+  cursor: pointer;
+  transition: background 200ms var(--ease-out),
+              color 200ms var(--ease-out),
+              box-shadow 160ms var(--ease-out),
+              transform 160ms var(--ease-out);
+}
+
+.nav-button:hover {
+  background: var(--white);
+  color: var(--red);
+  box-shadow: 5px 5px 0 var(--brown),
+              0 4px 18px rgba(245, 166, 35, 0.4);
+}
+
+.nav-button:active {
+  transform: scale(0.97);
+  box-shadow: 2px 2px 0 var(--brown);
+}
+
+/* ============================================================
+   HERO SCROLL INDICATOR — ANIMATED BOUNCING CHEVRON
+   ============================================================ */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  opacity: 0.85;
+  cursor: pointer;
+}
+
+.scroll-indicator span {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-right: 3px solid var(--yellow);
+  border-bottom: 3px solid var(--yellow);
+  transform: rotate(45deg);
+  animation: scroll-bounce 1.3s var(--ease-io) infinite;
+}
+
+.scroll-indicator span:nth-child(2) { animation-delay: 0.15s; opacity: 0.7; }
+.scroll-indicator span:nth-child(3) { animation-delay: 0.30s; opacity: 0.45; }
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: rotate(45deg) translateY(0); }
+  50%       { transform: rotate(45deg) translateY(8px); }
+}
+
+/* ============================================================
+   SCROLL REVEAL — INTERSECTION OBSERVER TRIGGERS
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px) scale(0.98);
+  transition: opacity 600ms var(--ease-out),
+              transform 600ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+
+.reveal.animate-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Stagger helpers */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 500ms var(--ease-out),
+              transform 500ms var(--ease-out);
+}
+.reveal-stagger.animate-in > *:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0ms; }
+.reveal-stagger.animate-in > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 80ms; }
+.reveal-stagger.animate-in > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 160ms; }
+.reveal-stagger.animate-in > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 240ms; }
+.reveal-stagger.animate-in > *:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 320ms; }
+.reveal-stagger.animate-in > *:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 400ms; }
+
+/* ============================================================
+   DOT PATTERN TEXTURE OVERLAY
+   Performance: fixed, pointer-events-none — never on scroll container
+   ============================================================ */
+.texture-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
+  background-size: 22px 22px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Dark dot pattern (for light backgrounds) */
+.texture-overlay-dark {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(59,26,8,0.07) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ============================================================
+   SECTION TITLES
+   ============================================================ */
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 2.5rem;
+}
+
+.section-title span {
+  color: var(--yellow);
+}
+
+.eyebrow {
+  display: inline-block;
+  background: var(--yellow);
+  color: var(--brown);
+  padding: 0.45rem 1.4rem;
+  border-radius: 50px;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  border: 2.5px solid var(--brown);
+  box-shadow: 3px 3px 0 var(--brown);
+  transform: rotate(-1.5deg);
+  margin-bottom: 1.2rem;
+}
+
+/* ============================================================
+   CTA BUTTONS — PREMIUM HOVER STATES
+   ============================================================ */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--yellow);
+  color: var(--brown);
+  border: 3px solid var(--brown);
+  border-radius: 50px;
+  padding: 0.9rem 2.2rem;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  text-decoration: none;
+  /* Emil: specific props, not 'all' */
+  transition: background 200ms var(--ease-out),
+              color 200ms var(--ease-out),
+              transform 160ms var(--ease-out),
+              box-shadow 200ms var(--ease-out);
+  box-shadow: 0 6px 0 var(--brown), 0 0 0 rgba(245,166,35,0);
+  will-change: transform;
+}
+
+.btn-primary:hover {
+  background: var(--white);
+  color: var(--red);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 0 var(--brown),
+              0 6px 28px rgba(245, 166, 35, 0.45);
+}
+
+.btn-primary:active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 0 3px 0 var(--brown), 0 0 0 rgba(245,166,35,0);
+}
+
+.btn-red {
+  background: var(--red);
+  color: var(--white);
+  border-color: var(--brown);
+  box-shadow: 0 6px 0 var(--red-deep), 0 0 0 rgba(204,31,10,0);
+}
+
+.btn-red:hover {
+  background: var(--yellow);
+  color: var(--brown);
+  box-shadow: 0 10px 0 var(--yellow-deep),
+              0 6px 28px rgba(245, 166, 35, 0.45);
+}
+
+/* ============================================================
+   CARD COMPONENTS — HOVER LIFT EFFECT
+   ============================================================ */
+.card-lift {
+  transition: transform 250ms var(--ease-out),
+              box-shadow 250ms var(--ease-out);
+  will-change: transform;
+}
+
+.card-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 45px rgba(59, 26, 8, 0.18),
+              0 8px 20px rgba(59, 26, 8, 0.08) !important;
+}
+
+/* ============================================================
+   FOOTER — DARK PREMIUM
+   ============================================================ */
+.site-footer {
+  background: var(--brown);
+  border-top: 5px solid var(--yellow);
+  padding: 5rem 6% 2.5rem;
+  color: var(--cream);
+  margin-top: 0;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+
+.footer-brand .logo {
+  color: var(--yellow);
+  font-size: 2.2rem;
+  display: inline-block;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+}
+
+.footer-brand p {
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.7;
+  color: rgba(245, 237, 214, 0.75);
+  max-width: 280px;
+}
+
+.footer-heading {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--yellow);
+  letter-spacing: 0.08em;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+}
+
+.footer-links {
+  list-style: none;
+}
+.footer-links li {
+  margin-bottom: 0.6rem;
+}
+.footer-links a {
+  text-decoration: none;
+  color: rgba(245, 237, 214, 0.7);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: color 200ms var(--ease-out),
+              padding-left 200ms var(--ease-out);
+}
+.footer-links a:hover {
+  color: var(--yellow);
+  padding-left: 6px;
+}
+
+.footer-contact-list {
+  list-style: none;
+}
+.footer-contact-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: rgba(245, 237, 214, 0.75);
+}
+.footer-contact-list i {
+  color: var(--yellow);
+  width: 18px;
+  flex-shrink: 0;
+}
+.footer-contact-list a {
+  color: rgba(245, 237, 214, 0.75);
+  text-decoration: none;
+  transition: color 200ms var(--ease-out);
+}
+.footer-contact-list a:hover { color: var(--yellow); }
+
+.footer-social {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.2rem;
+}
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(245, 166, 35, 0.12);
+  border: 2px solid rgba(245, 166, 35, 0.3);
+  color: rgba(245, 237, 214, 0.75);
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: background 200ms var(--ease-out),
+              color 200ms var(--ease-out),
+              border-color 200ms var(--ease-out),
+              transform 200ms var(--ease-out);
+}
+.footer-social a:hover {
+  background: var(--yellow);
+  color: var(--brown);
+  border-color: var(--yellow);
+  transform: translateY(-3px) scale(1.08);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(245, 166, 35, 0.2);
+  padding-top: 2rem;
+  text-align: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: rgba(245, 237, 214, 0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.8;
+}
+
+/* ============================================================
+   STATS BAR
+   ============================================================ */
+.stats-bar {
+  background: var(--brown);
+  color: var(--white);
+  padding: 4rem 8%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 2rem;
+  border-top: 5px solid var(--yellow);
+  border-bottom: 5px solid var(--yellow);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--yellow);
+  display: block;
+  letter-spacing: 0.04em;
+}
+
+.stat-label {
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  color: rgba(245, 237, 214, 0.75);
+  margin-top: 0.3rem;
+  display: block;
+}
+
+/* ============================================================
+   DEAL CARDS
+   ============================================================ */
+.deal-card {
+  background: var(--white);
+  border: 4px solid var(--brown);
+  border-radius: 28px;
+  padding: 1.8rem;
+  box-shadow: 10px 10px 0 var(--yellow);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  /* Card lift transition */
+  transition: transform 250ms var(--ease-out),
+              box-shadow 250ms var(--ease-out);
+  will-change: transform;
+}
+
+.deal-card:hover {
+  transform: translateY(-8px) rotate(0.4deg);
+  box-shadow: 14px 18px 0 var(--yellow),
+              0 20px 40px rgba(59, 26, 8, 0.12);
+}
+
+.deal-tag {
+  position: absolute;
+  top: 22px;
+  right: -32px;
+  background: var(--red);
+  color: var(--white);
+  padding: 0.5rem 3rem;
+  transform: rotate(45deg);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  z-index: 5;
+}
+
+.deal-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--red);
+  margin: 0.8rem 0 0.5rem;
+  letter-spacing: 0.03em;
+}
+
+.deal-card p {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--brown-mid);
+  opacity: 0.85;
+  margin-bottom: 1.2rem;
+  flex-grow: 1;
+  line-height: 1.5;
+}
+
+.price {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--brown);
+  margin-bottom: 1rem;
+  letter-spacing: 0.03em;
+}
+
+/* ============================================================
+   MENU ITEM CARDS
+   ============================================================ */
+.menu-item {
+  background: var(--white);
+  border-radius: 24px;
+  padding: 1.8rem;
+  text-align: center;
+  border: 4px solid var(--brown);
+  box-shadow: 6px 6px 0 var(--cream);
+  display: flex;
+  flex-direction: column;
+  transition: transform 250ms var(--ease-out),
+              box-shadow 250ms var(--ease-out);
+  will-change: transform;
+  overflow: hidden;
+}
+
+.menu-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 8px 16px 0 var(--yellow),
+              0 20px 40px rgba(59, 26, 8, 0.12);
+}
+
+.menu-item h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--red);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.03em;
+}
+
+.menu-item img {
+  transition: transform 350ms var(--ease-out);
+}
+
+.menu-item:hover img {
+  transform: scale(1.06);
+}
+
+/* ============================================================
+   FORM STYLES
+   ============================================================ */
+.form-group {
+  text-align: left;
+  margin-bottom: 1.4rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 800;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brown);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  border: 3px solid rgba(59, 26, 8, 0.2);
+  border-radius: 14px;
+  background: rgba(245, 237, 214, 0.4);
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  color: var(--brown);
+  transition: border-color 200ms var(--ease-out),
+              background 200ms var(--ease-out),
+              box-shadow 200ms var(--ease-out);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--yellow);
+  background: var(--white);
+  box-shadow: 0 0 0 4px rgba(245, 166, 35, 0.2);
+}
+
+/* ============================================================
+   PREFERS-REDUCED-MOTION
+   Emil rule: remove transforms/motion, keep opacity/color fades
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-stagger > *,
+  .card-lift,
+  .deal-card,
+  .menu-item,
+  .btn-primary,
+  .btn-red,
+  .nav-links a,
+  .nav-button {
+    transition: opacity 300ms ease !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .scroll-indicator {
+    display: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE NAVBAR COLLAPSE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .navbar {
+    grid-template-columns: 1fr;
+    row-gap: 0.6rem;
+    padding: 0.8rem 5%;
+  }
+  .logo { justify-self: center; }
+  .nav-links { justify-self: center; gap: 0.4rem; }
+  .nav-button { justify-self: center; }
+}
+
+@media (max-width: 640px) {
+  .nav-links a { font-size: 0.78rem; padding: 0.35rem 0.7rem; height: 34px; }
+  .nav-button { font-size: 0.78rem; height: 34px; min-width: 90px; }
+  .logo { font-size: 1.6rem; }
+}
+
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+.text-center { text-align: center; }
+.max-w-content { max-width: 1300px; margin: 0 auto; }
+.pt-nav { padding-top: 96px; } /* offset for fixed navbar */
