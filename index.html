@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mimalicious - Landing</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    :root {
+      --red: #D62300;
+      --yellow: #F5AF19;
+      --beige: #F2EBD9;
+      --brown: #502314;
+      --white: #FFFFFF;
+      --nike-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body { 
+      background-color: var(--beige); 
+      color: var(--brown); 
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    h1, h2, h3, .logo, .eyebrow, .order-btn, .submit-btn, .close-btn, .footer-heading { 
+      font-family: 'Titan One', cursive; 
+      text-transform: uppercase; 
+    }
+
+    /* --- Navbar --- */
+    .navbar { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      padding: 1rem 5%; 
+      background: var(--red); 
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .logo { font-size: 1.5rem; color: var(--yellow); text-shadow: 2px 2px 0px var(--brown); text-decoration: none; }
+    
+    .nav-button { 
+      text-decoration: none; background: var(--yellow); color: var(--brown);
+      padding: 0.6rem 1.2rem; border-radius: 50px; font-weight: 900; 
+      transition: 0.3s var(--nike-ease); box-shadow: 0 4px 0px #C48D14; cursor: pointer; border: none;
+      text-transform: uppercase; font-size: 0.8rem;
+    }
+    .nav-button:hover { background: var(--white); transform: translateY(-2px); box-shadow: 0 6px 0px #ddd; }
+
+    .header-spacer { height: 20px; background: var(--beige); }
+
+    /* --- Hero Carousel --- */
+    .hero-container {
+      position: relative;
+      height: 80vh; 
+      width: 92vw; 
+      margin: 0 auto;
+      background: var(--brown);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      border-radius: 30px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+    }
+
+    .carousel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+    .carousel-item {
+      position: absolute; width: 100%; height: 100%; opacity: 0;
+      transition: opacity 1.2s ease-in-out;
+      background-size: cover; background-repeat: no-repeat; background-position: center; 
+    }
+    .carousel-item.active { opacity: 1; }
+
+    .hero-overlay {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8));
+      z-index: 2;
+    }
+
+    .hero-content { 
+        position: relative; 
+        z-index: 10; 
+        padding: 0 10%; 
+        color: var(--white); 
+        text-align: center;
+        width: 100%;
+    }
+
+    .eyebrow { 
+      display: inline-block; background: var(--yellow); color: var(--brown); 
+      padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.7rem; 
+      margin-bottom: 1.5rem; letter-spacing: 1px;
+    }
+
+    .hero-content h1 { font-size: 2.8rem; margin-bottom: 1rem; line-height: 1; text-shadow: 3px 3px 0px rgba(0,0,0,0.5); }
+    .hero-content p { font-size: 1rem; color: var(--beige); margin-bottom: 2.5rem; font-weight: 600; line-height: 1.4; }
+    
+    .order-btn { 
+      background: var(--yellow); color: var(--brown); padding: 1.2rem 2.5rem; 
+      font-size: 1.2rem; border-radius: 60px; cursor: pointer; 
+      transition: 0.4s var(--nike-ease); box-shadow: 0 6px 0px #C48D14;
+      text-decoration: none; display: inline-block;
+    }
+
+    .hero-image-wrapper { 
+      width: 90%; border-radius: 30px; overflow: hidden; 
+      margin: 4rem auto; border: 8px solid var(--white); background-color: var(--white); 
+    }
+    .hero-image-wrapper img { width: 100%; height: auto; display: block; }
+
+    /* --- Footer --- */
+    .site-footer {
+      background-color: var(--white);
+      border-top: 6px solid var(--yellow);
+      padding: 4rem 8% 2rem;
+      color: var(--brown);
+    }
+
+    .footer-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      text-align: center;
+    }
+
+    .footer-brand .logo { font-size: 2rem; color: var(--red); margin-bottom: 0.5rem; }
+    .footer-brand p { font-weight: 600; margin: 0 auto; line-height: 1.6; font-size: 1rem; max-width: 300px; }
+    .footer-heading { font-size: 1.4rem; color: var(--red); margin-bottom: 1rem; }
+    .footer-list { list-style: none; }
+    .footer-list li { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 0.8rem; }
+    .footer-list a, .footer-list span { color: #007bff; text-decoration: none; font-weight: 800; font-size: 1rem; }
+    .social-icons { display: flex; justify-content: center; gap: 1.5rem; }
+    .social-icons a { font-size: 1.8rem; color: #007bff; }
+
+    .footer-bottom {
+      border-top: 2px solid var(--beige);
+      padding-top: 2rem; text-align: center;
+      font-weight: 800; font-size: 0.8rem; color: #888;
+      text-transform: uppercase; line-height: 1.6; margin-top: 2rem;
+    }
+
+    /* --- DESKTOP ADJUSTMENTS (Screens wider than 768px) --- */
+    @media (min-width: 768px) {
+      .navbar { padding: 1.5rem 8%; }
+      .logo { font-size: 2.2rem; }
+      .nav-button { padding: 0.8rem 2.2rem; font-size: 1rem; }
+      
+      .hero-container { height: 90vh; border-radius: 50px; width: 94vw; }
+      .hero-content { text-align: left; max-width: 900px; padding: 0 8%; }
+      .hero-content h1 { font-size: clamp(3rem, 8vw, 6rem); }
+      .hero-content p { font-size: 1.4rem; max-width: 550px; }
+      .eyebrow { font-size: 0.9rem; margin-bottom: 2rem; }
+      
+      .hero-overlay { background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 20%, transparent 100%); }
+      
+      .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; text-align: left; }
+      .footer-list li { justify-content: flex-start; }
+      .social-icons { justify-content: flex-start; }
+      .footer-brand p { margin: 0; }
+      
+      .hero-image-wrapper { width: 85%; border-radius: 50px; border-width: 15px; }
+    }
+
+    /* --- Modal --- */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.85); display: none; 
+      justify-content: center; align-items: center; z-index: 9999; backdrop-filter: blur(8px);
+    }
+    .modal-card {
+      background: var(--white); width: 90%; max-width: 450px; padding: 2.5rem 1.5rem;
+      border-radius: 30px; text-align: center; position: relative;
+    }
+    .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; }
+    .form-group { text-align: left; margin-bottom: 1rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 900; font-size: 0.7rem; text-transform: uppercase; }
+    .form-group input { width: 100%; padding: 1rem; border: 2px solid var(--beige); border-radius: 12px; }
+    .submit-btn { background: var(--red); color: white; border: none; padding: 1rem; width: 100%; border-radius: 50px; cursor: pointer; font-family: 'Titan One'; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="#" class="logo">MIMALICIOUS</a>
+  <button class="nav-button" onclick="openModal()">Login / Sign Up</button>
+</nav>
+
+<div class="header-spacer"></div>
+
+<section class="hero-container">
+  <div class="carousel">
+    <div class="carousel-item active" style="background-image: url('images/carousel1.jpg');"></div>
+    <div class="carousel-item" style="background-image: url('images/carousel2.jpg');"></div>
+    <div class="carousel-item" style="background-image: url('images/carousel3.png');"></div>
+  </div>
+  
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <span class="eyebrow">Flame-Grilled Since 2026</span>
+    <h1>Welcome to<br>Mimalicious</h1>
+    <p>Order your favorite burger now and enjoy sizzling flavors built exactly the way you want it.</p>
+    <button class="order-btn" onclick="openModal()">GET STARTED</button>
+  </div>
+</section>
+
+<div class="hero-image-wrapper">
+  <img src="images/landing.jpg" alt="Our Signature Burger">
+</div>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo">MIMALICIOUS</a>
+      <p>Serving up the boldest flavors and the cheesiest smiles since 2024.</p>
+    </div>
+
+    <div class="footer-column">
+      <h3 class="footer-heading">Get In Touch</h3>
+      <ul class="footer-list">
+        <li><i class="fa-solid fa-envelope"></i><a href="mailto:service@mima.com.ph">service@mima.com.ph</a></li>
+        <li><i class="fa-solid fa-phone"></i><span>8-533-3333</span></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3 class="footer-heading">Explore</h3>
+      <ul class="footer-list">
+        <li><a href="#" style="color: var(--brown)">Home</a></li>
+        <li><a href="#" style="color: var(--brown)">Full Menu</a></li>
+        <li><a href="#" style="color: var(--brown)">Our Story</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3 class="footer-heading">Get Social</h3>
+      <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 MIMALICIOUS. ALL RIGHTS RESERVED.<br>
+    DEVELOPED BY PROGRAMIZ
+  </div>
+</footer>
+
+<div class="modal-overlay" id="loginModal">
+  <div class="modal-card">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h2 style="color: var(--red);">Welcome!</h2>
+    <form id="authForm" style="margin-top: 1.5rem;">
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@example.com" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input id="password" type="password" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="submit-btn">Login / Sign Up</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.carousel-item');
+  setInterval(() => {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add('active');
+  }, 5000);
+
+  function openModal() { document.getElementById('loginModal').style.display = 'flex'; }
+  function closeModal() { document.getElementById('loginModal').style.display = 'none'; }
+  window.onclick = (e) => { if(e.target.id == 'loginModal') closeModal(); }
+
+  document.getElementById('authForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    window.location.href = 'home.html';
+  });
+</script>
+</body>
+</html>
