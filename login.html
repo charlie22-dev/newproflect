@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,9 @@
   <!-- Shared design system (tokens, fonts, form-group, etc.) -->
   <link rel="stylesheet" href="styles.css">
   <!-- Poppins for body per user spec -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap"
+    rel="stylesheet">
 
   <style>
     /* ── Base override ───────────────────────────────────────────── */
@@ -41,7 +44,7 @@
       padding: 4rem 3rem;
       position: relative;
       /* Subtle cream dot texture */
-      background-image: radial-gradient(circle, rgba(59,26,8,0.05) 1px, transparent 1px);
+      background-image: radial-gradient(circle, rgba(59, 26, 8, 0.05) 1px, transparent 1px);
       background-size: 20px 20px;
     }
 
@@ -60,8 +63,15 @@
     }
 
     @keyframes card-enter {
-      from { opacity: 0; transform: translateY(20px) scale(0.97); }
-      to   { opacity: 1; transform: translateY(0)    scale(1);    }
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.97);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     /* Brand mark above form */
@@ -101,7 +111,7 @@
       line-height: 1;
     }
 
-    .auth-card > p {
+    .auth-card>p {
       font-weight: 600;
       color: var(--brown-mid);
       font-size: 0.92rem;
@@ -135,17 +145,19 @@
       margin-top: 0.8rem;
       transition:
         background 200ms var(--ease-out),
-        color      200ms var(--ease-out),
-        transform  160ms var(--ease-out),
+        color 200ms var(--ease-out),
+        transform 160ms var(--ease-out),
         box-shadow 200ms var(--ease-out);
       box-shadow: 0 5px 0 var(--red-deep);
     }
+
     .submit-btn:hover {
       background: var(--yellow);
       color: var(--brown);
       transform: translateY(-2px);
-      box-shadow: 0 8px 0 var(--yellow-deep), 0 4px 20px rgba(245,166,35,0.4);
+      box-shadow: 0 8px 0 var(--yellow-deep), 0 4px 20px rgba(245, 166, 35, 0.4);
     }
+
     .submit-btn:active {
       transform: scale(0.97);
       box-shadow: 0 2px 0 var(--red-deep);
@@ -161,7 +173,10 @@
       text-decoration: none;
       transition: color 200ms var(--ease-out);
     }
-    .back-link:hover { color: var(--red); }
+
+    .back-link:hover {
+      color: var(--red);
+    }
 
     /* ════════════════════════════════════════════════════════════════
        RIGHT SIDE — Testimonials panel
@@ -169,7 +184,7 @@
     .reviews-panel {
       background: var(--red);
       /* Dot/grain texture matching site-wide pattern */
-      background-image: radial-gradient(circle, rgba(255,255,255,0.10) 1px, transparent 1px);
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.10) 1px, transparent 1px);
       background-size: 22px 22px;
       display: flex;
       flex-direction: column;
@@ -192,6 +207,7 @@
       right: -120px;
       pointer-events: none;
     }
+
     .reviews-panel::after {
       content: '';
       position: absolute;
@@ -257,7 +273,7 @@
       opacity: 0;
       transform: translateX(40px) scale(0.97);
       transition:
-        opacity  500ms var(--ease-out),
+        opacity 500ms var(--ease-out),
         transform 500ms var(--ease-out);
       pointer-events: none;
     }
@@ -277,9 +293,17 @@
 
     /* Subtle perpetual float — Emil: only on decorative elements */
     @keyframes card-float {
-      0%,  100% { transform: translateY(0);    }
-      50%        { transform: translateY(-7px); }
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-7px);
+      }
     }
+
     /* Override float when entering/exiting (transition takes precedence) */
     .review-card.exit,
     .review-card:not(.active) {
@@ -388,8 +412,8 @@
       border: 2px solid rgba(245, 166, 35, 0.4);
       cursor: pointer;
       transition:
-        background  250ms var(--ease-out),
-        transform   250ms var(--ease-out),
+        background 250ms var(--ease-out),
+        transform 250ms var(--ease-out),
         border-color 250ms var(--ease-out);
     }
 
@@ -422,252 +446,280 @@
 
     /* ── Responsive ─────────────────────────────────────────── */
     @media (max-width: 900px) {
-      .login-wrap { grid-template-columns: 1fr; }
-      .reviews-panel { min-height: 420px; }
+      .login-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .reviews-panel {
+        min-height: 420px;
+      }
     }
 
     @media (max-width: 600px) {
-      .login-form-side { padding: 2.5rem 1.5rem; }
-      .auth-card { padding: 2rem 1.5rem; }
-      .reviews-panel { padding: 3rem 1.5rem; }
-      .review-card { padding: 1.8rem 1.5rem 1.4rem; }
+      .login-form-side {
+        padding: 2.5rem 1.5rem;
+      }
+
+      .auth-card {
+        padding: 2rem 1.5rem;
+      }
+
+      .reviews-panel {
+        padding: 3rem 1.5rem;
+      }
+
+      .review-card {
+        padding: 1.8rem 1.5rem 1.4rem;
+      }
     }
 
     /* ── Reduced motion ─────────────────────────────────────── */
     @media (prefers-reduced-motion: reduce) {
-      .review-card { animation: none !important; transition: opacity 200ms ease !important; }
-      .auth-card { animation: none !important; }
+      .review-card {
+        animation: none !important;
+        transition: opacity 200ms ease !important;
+      }
+
+      .auth-card {
+        animation: none !important;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<!-- Redirect if already logged in -->
-<script>
-  if (localStorage.getItem('loggedIn') === 'true') window.location.href = 'home.html';
-</script>
+  <!-- Redirect if already logged in -->
+  <script>
+    if (localStorage.getItem('loggedIn') === 'true') window.location.href = 'home.html';
+  </script>
 
-<div class="login-wrap">
+  <div class="login-wrap">
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
        LEFT — Login Form
   ═══════════════════════════════════════════════════════════ -->
-  <div class="login-form-side">
-    <div class="auth-card">
+    <div class="login-form-side">
+      <div class="auth-card">
 
-      <!-- Mini brand mark -->
-      <div class="form-brand-mark">
-        <a href="index.html" class="logo-small">MIMALICIOUS</a>
-        <span class="badge-pill">EST. 2026</span>
+        <!-- Mini brand mark -->
+        <div class="form-brand-mark">
+          <a href="index.html" class="logo-small">MIMALICIOUS</a>
+          <span class="badge-pill">EST. 2026</span>
+        </div>
+
+        <h2>Welcome Back!</h2>
+        <p>Sign in to start your order</p>
+
+        <form id="authForm">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input id="email" type="email" placeholder="you@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" type="password" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="submit-btn" id="login-submit-btn">LOGIN / SIGN UP</button>
+        </form>
+
+        <a href="index.html" class="back-link">← Back to Landing</a>
       </div>
-
-      <h2>Welcome Back!</h2>
-      <p>Sign in to start your order</p>
-
-      <form id="authForm">
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input id="email" type="email" placeholder="you@example.com" required>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input id="password" type="password" placeholder="••••••••" required>
-        </div>
-        <button type="submit" class="submit-btn" id="login-submit-btn">LOGIN / SIGN UP</button>
-      </form>
-
-      <a href="index.html" class="back-link">← Back to Landing</a>
     </div>
-  </div>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
        RIGHT — Testimonials / Reviews Panel
   ═══════════════════════════════════════════════════════════ -->
-  <div class="reviews-panel">
+    <div class="reviews-panel">
 
-    <p class="reviews-heading">What Our <span>Hungry</span> Fams Say</p>
+      <p class="reviews-heading">What Our <span>Hungry</span> Fams Say</p>
 
-    <!-- Carousel track -->
-    <div class="carousel-track" id="carouselTrack" aria-live="polite" aria-atomic="true">
+      <!-- Carousel track -->
+      <div class="carousel-track" id="carouselTrack" aria-live="polite" aria-atomic="true">
 
-      <!-- Card 1 -->
-      <article class="review-card active" aria-label="Review from Marvie Santos">
-        <span class="quote-mark" aria-hidden="true">&ldquo;</span>
-        <span class="review-stars" aria-label="5 out of 5 stars">★★★★★</span>
-        <p class="review-quote">
-          "Grabe yung Big Mima, kaya na nyang pumalit sa aking ex! Hindi ako nag-regret kahit isang segundo. Solid ang lasa, bes!"
-        </p>
-        <div class="review-customer">
-          <div class="avatar" aria-hidden="true">M</div>
-          <div>
-            <span class="customer-name">Marvie Santos</span>
-            <span class="customer-tag">Verified Burger Addict &bull; Quezon City</span>
+        <!-- Card 1 -->
+        <article class="review-card active" aria-label="Review from Marvie Santos">
+          <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+          <span class="review-stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p class="review-quote">
+            "Grabe yung Big Mima, kaya na nyang pumalit sa aking ex! Hindi ako nag-regret kahit isang segundo. Solid ang
+            lasa, bes!"
+          </p>
+          <div class="review-customer">
+            <div class="avatar" aria-hidden="true">M</div>
+            <div>
+              <span class="customer-name">Marvie Santos</span>
+              <span class="customer-tag">Verified Burger Addict &bull; Quezon City</span>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- Card 2 -->
-      <article class="review-card" aria-label="Review from Karlo Reyes">
-        <span class="quote-mark" aria-hidden="true">&ldquo;</span>
-        <span class="review-stars" aria-label="5 out of 5 stars">★★★★★</span>
-        <p class="review-quote">
-          "Yung Mima Cheesy Overload? Bro, four layers ng cheese. FOUR. I called my mom after just to tell her I'm okay. Sobrang sarap!"
-        </p>
-        <div class="review-customer">
-          <div class="avatar" aria-hidden="true">K</div>
-          <div>
-            <span class="customer-name">Karlo Reyes</span>
-            <span class="customer-tag">Regular Customer &bull; Makati</span>
+        <!-- Card 2 -->
+        <article class="review-card" aria-label="Review from Karlo Reyes">
+          <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+          <span class="review-stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p class="review-quote">
+            "Yung Mima Cheesy Overload? Bro, four layers ng cheese. FOUR. I called my mom after just to tell her I'm
+            okay. Sobrang sarap!"
+          </p>
+          <div class="review-customer">
+            <div class="avatar" aria-hidden="true">K</div>
+            <div>
+              <span class="customer-name">Karlo Reyes</span>
+              <span class="customer-tag">Regular Customer &bull; Makati</span>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- Card 3 -->
-      <article class="review-card" aria-label="Review from Lovely Dela Cruz">
-        <span class="quote-mark" aria-hidden="true">&ldquo;</span>
-        <span class="review-stars" aria-label="5 out of 5 stars">★★★★★</span>
-        <p class="review-quote">
-          "Pina-order ko 'tong Mima BBQ Blast sa first date ko. Third date na kami ngayon, and he said 'the burger sealed the deal.' I'm not sure if he means me or the food."
-        </p>
-        <div class="review-customer">
-          <div class="avatar" aria-hidden="true">L</div>
-          <div>
-            <span class="customer-name">Lovely Dela Cruz</span>
-            <span class="customer-tag">Suki ng Mimalicious &bull; Pasig</span>
+        <!-- Card 3 -->
+        <article class="review-card" aria-label="Review from Lovely Dela Cruz">
+          <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+          <span class="review-stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p class="review-quote">
+            "Pina-order ko 'tong Mima BBQ Blast sa first date ko. Third date na kami ngayon, and he said 'the burger
+            sealed the deal.' I'm not sure if he means me or the food."
+          </p>
+          <div class="review-customer">
+            <div class="avatar" aria-hidden="true">L</div>
+            <div>
+              <span class="customer-name">Lovely Dela Cruz</span>
+              <span class="customer-tag">Suki ng Mimalicious &bull; Pasig</span>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- Card 4 -->
-      <article class="review-card" aria-label="Review from Andro Bautista">
-        <span class="quote-mark" aria-hidden="true">&ldquo;</span>
-        <span class="review-stars" aria-label="5 out of 5 stars">★★★★★</span>
-        <p class="review-quote">
-          "Tinry ko yung Mima Fire Crunch isang beses. Isang beses lang — kasi every day na ako nag-uuwi ng lima. Doc said my blood type is now BBQ. Worth it."
-        </p>
-        <div class="review-customer">
-          <div class="avatar" aria-hidden="true">A</div>
-          <div>
-            <span class="customer-name">Andro Bautista</span>
-            <span class="customer-tag">Power Customer &bull; Mandaluyong</span>
+        <!-- Card 4 -->
+        <article class="review-card" aria-label="Review from Andro Bautista">
+          <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+          <span class="review-stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p class="review-quote">
+            "Tinry ko yung Mima Fire Crunch isang beses. Isang beses lang — kasi every day na ako nag-uuwi ng lima. Doc
+            said my blood type is now BBQ. Worth it."
+          </p>
+          <div class="review-customer">
+            <div class="avatar" aria-hidden="true">A</div>
+            <div>
+              <span class="customer-name">Andro Bautista</span>
+              <span class="customer-tag">Power Customer &bull; Mandaluyong</span>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-    </div><!-- /carousel-track -->
+      </div><!-- /carousel-track -->
 
-    <!-- Dot indicators -->
-    <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Review navigation">
-      <button class="dot active" role="tab" aria-selected="true"  aria-label="Review 1" onclick="goTo(0)"></button>
-      <button class="dot"        role="tab" aria-selected="false" aria-label="Review 2" onclick="goTo(1)"></button>
-      <button class="dot"        role="tab" aria-selected="false" aria-label="Review 3" onclick="goTo(2)"></button>
-      <button class="dot"        role="tab" aria-selected="false" aria-label="Review 4" onclick="goTo(3)"></button>
-    </div>
+      <!-- Dot indicators -->
+      <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Review navigation">
+        <button class="dot active" role="tab" aria-selected="true" aria-label="Review 1" onclick="goTo(0)"></button>
+        <button class="dot" role="tab" aria-selected="false" aria-label="Review 2" onclick="goTo(1)"></button>
+        <button class="dot" role="tab" aria-selected="false" aria-label="Review 3" onclick="goTo(2)"></button>
+        <button class="dot" role="tab" aria-selected="false" aria-label="Review 4" onclick="goTo(3)"></button>
+      </div>
 
-    <!-- Auto-advance progress bar -->
-    <div class="carousel-progress" aria-hidden="true">
-      <div class="carousel-progress-bar" id="progressBar"></div>
-    </div>
+      <!-- Auto-advance progress bar -->
+      <div class="carousel-progress" aria-hidden="true">
+        <div class="carousel-progress-bar" id="progressBar"></div>
+      </div>
 
-  </div><!-- /reviews-panel -->
+    </div><!-- /reviews-panel -->
 
-</div><!-- /login-wrap -->
+  </div><!-- /login-wrap -->
 
 
-<script>
-  /* ── Login form ──────────────────────────────────────────────── */
-  document.getElementById('authForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    localStorage.setItem('loggedIn', 'true');
-    window.location.href = 'home.html';
-  });
-
-  /* ── Testimonial carousel ────────────────────────────────────── */
-  const AUTOPLAY_MS  = 4000;  // rotate every 4 s
-  const TRANSITION_MS = 500;  // must match CSS transition duration
-
-  const cards    = Array.from(document.querySelectorAll('.review-card'));
-  const dots     = Array.from(document.querySelectorAll('.dot'));
-  const progressBar = document.getElementById('progressBar');
-
-  let current    = 0;
-  let timer      = null;
-  let progTimer  = null;
-  let isAnimating = false;
-
-  /* Navigate to a specific card index */
-  function goTo(index) {
-    if (isAnimating || index === current) return;
-    isAnimating = true;
-
-    const prev = current;
-    current = index;
-
-    /* Slide previous card out (left) */
-    cards[prev].classList.remove('active');
-    cards[prev].classList.add('exit');
-
-    /* Bring new card in (from right) */
-    cards[current].classList.add('active');
-
-    /* Update dots */
-    dots.forEach((d, i) => {
-      d.classList.toggle('active', i === current);
-      d.setAttribute('aria-selected', i === current ? 'true' : 'false');
+  <script>
+    /* ── Login form ──────────────────────────────────────────────── */
+    document.getElementById('authForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      localStorage.setItem('loggedIn', 'true');
+      window.location.href = 'home.html';
     });
 
-    /* Clean exit class after transition completes */
-    setTimeout(() => {
-      cards[prev].classList.remove('exit');
-      isAnimating = false;
-    }, TRANSITION_MS);
+    /* ── Testimonial carousel ────────────────────────────────────── */
+    const AUTOPLAY_MS = 4000;  // rotate every 4 s
+    const TRANSITION_MS = 500;  // must match CSS transition duration
 
-    /* Restart progress bar */
-    resetProgress();
-  }
+    const cards = Array.from(document.querySelectorAll('.review-card'));
+    const dots = Array.from(document.querySelectorAll('.dot'));
+    const progressBar = document.getElementById('progressBar');
 
-  /* Auto-advance */
-  function next() {
-    goTo((current + 1) % cards.length);
-  }
+    let current = 0;
+    let timer = null;
+    let progTimer = null;
+    let isAnimating = false;
 
-  function startAutoplay() {
-    timer = setInterval(next, AUTOPLAY_MS);
-  }
+    /* Navigate to a specific card index */
+    function goTo(index) {
+      if (isAnimating || index === current) return;
+      isAnimating = true;
 
-  function stopAutoplay() {
-    clearInterval(timer);
-    clearInterval(progTimer);
-  }
+      const prev = current;
+      current = index;
 
-  /* Progress bar fill — visual timer indicator */
-  function resetProgress() {
-    progressBar.style.transition = 'none';
-    progressBar.style.width = '0%';
-    /* Force reflow so transition resets cleanly */
-    void progressBar.offsetWidth;
-    progressBar.style.transition = `width ${AUTOPLAY_MS}ms linear`;
-    progressBar.style.width = '100%';
-  }
+      /* Slide previous card out (left) */
+      cards[prev].classList.remove('active');
+      cards[prev].classList.add('exit');
 
-  /* Pause on hover — Emil: avoid animating over user's attention */
-  const track = document.getElementById('carouselTrack');
-  track.addEventListener('mouseenter', stopAutoplay);
-  track.addEventListener('mouseleave', () => {
+      /* Bring new card in (from right) */
+      cards[current].classList.add('active');
+
+      /* Update dots */
+      dots.forEach((d, i) => {
+        d.classList.toggle('active', i === current);
+        d.setAttribute('aria-selected', i === current ? 'true' : 'false');
+      });
+
+      /* Clean exit class after transition completes */
+      setTimeout(() => {
+        cards[prev].classList.remove('exit');
+        isAnimating = false;
+      }, TRANSITION_MS);
+
+      /* Restart progress bar */
+      resetProgress();
+    }
+
+    /* Auto-advance */
+    function next() {
+      goTo((current + 1) % cards.length);
+    }
+
+    function startAutoplay() {
+      timer = setInterval(next, AUTOPLAY_MS);
+    }
+
+    function stopAutoplay() {
+      clearInterval(timer);
+      clearInterval(progTimer);
+    }
+
+    /* Progress bar fill — visual timer indicator */
+    function resetProgress() {
+      progressBar.style.transition = 'none';
+      progressBar.style.width = '0%';
+      /* Force reflow so transition resets cleanly */
+      void progressBar.offsetWidth;
+      progressBar.style.transition = `width ${AUTOPLAY_MS}ms linear`;
+      progressBar.style.width = '100%';
+    }
+
+    /* Pause on hover — Emil: avoid animating over user's attention */
+    const track = document.getElementById('carouselTrack');
+    track.addEventListener('mouseenter', stopAutoplay);
+    track.addEventListener('mouseleave', () => {
+      startAutoplay();
+      resetProgress();
+    });
+
+    /* Keyboard navigation */
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { stopAutoplay(); next(); startAutoplay(); }
+      if (e.key === 'ArrowLeft') { stopAutoplay(); goTo((current - 1 + cards.length) % cards.length); startAutoplay(); }
+    });
+
+    /* Boot */
     startAutoplay();
     resetProgress();
-  });
-
-  /* Keyboard navigation */
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight') { stopAutoplay(); next(); startAutoplay(); }
-    if (e.key === 'ArrowLeft')  { stopAutoplay(); goTo((current - 1 + cards.length) % cards.length); startAutoplay(); }
-  });
-
-  /* Boot */
-  startAutoplay();
-  resetProgress();
-</script>
+  </script>
 
 </body>
+
 </html>

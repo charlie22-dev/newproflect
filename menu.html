@@ -7,8 +7,8 @@
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
-body{padding-top:96px;}
-.menu-hero{display:flex;align-items:center;justify-content:center;min-height:42dvh;background:var(--red);background-image:radial-gradient(circle,rgba(0,0,0,0.18) 1px,transparent 1px);background-size:26px 26px;clip-path:ellipse(150% 100% at 50% 0%);color:var(--yellow);text-align:center;flex-direction:column;position:relative;padding:4rem 6%;}
+body{padding-top:0;}
+.menu-hero{display:flex;align-items:center;justify-content:center;min-height:42dvh;background-color:var(--red);background-image:radial-gradient(var(--red-deep) 8px,transparent 8px);background-size:32px 32px;background-position:0 0, 16px 16px;clip-path:ellipse(150% 100% at 50% 0%);color:var(--yellow);text-align:center;flex-direction:column;position:relative;padding:9rem 6% 4rem;}
 .hero-title h1{font-family:var(--font-display);font-size:clamp(3rem,8vw,5rem);text-shadow:5px 5px 0 var(--brown);text-transform:uppercase;letter-spacing:0.04em;}
 .hero-title p{font-weight:700;font-size:1.1rem;color:var(--cream);opacity:0.9;margin-top:0.6rem;}
 .deals-section{padding:4rem 6%;text-align:center;background:var(--cream);}
@@ -116,18 +116,18 @@ body{padding-top:96px;}
 
 <section class="sub-menu-container">
   <div id="menu-burgers" class="sub-menu active">
-<div class="menu-item reveal"><img src="images/classic.png" alt="MIMA CLASSIC" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA CLASSIC</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">The OG. 100% Beef, secret sauce, total satisfaction.</p><div class="price">₱70</div><button class="add-btn" onclick="addToCart('Mima Classic',70)"></button></div>
-<div class="menu-item reveal"><img src="images/Big.png" alt="THE BIG MIMA" style="width:100%;height:160px;object-fit:contain;"><h3>THE BIG MIMA</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Stacked high with double beef and triple the attitude.</p><div class="price">₱150</div><button class="add-btn" onclick="addToCart('The Big Mima',150)"></button></div>
-<div class="menu-item reveal"><img src="images/Heat.png" alt="MIMA SWEET HEAT" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA SWEET HEAT</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Sweet and spicy flavor with a fiery kick.</p><div class="price">₱150</div><button class="add-btn" onclick="addToCart('Mima Sweet Heat',150)"></button></div>
-<div class="menu-item reveal"><img src="images/Loaded.png" alt="MIMA LOADED STACK" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA LOADED STACK</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Packed with beef, cheese, and extra toppings.</p><div class="price">₱150</div><button class="add-btn" onclick="addToCart('Mima Loaded Stack',150)"></button></div>
-<div class="menu-item reveal"><img src="images/melt.png" alt="MIMA ULTIMATE MELT" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA ULTIMATE MELT</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Rich, juicy burger with perfectly melted cheese.</p><div class="price">₱150</div><button class="add-btn" onclick="addToCart('Mima Ultimate Melt',150)"></button></div>
-<div class="menu-item reveal"><img src="images/bbq.png" alt="MIMA BBQ BLAST" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA BBQ BLAST</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Smoky BBQ beef with caramelized onions.</p><div class="price">₱100</div><button class="add-btn" onclick="addToCart('Mima BBQ BLAST',100)"></button></div>
-<div class="menu-item reveal"><img src="images/cheesy.png" alt="MIMA CHEESY OVERLOAD" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA CHEESY OVERLOAD</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Loaded with gooey, melted cheese layers.</p><div class="price">₱110</div><button class="add-btn" onclick="addToCart('Mima Cheesy Overload',110)"></button></div>
-<div class="menu-item reveal"><img src="images/crunchy.png" alt="MIMA CRUNCHY STACK" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA CRUNCHY STACK</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Crispy chicken and fresh veggies in every bite.</p><div class="price">₱110</div><button class="add-btn" onclick="addToCart('Mima Crunchy Stack',110)"></button></div>
-<div class="menu-item reveal"><img src="images/fire-removebg-preview.png" alt="MIMA FIRE CRUNCH" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA FIRE CRUNCH</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Crispy chicken with a spicy crunch.</p><div class="price">₱99</div><button class="add-btn" onclick="addToCart('Mima Fire Crunch',99)"></button></div>
-<div class="menu-item reveal"><img src="images/smokey.png" alt="MIMA SMOKY MELT" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA SMOKY MELT</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Beef with smoky sauce and melted cheese.</p><div class="price">₱99</div><button class="add-btn" onclick="addToCart('Mima Smoky Melt',99)"></button></div>
-<div class="menu-item reveal"><img src="images/zing.png" alt="MIMA ZING STACK" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA ZING STACK</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Tangy, juicy layers with a zesty bite.</p><div class="price">₱99</div><button class="add-btn" onclick="addToCart('Mima Zing Stack',99)"></button></div>
-<div class="menu-item reveal"><img src="images/peper.png" alt="MIMA PEPPER BLAST" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA PEPPER BLAST</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Peppery beef with bold, rich flavor.</p><div class="price">₱99</div><button class="add-btn" onclick="addToCart('Mima Pepper Blast',99)"></button></div>
+<div class="menu-item reveal"><img src="images/classic.png" alt="MIMA CLASSIC" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA CLASSIC</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">The OG. 100% Beef, secret sauce, total satisfaction.</p><div class="price">₱70</div><button class="add-btn" onclick="openAddonsModal('Mima Classic',70)"></button></div>
+<div class="menu-item reveal"><img src="images/Big.png" alt="THE BIG MIMA" style="width:100%;height:160px;object-fit:contain;"><h3>THE BIG MIMA</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Stacked high with double beef and triple the attitude.</p><div class="price">₱150</div><button class="add-btn" onclick="openAddonsModal('The Big Mima',150)"></button></div>
+<div class="menu-item reveal"><img src="images/Heat.png" alt="MIMA SWEET HEAT" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA SWEET HEAT</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Sweet and spicy flavor with a fiery kick.</p><div class="price">₱150</div><button class="add-btn" onclick="openAddonsModal('Mima Sweet Heat',150)"></button></div>
+<div class="menu-item reveal"><img src="images/Loaded.png" alt="MIMA LOADED STACK" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA LOADED STACK</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Packed with beef, cheese, and extra toppings.</p><div class="price">₱150</div><button class="add-btn" onclick="openAddonsModal('Mima Loaded Stack',150)"></button></div>
+<div class="menu-item reveal"><img src="images/melt.png" alt="MIMA ULTIMATE MELT" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA ULTIMATE MELT</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Rich, juicy burger with perfectly melted cheese.</p><div class="price">₱150</div><button class="add-btn" onclick="openAddonsModal('Mima Ultimate Melt',150)"></button></div>
+<div class="menu-item reveal"><img src="images/bbq.png" alt="MIMA BBQ BLAST" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA BBQ BLAST</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Smoky BBQ beef with caramelized onions.</p><div class="price">₱100</div><button class="add-btn" onclick="openAddonsModal('Mima BBQ BLAST',100)"></button></div>
+<div class="menu-item reveal"><img src="images/cheesy.png" alt="MIMA CHEESY OVERLOAD" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA CHEESY OVERLOAD</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Loaded with gooey, melted cheese layers.</p><div class="price">₱110</div><button class="add-btn" onclick="openAddonsModal('Mima Cheesy Overload',110)"></button></div>
+<div class="menu-item reveal"><img src="images/crunchy.png" alt="MIMA CRUNCHY STACK" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA CRUNCHY STACK</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Crispy chicken and fresh veggies in every bite.</p><div class="price">₱110</div><button class="add-btn" onclick="openAddonsModal('Mima Crunchy Stack',110)"></button></div>
+<div class="menu-item reveal"><img src="images/fire-removebg-preview.png" alt="MIMA FIRE CRUNCH" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA FIRE CRUNCH</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Crispy chicken with a spicy crunch.</p><div class="price">₱149</div><button class="add-btn" onclick="openAddonsModal('Mima Fire Crunch',149)"></button></div>
+<div class="menu-item reveal"><img src="images/smokey.png" alt="MIMA SMOKY MELT" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA SMOKY MELT</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Beef with smoky sauce and melted cheese.</p><div class="price">₱149</div><button class="add-btn" onclick="openAddonsModal('Mima Smoky Melt',149)"></button></div>
+<div class="menu-item reveal"><img src="images/zing.png" alt="MIMA ZING STACK" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA ZING STACK</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Tangy, juicy layers with a zesty bite.</p><div class="price">₱149</div><button class="add-btn" onclick="openAddonsModal('Mima Zing Stack',149)"></button></div>
+<div class="menu-item reveal"><img src="images/peper.png" alt="MIMA PEPPER BLAST" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA PEPPER BLAST</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Peppery beef with bold, rich flavor.</p><div class="price">₱149</div><button class="add-btn" onclick="openAddonsModal('Mima Pepper Blast',149)"></button></div>
   </div>
   <div id="menu-fries" class="sub-menu">
 <div class="menu-item reveal"><img src="images/1.png" alt="MIMA CLASSIC CRISP FRIES" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA CLASSIC CRISP FRIES</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Golden, thin-cut fries with light salt seasoning.</p><div class="price">₱50</div><button class="add-btn" onclick="openSizeModal('MIMA CLASSIC CRISP FRIES',50,'fries')"></button></div>
@@ -138,12 +138,12 @@ body{padding-top:96px;}
 <div class="menu-item reveal"><img src="images/last.png" alt="MIMA CHILI CHEESE FRIES" style="width:100%;height:160px;object-fit:contain;"><h3>MIMA CHILI CHEESE FRIES</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Spicy chili sauce and melted cheese topping.</p><div class="price">₱50</div><button class="add-btn" onclick="openSizeModal('MIMA CHILI CHEESE FRIES',50,'fries')"></button></div>
   </div>
   <div id="menu-drinks" class="sub-menu">
-<div class="menu-item reveal"><img src="images/coke.png" alt="COKE" style="width:100%;height:160px;object-fit:contain;"><h3>COKE</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Sweet, dark soda with caffeine.</p><div class="price">₱20</div><button class="add-btn" onclick="openSizeModal('COKE',20,'drinks')"></button></div>
-<div class="menu-item reveal"><img src="images/sprite.png" alt="SPRITE" style="width:100%;height:160px;object-fit:contain;"><h3>SPRITE</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Lemon-lime soda, caffeine-free.</p><div class="price">₱20</div><button class="add-btn" onclick="openSizeModal('SPRITE',20,'drinks')"></button></div>
-<div class="menu-item reveal"><img src="images/royal.png" alt="ROYAL" style="width:100%;height:160px;object-fit:contain;"><h3>ROYAL</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Sweet, fruity soda (usually orange).</p><div class="price">₱20</div><button class="add-btn" onclick="openSizeModal('ROYAL',20,'drinks')"></button></div>
-<div class="menu-item reveal"><img src="images/springwater.png" alt="SPRING WATER" style="width:100%;height:160px;object-fit:contain;"><h3>SPRING WATER</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Natural, non-carbonated drinking water.</p><div class="price">₱10</div><button class="add-btn" onclick="openSizeModal('SPRING WATER',10,'drinks')"></button></div>
-<div class="menu-item reveal"><img src="images/Lemon.png" alt="LEMONADE" style="width:100%;height:160px;object-fit:contain;"><h3>LEMONADE</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Icy cold refreshment to put out the fire.</p><div class="price">₱25</div><button class="add-btn" onclick="openSizeModal('LEMONADE',25,'drinks')"></button></div>
-<div class="menu-item reveal"><img src="images/Tea.png" alt="ICED TEA" style="width:100%;height:160px;object-fit:contain;"><h3>ICED TEA</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Chilled tea, slightly sweet and refreshing.</p><div class="price">₱25</div><button class="add-btn" onclick="openSizeModal('ICED TEA',25,'drinks')"></button></div>
+<div class="menu-item reveal"><img src="images/coke.png" alt="COKE" style="width:100%;height:160px;object-fit:contain;"><h3>COKE</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Sweet, dark soda with caffeine.</p><div class="price">₱40</div><button class="add-btn" onclick="openSizeModal('COKE',40,'drinks')"></button></div>
+<div class="menu-item reveal"><img src="images/sprite.png" alt="SPRITE" style="width:100%;height:160px;object-fit:contain;"><h3>SPRITE</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Lemon-lime soda, caffeine-free.</p><div class="price">₱40</div><button class="add-btn" onclick="openSizeModal('SPRITE',40,'drinks')"></button></div>
+<div class="menu-item reveal"><img src="images/royal.png" alt="ROYAL" style="width:100%;height:160px;object-fit:contain;"><h3>ROYAL</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Sweet, fruity soda (usually orange).</p><div class="price">₱40</div><button class="add-btn" onclick="openSizeModal('ROYAL',40,'drinks')"></button></div>
+<div class="menu-item reveal"><img src="images/springwater.png" alt="SPRING WATER" style="width:100%;height:160px;object-fit:contain;"><h3>SPRING WATER</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Natural, non-carbonated drinking water.</p><div class="price">₱30</div><button class="add-btn" onclick="addToCart('SPRING WATER',30)"></button></div>
+<div class="menu-item reveal"><img src="images/Lemon.png" alt="LEMONADE" style="width:100%;height:160px;object-fit:contain;"><h3>LEMONADE</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Icy cold refreshment to put out the fire.</p><div class="price">₱45</div><button class="add-btn" onclick="openSizeModal('LEMONADE',45,'juice')"></button></div>
+<div class="menu-item reveal"><img src="images/Tea.png" alt="ICED TEA" style="width:100%;height:160px;object-fit:contain;"><h3>ICED TEA</h3><p style="font-size:.9rem;font-weight:600;color:var(--brown-mid);margin:.4rem 0 .8rem;line-height:1.4;">Chilled tea, slightly sweet and refreshing.</p><div class="price">₱45</div><button class="add-btn" onclick="openSizeModal('ICED TEA',45,'juice')"></button></div>
   </div>
 </section>
 
@@ -152,6 +152,22 @@ body{padding-top:96px;}
     <div class="size-modal-header"><span id="sizeModalTitle">Choose Size</span><button class="size-close" type="button" onclick="closeSizeModal()">&times;</button></div>
     <div class="size-modal-body"><div class="size-prompt" id="sizeModalPrompt">Select a size:</div><div id="sizeOptions"></div></div>
     <div class="size-modal-actions"><button class="size-confirm" id="sizeConfirmBtn" type="button" onclick="confirmSizeSelection()">Add to Cart</button></div>
+  </div>
+</div>
+
+<div class="size-overlay" id="addonsOverlay" onclick="closeAddonsModal(event)">
+  <div class="size-modal" onclick="event.stopPropagation()">
+    <div class="size-modal-header"><span id="addonsModalTitle">Add Ingredients (Max 1)</span><button class="size-close" type="button" onclick="closeAddonsModal()">&times;</button></div>
+    <div class="size-modal-body">
+      <div class="size-prompt">Select an add-on:</div>
+      <div id="addonsOptions">
+        <label class="size-option active" data-addon="None"><input type="radio" name="addon-option" value="None" checked onchange="chooseAddonOption('None')"><strong>None</strong><span class="size-price">&#8369;0</span></label>
+        <label class="size-option" data-addon="Add lettuce"><input type="radio" name="addon-option" value="Add lettuce" onchange="chooseAddonOption('Add lettuce')"><strong>Add lettuce</strong><span class="size-price">+&#8369;10</span></label>
+        <label class="size-option" data-addon="Add onions"><input type="radio" name="addon-option" value="Add onions" onchange="chooseAddonOption('Add onions')"><strong>Add onions</strong><span class="size-price">+&#8369;10</span></label>
+        <label class="size-option" data-addon="Add mayo"><input type="radio" name="addon-option" value="Add mayo" onchange="chooseAddonOption('Add mayo')"><strong>Add mayo</strong><span class="size-price">+&#8369;15</span></label>
+      </div>
+    </div>
+    <div class="size-modal-actions"><button class="size-confirm" id="addonsConfirmBtn" type="button" onclick="confirmAddonsSelection()">Add to Cart</button></div>
   </div>
 </div>
 
@@ -188,41 +204,71 @@ body{padding-top:96px;}
 <script>
 let cartData={};
 const ORDER_HISTORY_KEY="mimaliciousOrderHistory";
-const PRICE_MAP={"Mima-namnam Deluxe":150,"Mima-mazing Bite":190,"Mima-sarap Supreme":220,"Mima Classic":70,"The Big Mima":150,"Mima Sweet Heat":150,"Mima Loaded Stack":150,"Mima Ultimate Melt":150,"Mima BBQ BLAST":100,"Mima Cheesy Overload":110,"Mima Crunchy Stack":110,"Mima Fire Crunch":99,"Mima Smoky Melt":99,"Mima Zing Stack":99,"Mima Pepper Blast":99,"MIMA CLASSIC CRISP FRIES":50,"MIMA CHEESY MELT FRIES":50,"MIMA GARLIC PARM FRIES":50,"MIMA SWEET HEAT FRIES":50,"MIMA BBQ SMOKE FRIES":50,"MIMA CHILI CHEESE FRIES":50,"COKE":20,"SPRITE":20,"ROYAL":20,"SPRING WATER":10,"LEMONADE":25,"ICED TEA":25};
-const SIZE_CONFIG={fries:[{label:"Regular",multiplier:1},{label:"Medium",multiplier:1.5},{label:"Large",multiplier:2}],drinks:[{label:"Regular",multiplier:1},{label:"Medium",multiplier:1.5},{label:"Large",multiplier:2}]};
+const PRICE_MAP={"Mima-namnam Deluxe":150,"Mima-mazing Bite":190,"Mima-sarap Supreme":220,"Mima Classic":70,"The Big Mima":150,"Mima Sweet Heat":150,"Mima Loaded Stack":150,"Mima Ultimate Melt":150,"Mima BBQ BLAST":100,"Mima Cheesy Overload":110,"Mima Crunchy Stack":110,"Mima Fire Crunch":149,"Mima Smoky Melt":149,"Mima Zing Stack":149,"Mima Pepper Blast":149,"MIMA CLASSIC CRISP FRIES":50,"MIMA CHEESY MELT FRIES":50,"MIMA GARLIC PARM FRIES":50,"MIMA SWEET HEAT FRIES":50,"MIMA BBQ SMOKE FRIES":50,"MIMA CHILI CHEESE FRIES":50,"COKE":40,"SPRITE":40,"ROYAL":40,"SPRING WATER":30,"LEMONADE":45,"ICED TEA":45};
+const SIZE_CONFIG={fries:[{label:"Regular",add:0},{label:"Medium",add:20},{label:"Large",add:40}],drinks:[{label:"S",add:0},{label:"M",add:20},{label:"L",add:30}],juice:[{label:"S",add:0},{label:"M",add:20},{label:"L",add:30}]};
+const ADDON_PRICES={"None":0,"Add lettuce":10,"Add onions":10,"Add mayo":15};
 let activeSizeChoice=null;
+let activeAddonChoice=null;
 
 function logoutAndResetHistory(e){if(e)e.preventDefault();localStorage.removeItem(ORDER_HISTORY_KEY);sessionStorage.removeItem(ORDER_HISTORY_KEY);window.location.href="index.html";return false;}
 function showSubMenu(id){document.querySelectorAll('.sub-menu').forEach(m=>m.classList.remove('active'));document.querySelectorAll('.category-card').forEach(c=>c.classList.remove('active'));document.getElementById('menu-'+id).classList.add('active');document.getElementById('card-'+id).classList.add('active');}
 function toggleCart(){document.getElementById("sideCart").classList.toggle("open");document.getElementById("cartBackdrop").classList.toggle("active");}
-function closeAllModals(){document.getElementById("sideCart").classList.remove("open");document.getElementById("paymentModal").classList.remove("open");document.getElementById("cartBackdrop").classList.remove("active");closeSizeModal();}
-function buildCartKey(n,s){return s?n+"||"+s:n;}
-function priceWithMultiplier(p,m){return Math.round(Number(p)*m);}
+function closeAllModals(){document.getElementById("sideCart").classList.remove("open");document.getElementById("paymentModal").classList.remove("open");document.getElementById("cartBackdrop").classList.remove("active");closeSizeModal();closeAddonsModal();}
+function buildCartKey(n,s,a){let key=n;if(s)key+="||"+s;if(a&&a!=="None")key+="||"+a;return key;}
+function priceWithMultiplier(p,a){return Number(p)+Number(a);}
+
 function openSizeModal(name,price,cat){
   const opts=SIZE_CONFIG[cat]||SIZE_CONFIG.fries;
   activeSizeChoice={name,price:Number(price),category:cat,size:opts[0].label};
-  document.getElementById("sizeModalTitle").textContent=cat==="drinks"?"Choose Size for Drinks":"Choose Size for Fries";
+  document.getElementById("sizeModalTitle").textContent=cat==="drinks"||cat==="juice"?"Choose Size for Drinks":"Choose Size for Fries";
   document.getElementById("sizeModalPrompt").textContent="Select a size:";
-  document.getElementById("sizeOptions").innerHTML=opts.map((o,i)=>`<label class="size-option ${i===0?'active':''}" data-size="${o.label}"><input type="radio" name="size-option" value="${o.label}" ${i===0?'checked':''} onchange="chooseSizeOption('${o.label}')"><strong>${o.label}</strong><span class="size-price">&#8369;${priceWithMultiplier(price,o.multiplier)}</span></label>`).join("");
+  document.getElementById("sizeOptions").innerHTML=opts.map((o,i)=>`<label class="size-option ${i===0?'active':''}" data-size="${o.label}"><input type="radio" name="size-option" value="${o.label}" ${i===0?'checked':''} onchange="chooseSizeOption('${o.label}')"><strong>${o.label}</strong><span class="size-price">&#8369;${priceWithMultiplier(price,o.add)}</span></label>`).join("");
   document.getElementById("sizeOverlay").classList.add("active");
   document.getElementById("sizeConfirmBtn").disabled=false;
 }
 function chooseSizeOption(size){if(!activeSizeChoice)return;activeSizeChoice.size=size;document.querySelectorAll("#sizeOptions .size-option").forEach(l=>l.classList.toggle("active",l.getAttribute("data-size")===size));}
 function closeSizeModal(e){if(e)e.stopPropagation();const o=document.getElementById("sizeOverlay");if(o)o.classList.remove("active");const b=document.getElementById("sizeConfirmBtn");if(b)b.disabled=true;activeSizeChoice=null;}
-function confirmSizeSelection(){if(!activeSizeChoice)return;const sel=activeSizeChoice.size||"Regular";const opt=(SIZE_CONFIG[activeSizeChoice.category]||SIZE_CONFIG.fries).find(o=>o.label===sel)||SIZE_CONFIG.fries[0];addToCart(activeSizeChoice.name,priceWithMultiplier(activeSizeChoice.price,opt.multiplier),sel);closeSizeModal();}
-function addToCart(name,price,size){const fp=PRICE_MAP[name]??price;const ap=Number(price||fp);const key=buildCartKey(name,size||null);if(cartData[key])cartData[key].qty++;else cartData[key]={item:name,price:ap,qty:1,size:size||null};updateUI();}
+function confirmSizeSelection(){if(!activeSizeChoice)return;const sel=activeSizeChoice.size||"Regular";const opt=(SIZE_CONFIG[activeSizeChoice.category]||SIZE_CONFIG.fries).find(o=>o.label===sel)||SIZE_CONFIG.fries[0];addToCart(activeSizeChoice.name,priceWithMultiplier(activeSizeChoice.price,opt.add),sel,null,activeSizeChoice.category);closeSizeModal();}
+
+function openAddonsModal(name,price){
+  activeAddonChoice={name,price:Number(price),addon:"None"};
+  document.getElementById("addonsOptions").querySelectorAll("input[type='radio']")[0].checked=true;
+  chooseAddonOption("None");
+  document.getElementById("addonsOverlay").classList.add("active");
+  document.getElementById("addonsConfirmBtn").disabled=false;
+}
+function chooseAddonOption(addon){if(!activeAddonChoice)return;activeAddonChoice.addon=addon;document.querySelectorAll("#addonsOptions .size-option").forEach(l=>l.classList.toggle("active",l.getAttribute("data-addon")===addon));}
+function closeAddonsModal(e){if(e)e.stopPropagation();const o=document.getElementById("addonsOverlay");if(o)o.classList.remove("active");const b=document.getElementById("addonsConfirmBtn");if(b)b.disabled=true;activeAddonChoice=null;}
+function confirmAddonsSelection(){if(!activeAddonChoice)return;const sel=activeAddonChoice.addon;const finalPrice=activeAddonChoice.price+ADDON_PRICES[sel];addToCart(activeAddonChoice.name,finalPrice,null,sel);closeAddonsModal();}
+
+function addToCart(name,price,size,addon,category){
+  const fp=PRICE_MAP[name]??price;
+  const ap=Number(price||fp);
+  const key=buildCartKey(name,size||null,addon||null);
+  if(cartData[key])cartData[key].qty++;else cartData[key]={item:name,price:ap,qty:1,size:size||null,addon:addon||"None",category:category||"other"};
+  updateUI();
+}
+
 function changeQty(key,val){cartData[key].qty+=val;if(cartData[key].qty<=0)delete cartData[key];updateUI();}
+function addMoreWithCat(name, price, category) { openSizeModal(name, price, category); }
+
 function processCheckout(){
   if(Object.keys(cartData).length===0){alert("Your tray is empty!");return;}
   const sl=document.getElementById("payment-summary-list");let total=0;sl.innerHTML="";
-  Object.keys(cartData).forEach(k=>{const it=cartData[k];const sub=it.price*it.qty;total+=sub;sl.innerHTML+=`<div class="summary-item"><span>${it.qty}x ${it.item}${it.size?` (${it.size})`:""}</span><span>&#8369;${sub}</span></div>`;});
-  document.getElementById("payment-total-value").innerText="&#8369;"+total;
+  Object.keys(cartData).forEach(k=>{
+    const it=cartData[k];const sub=it.price*it.qty;total+=sub;
+    const extras=[];
+    if(it.size)extras.push(it.size);
+    if(it.addon&&it.addon!=="None")extras.push(it.addon);
+    sl.innerHTML+=`<div class="summary-item"><span>${it.qty}x ${it.item}${extras.length?` (${extras.join(", ")})`:""}</span><span>&#8369;${sub}</span></div>`;
+  });
+  document.getElementById("payment-total-value").innerHTML="&#8369;"+total;
   document.getElementById("sideCart").classList.remove("open");
   document.getElementById("paymentModal").classList.add("open");
 }
 function closePaymentModal(){document.getElementById("paymentModal").classList.remove("open");document.getElementById("cartBackdrop").classList.remove("active");}
 function saveOrderToHistory(method){
-  const items=Object.keys(cartData).map(k=>({item:cartData[k].item,quantity:cartData[k].qty,price:cartData[k].price,size:cartData[k].size||null}));
+  const items=Object.keys(cartData).map(k=>({item:cartData[k].item,quantity:cartData[k].qty,price:cartData[k].price,size:cartData[k].size||null,addon:cartData[k].addon||"None"}));
   if(!items.length)return;
   const total=items.reduce((s,i)=>s+(Number(i.price)*Number(i.quantity)),0);
   let saved=[];try{const ex=sessionStorage.getItem(ORDER_HISTORY_KEY);saved=ex?JSON.parse(ex):[];if(!Array.isArray(saved))saved=[];}catch(e){saved=[];}
@@ -233,22 +279,37 @@ function confirmOrder(){const m=document.querySelector('input[name="pay-method"]
 function updateUI(){
   const c=document.getElementById("cart-items-container");const tv=document.getElementById("cart-total-value");const cv=document.getElementById("cart-count");
   let total=0,totalItems=0;c.innerHTML="";
-  Object.keys(cartData).forEach(k=>{const it=cartData[k];total+=it.price*it.qty;totalItems+=it.qty;
+  Object.keys(cartData).forEach(k=>{
+    const it=cartData[k];total+=it.price*it.qty;totalItems+=it.qty;
+    const extras=[];
+    if(it.size)extras.push(`Size: ${it.size}`);
+    if(it.addon&&it.addon!=="None")extras.push(`+ ${it.addon}`);
+    let plusBtn=`<button style="background:var(--yellow);border:none;width:30px;height:30px;font-weight:900;cursor:pointer;font-size:1rem;" onclick="changeQty('${k}',1)">+</button>`;
+    if(it.category==="fries"||it.category==="drinks"||it.category==="juice"){
+      const basePrice=PRICE_MAP[it.item]||it.price;
+      plusBtn=`<button style="background:var(--yellow);border:none;width:30px;height:30px;font-weight:900;cursor:pointer;font-size:1rem;" onclick="addMoreWithCat('${it.item}',${basePrice},'${it.category}')">+</button>`;
+    }
     c.innerHTML+=`<div style="background:var(--white);border-radius:14px;padding:1rem;margin-bottom:0.8rem;display:flex;justify-content:space-between;align-items:center;border:2.5px solid var(--brown);box-shadow:3px 3px 0 var(--cream);">
-      <div><strong style="font-family:var(--font-display);font-size:1rem;">${it.item}</strong>${it.size?`<br><small>Size: ${it.size}</small>`:""}<br><span style="color:var(--red);font-weight:800;">&#8369;${it.price}</span></div>
+      <div><strong style="font-family:var(--font-display);font-size:1rem;">${it.item}</strong>${extras.length?`<br><small style="color:var(--brown-mid);font-weight:700;">${extras.join(" | ")}</small>`:""}<br><span style="color:var(--red);font-weight:800;">&#8369;${it.price}</span></div>
       <div style="display:flex;align-items:center;background:var(--cream);border:2px solid var(--brown);border-radius:8px;overflow:hidden;">
         <button style="background:var(--yellow);border:none;width:30px;height:30px;font-weight:900;cursor:pointer;font-size:1rem;" onclick="changeQty('${k}',-1)">-</button>
         <span style="width:32px;text-align:center;font-weight:800;">${it.qty}</span>
-        <button style="background:var(--yellow);border:none;width:30px;height:30px;font-weight:900;cursor:pointer;font-size:1rem;" onclick="changeQty('${k}',1)">+</button>
+        ${plusBtn}
       </div>
     </div>`;
   });
-  tv.innerText="&#8369;"+total;cv.innerText=totalItems;
+  tv.innerHTML="&#8369;"+total;cv.innerText=totalItems;
 }
 
 // Navbar interactions
 const nav=document.getElementById('mainNav');
-window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60),{passive:true});
+let lastScrollY = window.scrollY;
+window.addEventListener('scroll',() => {
+  const scrollY = window.scrollY;
+  if (scrollY > 50) { nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
+  if (scrollY > lastScrollY && scrollY > 200) { nav.classList.add('nav-hidden'); } else { nav.classList.remove('nav-hidden'); }
+  lastScrollY = scrollY;
+},{passive:true});
 document.querySelectorAll('.nav-links a').forEach(item=>{
   item.addEventListener('mousemove',e=>{const r=item.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5;const y=(e.clientY-r.top)/r.height-.5;item.style.transition='none';item.style.transform=`perspective(600px) rotateX(${-y*14}deg) rotateY(${x*14}deg) scale(1.06)`;});
   item.addEventListener('mouseleave',()=>{item.style.transition='background 200ms var(--ease-out),transform 300ms var(--ease-out)';item.style.transform='';});
