@@ -639,18 +639,18 @@
     <!-- Floating top nav bar on landing -->
     <nav class="hero-top-nav">
       <a href="#" class="logo">MIMALICIOUS</a>
-      <button class="nav-button" onclick="openModal()" id="landing-login-btn">Login / Sign Up</button>
+      <button class="nav-button" onclick="window.location.href='login.html'" id="landing-login-btn">Login / Sign Up</button>
     </nav>
 
     <!-- Left-aligned hero content -->
     <div class="hero-content">
       <span class="eyebrow">Flame-Grilled Since 2026</span>
       <h1 style="text-transform: none; display: flex; flex-direction: column;">
-        <span style="font-size: 0.55em; text-transform: lowercase; line-height: 1;">welcome to</span>
-        <span style="color: var(--yellow); text-transform: uppercase;">MIMALICIOUS</span>
+        <span style="color: var(--yellow); font-size: 0.55em; text-transform: lowercase; line-height: 1;">welcome to</span>
+        <span style="color: var(--white); text-transform: uppercase;">MIMALICIOUS</span>
       </h1>
-      <p>Order your favorite burger now and enjoy sizzling flavors built exactly the way you want it.</p>
-      <button class="order-btn" onclick="openModal()" id="hero-cta-btn">GET STARTED <i
+      <p style="color: var(--yellow);">Order your favorite burger now and enjoy sizzling flavors built exactly the way you want it.</p>
+      <button class="order-btn" onclick="window.location.href='login.html'" id="hero-cta-btn">GET STARTED <i
           class="fa-solid fa-arrow-right"></i></button>
     </div>
 
@@ -798,25 +798,7 @@
     </div>
   </footer>
 
-  <!-- LOGIN MODAL -->
-  <div class="modal-overlay" id="loginModal">
-    <div class="modal-card">
-      <button class="close-btn" onclick="closeModal()" aria-label="Close">&times;</button>
-      <h2>Welcome!</h2>
-      <p>Sign in to start your order</p>
-      <form id="authForm">
-        <div class="form-group">
-          <label for="login-email">Email Address</label>
-          <input id="login-email" type="email" placeholder="you@example.com" required>
-        </div>
-        <div class="form-group">
-          <label for="login-password">Password</label>
-          <input id="login-password" type="password" placeholder="••••••••" required>
-        </div>
-        <button type="submit" class="submit-btn">LOGIN / SIGN UP</button>
-      </form>
-    </div>
-  </div>
+
 
   <script>
     /* ---- Carousel with dot sync ---- */
@@ -843,20 +825,7 @@
       }, { passive: true });
     }
 
-    /* ---- Modal ---- */
-    function openModal() {
-      const modal = document.getElementById('loginModal');
-      modal.style.display = 'flex';
-    }
-    function closeModal() {
-      document.getElementById('loginModal').style.display = 'none';
-    }
-    window.addEventListener('click', (e) => { if (e.target.id === 'loginModal') closeModal(); });
 
-    document.getElementById('authForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      window.location.href = 'home.html';
-    });
 
     /* ---- Testimonials Carousel ---- */
     (function () {

@@ -60,6 +60,14 @@
   </style>
 </head>
 <body>
+  <!-- Auth guard -->
+  <script>
+    (function(){
+      if(localStorage.getItem('loggedIn')!=='true'){
+        location.replace('login.html?to='+encodeURIComponent(location.pathname.split('/').pop()||'about.html'));
+      }
+    })();
+  </script>
 <nav class="navbar" id="mainNav">
   <a href="home.html" class="logo">MIMALICIOUS</a>
   <ul class="nav-links">
@@ -198,7 +206,7 @@
 
 <script>
 const ORDER_HISTORY_KEY="mimaliciousOrderHistory";
-function logoutAndResetHistory(e){if(e)e.preventDefault();localStorage.removeItem(ORDER_HISTORY_KEY);sessionStorage.removeItem(ORDER_HISTORY_KEY);window.location.href="index.html";return false;}
+function logoutAndResetHistory(e){if(e)e.preventDefault();localStorage.removeItem(ORDER_HISTORY_KEY);sessionStorage.removeItem(ORDER_HISTORY_KEY);localStorage.removeItem('loggedIn');window.location.href="login.html";return false;}
 const nav=document.getElementById('mainNav');
 let lastScrollY = window.scrollY;
 window.addEventListener('scroll',() => {

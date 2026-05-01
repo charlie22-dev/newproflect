@@ -70,9 +70,35 @@ body{padding-top:0;}
 .summary-item{display:flex;justify-content:space-between;margin-bottom:4px;font-weight:700;}
 .footer-bar{border-top:1px solid rgba(59,26,8,0.1);padding:1.5rem 6%;text-align:center;font-weight:700;font-size:0.8rem;color:rgba(59,26,8,0.4);text-transform:uppercase;letter-spacing:0.06em;}
 @media(max-width:1024px){.navbar{flex-direction:column;row-gap:0.5rem;padding:0.8rem 5%;display:flex;}.logo,.nav-right{justify-self:center;}.nav-links{justify-content:center;flex-wrap:wrap;gap:0.4rem;}}
+/* === COD DELIVERY FIELDS === */
+.cod-fields-wrap{overflow:hidden;max-height:0;transition:max-height 360ms var(--ease-out),opacity 300ms var(--ease-out);opacity:0;margin-top:0;}
+.cod-fields-wrap.visible{max-height:320px;opacity:1;margin-top:0.7rem;}
+.cod-fields-wrap-inner{background:var(--cream);border:2px dashed var(--brown);border-radius:14px;padding:1rem 1rem 0.4rem;}
+.cod-fields-wrap-inner h4{font-family:var(--font-display);font-size:1rem;color:var(--brown);margin-bottom:0.8rem;letter-spacing:0.04em;}
+.delivery-field{margin-bottom:0.75rem;}
+.delivery-field label{display:block;font-weight:800;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--brown);margin-bottom:0.35rem;}
+.delivery-field input,.delivery-field textarea{width:100%;padding:0.65rem 0.9rem;border:2.5px solid rgba(59,26,8,0.2);border-radius:10px;background:var(--white);font-family:var(--font-body);font-weight:600;font-size:0.9rem;color:var(--brown);transition:border-color 200ms var(--ease-out),box-shadow 200ms var(--ease-out);resize:none;}
+.delivery-field input:focus,.delivery-field textarea:focus{outline:none;border-color:var(--yellow);box-shadow:0 0 0 3px rgba(245,166,35,0.2);}
+.delivery-field.error input,.delivery-field.error textarea{border-color:var(--red);box-shadow:0 0 0 3px rgba(204,31,10,0.15);}
+.field-error-msg{font-size:0.73rem;color:var(--red);font-weight:700;margin-top:0.2rem;display:none;}
+.delivery-field.error .field-error-msg{display:block;}
+/* === CART CHECKBOXES === */
+.cart-select-bar{display:flex;align-items:center;gap:0.55rem;padding:0.55rem 1rem;background:rgba(59,26,8,0.05);border-bottom:1.5px solid rgba(59,26,8,0.1);font-size:0.78rem;font-weight:800;color:var(--brown-mid);text-transform:uppercase;letter-spacing:0.04em;cursor:pointer;}
+.cart-select-bar input[type=checkbox]{accent-color:var(--red);width:15px;height:15px;cursor:pointer;}
+.cart-item-cb{accent-color:var(--red);width:17px;height:17px;cursor:pointer;flex-shrink:0;}
+@keyframes shake-err{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.shake-anim{animation:shake-err 0.4s var(--ease-out);}
 </style>
 </head>
 <body>
+  <!-- Auth guard -->
+  <script>
+    (function(){
+      if(localStorage.getItem('loggedIn')!=='true'){
+        location.replace('login.html?to='+encodeURIComponent(location.pathname.split('/').pop()||'menu.html'));
+      }
+    })();
+  </script>
 <nav class="navbar" id="mainNav" style="display:flex;justify-content:space-between;">
   <a href="home.html" class="logo">MIMALICIOUS</a>
   <ul class="nav-links">
@@ -175,9 +201,13 @@ body{padding-top:0;}
 
 <div class="cart-overlay" id="sideCart">
   <div class="cart-header"><h2>YOUR TRAY</h2><button class="close-cart" onclick="toggleCart()">&times;</button></div>
+  <label class="cart-select-bar" for="selectAllCb">
+    <input type="checkbox" id="selectAllCb" onchange="toggleSelectAll(this.checked)" checked>
+    <span id="selectAllLabel">Select All</span>
+  </label>
   <div id="cart-items-container" style="flex-grow:1;overflow-y:auto;padding:1rem;"></div>
   <div class="cart-footer">
-    <div style="display:flex;justify-content:space-between;font-family:var(--font-display);font-size:1.4rem;margin-bottom:0.8rem;"><span>TOTAL:</span><span id="cart-total-value">&#8369;0</span></div>
+    <div style="display:flex;justify-content:space-between;font-family:var(--font-display);font-size:1.4rem;margin-bottom:0.8rem;"><span>SELECTED:</span><span id="cart-total-value">&#8369;0</span></div>
     <button class="checkout-btn" onclick="processCheckout()">CHECKOUT NOW</button>
   </div>
 </div>
@@ -188,9 +218,25 @@ body{padding-top:0;}
     <h3 style="margin-bottom:10px;font-size:1.1rem;font-weight:800;text-transform:uppercase;">Order Summary</h3>
     <div class="order-summary-box" id="payment-summary-list"></div>
     <h3 style="margin-bottom:12px;font-size:1.1rem;font-weight:800;text-transform:uppercase;">Payment Method</h3>
-    <div class="payment-option" onclick="document.getElementById('pay-cod').checked=true">
-      <input type="radio" name="pay-method" id="pay-cod" value="COD" checked>
+    <div class="payment-option" onclick="document.getElementById('pay-cod').checked=true;toggleCODFields()">
+      <input type="radio" name="pay-method" id="pay-cod" value="COD" checked onchange="toggleCODFields()">
       <label for="pay-cod">Cash on Delivery (COD) <i class="fa-solid fa-money-bill-1-wave" style="color:#2d8c4e;"></i></label>
+    </div>
+    <!-- COD Delivery Details -->
+    <div class="cod-fields-wrap visible" id="cod-delivery-wrap">
+      <div class="cod-fields-wrap-inner">
+        <h4>&#128663; Delivery Details</h4>
+        <div class="delivery-field" id="field-recipient">
+          <label for="cod-recipient">Recipient Name <span style="color:var(--red)">*</span></label>
+          <input type="text" id="cod-recipient" placeholder="e.g. Juan dela Cruz" autocomplete="name">
+          <div class="field-error-msg">Please enter the recipient name.</div>
+        </div>
+        <div class="delivery-field" id="field-address">
+          <label for="cod-address">Delivery Address <span style="color:var(--red)">*</span></label>
+          <textarea id="cod-address" rows="2" placeholder="House/Unit No., Street, Barangay, City"></textarea>
+          <div class="field-error-msg">Please enter a delivery address.</div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="cart-footer">
@@ -203,6 +249,7 @@ body{padding-top:0;}
 
 <script>
 let cartData={};
+let selectedKeys=new Set();
 const ORDER_HISTORY_KEY="mimaliciousOrderHistory";
 const PRICE_MAP={"Mima-namnam Deluxe":150,"Mima-mazing Bite":190,"Mima-sarap Supreme":220,"Mima Classic":70,"The Big Mima":150,"Mima Sweet Heat":150,"Mima Loaded Stack":150,"Mima Ultimate Melt":150,"Mima BBQ BLAST":100,"Mima Cheesy Overload":110,"Mima Crunchy Stack":110,"Mima Fire Crunch":149,"Mima Smoky Melt":149,"Mima Zing Stack":149,"Mima Pepper Blast":149,"MIMA CLASSIC CRISP FRIES":50,"MIMA CHEESY MELT FRIES":50,"MIMA GARLIC PARM FRIES":50,"MIMA SWEET HEAT FRIES":50,"MIMA BBQ SMOKE FRIES":50,"MIMA CHILI CHEESE FRIES":50,"COKE":40,"SPRITE":40,"ROYAL":40,"SPRING WATER":30,"LEMONADE":45,"ICED TEA":45};
 const SIZE_CONFIG={fries:[{label:"Regular",add:0},{label:"Medium",add:20},{label:"Large",add:40}],drinks:[{label:"S",add:0},{label:"M",add:20},{label:"L",add:30}],juice:[{label:"S",add:0},{label:"M",add:20},{label:"L",add:30}]};
@@ -210,7 +257,8 @@ const ADDON_PRICES={"None":0,"Add lettuce":10,"Add onions":10,"Add mayo":15};
 let activeSizeChoice=null;
 let activeAddonChoice=null;
 
-function logoutAndResetHistory(e){if(e)e.preventDefault();localStorage.removeItem(ORDER_HISTORY_KEY);sessionStorage.removeItem(ORDER_HISTORY_KEY);window.location.href="index.html";return false;}
+function logoutAndResetHistory(e){if(e)e.preventDefault();localStorage.removeItem(ORDER_HISTORY_KEY);sessionStorage.removeItem(ORDER_HISTORY_KEY);localStorage.removeItem('loggedIn');window.location.href="login.html";return false;}
+function toggleCODFields(){const m=document.querySelector('input[name="pay-method"]:checked');const wrap=document.getElementById('cod-delivery-wrap');if(!wrap)return;if(m&&m.value==='COD')wrap.classList.add('visible');else wrap.classList.remove('visible');}
 function showSubMenu(id){document.querySelectorAll('.sub-menu').forEach(m=>m.classList.remove('active'));document.querySelectorAll('.category-card').forEach(c=>c.classList.remove('active'));document.getElementById('menu-'+id).classList.add('active');document.getElementById('card-'+id).classList.add('active');}
 function toggleCart(){document.getElementById("sideCart").classList.toggle("open");document.getElementById("cartBackdrop").classList.toggle("active");}
 function closeAllModals(){document.getElementById("sideCart").classList.remove("open");document.getElementById("paymentModal").classList.remove("open");document.getElementById("cartBackdrop").classList.remove("active");closeSizeModal();closeAddonsModal();}
@@ -246,16 +294,23 @@ function addToCart(name,price,size,addon,category){
   const ap=Number(price||fp);
   const key=buildCartKey(name,size||null,addon||null);
   if(cartData[key])cartData[key].qty++;else cartData[key]={item:name,price:ap,qty:1,size:size||null,addon:addon||"None",category:category||"other"};
+  selectedKeys.add(key);
   updateUI();
 }
+function toggleItemSelection(key,checked){if(checked)selectedKeys.add(key);else selectedKeys.delete(key);recalcCartTotal();syncSelectAllState();}
+function toggleSelectAll(checked){if(checked)Object.keys(cartData).forEach(k=>selectedKeys.add(k));else selectedKeys.clear();updateUI();}
+function recalcCartTotal(){let t=0;Object.keys(cartData).forEach(k=>{if(selectedKeys.has(k))t+=cartData[k].price*cartData[k].qty;});document.getElementById('cart-total-value').innerHTML='&#8369;'+t;}
+function syncSelectAllState(){const cb=document.getElementById('selectAllCb');const lbl=document.getElementById('selectAllLabel');if(!cb)return;const keys=Object.keys(cartData);const allSel=keys.length>0&&keys.every(k=>selectedKeys.has(k));const someSel=keys.some(k=>selectedKeys.has(k));cb.checked=allSel;cb.indeterminate=!allSel&&someSel;lbl.textContent=allSel?'Deselect All':'Select All';}
+function validateCODFields(){let valid=true;const rn=document.getElementById('cod-recipient');const ra=document.getElementById('cod-address');const frn=document.getElementById('field-recipient');const fra=document.getElementById('field-address');frn.classList.remove('error');fra.classList.remove('error');if(!rn.value.trim()){frn.classList.add('error');valid=false;}if(!ra.value.trim()){fra.classList.add('error');valid=false;}if(!valid){const w=document.getElementById('cod-delivery-wrap');w.classList.add('shake-anim');setTimeout(()=>w.classList.remove('shake-anim'),420);}return valid;}
 
-function changeQty(key,val){cartData[key].qty+=val;if(cartData[key].qty<=0)delete cartData[key];updateUI();}
+function changeQty(key,val){cartData[key].qty+=val;if(cartData[key].qty<=0){delete cartData[key];selectedKeys.delete(key);}updateUI();}
 function addMoreWithCat(name, price, category) { openSizeModal(name, price, category); }
 
 function processCheckout(){
-  if(Object.keys(cartData).length===0){alert("Your tray is empty!");return;}
+  const checkedKeys=Object.keys(cartData).filter(k=>selectedKeys.has(k));
+  if(checkedKeys.length===0){alert("Select at least one item to checkout!");return;}
   const sl=document.getElementById("payment-summary-list");let total=0;sl.innerHTML="";
-  Object.keys(cartData).forEach(k=>{
+  checkedKeys.forEach(k=>{
     const it=cartData[k];const sub=it.price*it.qty;total+=sub;
     const extras=[];
     if(it.size)extras.push(it.size);
@@ -265,40 +320,60 @@ function processCheckout(){
   document.getElementById("payment-total-value").innerHTML="&#8369;"+total;
   document.getElementById("sideCart").classList.remove("open");
   document.getElementById("paymentModal").classList.add("open");
+  toggleCODFields();
 }
 function closePaymentModal(){document.getElementById("paymentModal").classList.remove("open");document.getElementById("cartBackdrop").classList.remove("active");}
-function saveOrderToHistory(method){
-  const items=Object.keys(cartData).map(k=>({item:cartData[k].item,quantity:cartData[k].qty,price:cartData[k].price,size:cartData[k].size||null,addon:cartData[k].addon||"None"}));
+function saveOrderToHistory(method,recipientName,deliveryAddress){
+  const checkedKeys=Object.keys(cartData).filter(k=>selectedKeys.has(k));
+  const items=checkedKeys.map(k=>({item:cartData[k].item,quantity:cartData[k].qty,price:cartData[k].price,size:cartData[k].size||null,addon:cartData[k].addon||"None"}));
   if(!items.length)return;
   const total=items.reduce((s,i)=>s+(Number(i.price)*Number(i.quantity)),0);
-  let saved=[];try{const ex=sessionStorage.getItem(ORDER_HISTORY_KEY);saved=ex?JSON.parse(ex):[];if(!Array.isArray(saved))saved=[];}catch(e){saved=[];}
-  saved.push({date:new Date().toISOString(),total,status:"Pending",paymentMethod:method,items});
-  sessionStorage.setItem(ORDER_HISTORY_KEY,JSON.stringify(saved));
+  let saved=[];try{const ex=localStorage.getItem(ORDER_HISTORY_KEY);saved=ex?JSON.parse(ex):[];if(!Array.isArray(saved))saved=[];}catch(e){saved=[];}
+  saved.push({date:new Date().toISOString(),total,status:"Pending",paymentMethod:method,recipientName:recipientName||"",deliveryAddress:deliveryAddress||"",items});
+  localStorage.setItem(ORDER_HISTORY_KEY,JSON.stringify(saved));
 }
-function confirmOrder(){const m=document.querySelector('input[name="pay-method"]:checked').value;saveOrderToHistory(m);alert(`Order confirmed via ${m}! Grilling in progress...`);cartData={};updateUI();closePaymentModal();}
+function confirmOrder(){
+  const m=document.querySelector('input[name="pay-method"]:checked').value;
+  let rname="",raddr="";
+  if(m==='COD'){if(!validateCODFields())return;rname=document.getElementById('cod-recipient').value.trim();raddr=document.getElementById('cod-address').value.trim();}
+  saveOrderToHistory(m,rname,raddr);
+  const checkedKeys=Object.keys(cartData).filter(k=>selectedKeys.has(k));
+  checkedKeys.forEach(k=>{delete cartData[k];selectedKeys.delete(k);});
+  updateUI();closePaymentModal();
+  alert(`Order confirmed via ${m}! Grilling in progress...`);
+}
 function updateUI(){
   const c=document.getElementById("cart-items-container");const tv=document.getElementById("cart-total-value");const cv=document.getElementById("cart-count");
-  let total=0,totalItems=0;c.innerHTML="";
-  Object.keys(cartData).forEach(k=>{
-    const it=cartData[k];total+=it.price*it.qty;totalItems+=it.qty;
+  let selectedTotal=0,totalItems=0;
+  const keys=Object.keys(cartData);
+  if(keys.length===0){c.innerHTML='<div style="text-align:center;padding:2rem 1rem;font-weight:700;color:var(--brown-mid);opacity:0.6;">Your tray is empty!</div>';tv.innerHTML="&#8369;0";cv.innerText=0;syncSelectAllState();return;}
+  c.innerHTML="";
+  keys.forEach(k=>{
+    const it=cartData[k];const isSel=selectedKeys.has(k);
+    if(isSel)selectedTotal+=it.price*it.qty;totalItems+=it.qty;
     const extras=[];
     if(it.size)extras.push(`Size: ${it.size}`);
     if(it.addon&&it.addon!=="None")extras.push(`+ ${it.addon}`);
-    let plusBtn=`<button style="background:var(--yellow);border:none;width:30px;height:30px;font-weight:900;cursor:pointer;font-size:1rem;" onclick="changeQty('${k}',1)">+</button>`;
+    const ek=k.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    let plusBtn=`<button style="background:var(--yellow);border:none;width:30px;height:30px;font-weight:900;cursor:pointer;font-size:1rem;" onclick="changeQty('${ek}',1)">+</button>`;
     if(it.category==="fries"||it.category==="drinks"||it.category==="juice"){
       const basePrice=PRICE_MAP[it.item]||it.price;
       plusBtn=`<button style="background:var(--yellow);border:none;width:30px;height:30px;font-weight:900;cursor:pointer;font-size:1rem;" onclick="addMoreWithCat('${it.item}',${basePrice},'${it.category}')">+</button>`;
     }
-    c.innerHTML+=`<div style="background:var(--white);border-radius:14px;padding:1rem;margin-bottom:0.8rem;display:flex;justify-content:space-between;align-items:center;border:2.5px solid var(--brown);box-shadow:3px 3px 0 var(--cream);">
-      <div><strong style="font-family:var(--font-display);font-size:1rem;">${it.item}</strong>${extras.length?`<br><small style="color:var(--brown-mid);font-weight:700;">${extras.join(" | ")}</small>`:""}<br><span style="color:var(--red);font-weight:800;">&#8369;${it.price}</span></div>
+    c.innerHTML+=`<div style="background:${isSel?'var(--white)':'rgba(245,237,214,0.5)'};border-radius:14px;padding:1rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:0.7rem;border:2.5px solid ${isSel?'var(--brown)':'rgba(59,26,8,0.25)'};box-shadow:${isSel?'3px 3px 0 var(--cream)':'none'};transition:background 200ms,border-color 200ms;">
+      <input type="checkbox" class="cart-item-cb" ${isSel?'checked':''} onchange="toggleItemSelection('${ek}',this.checked)">
+      <div style="flex:1">
+        <strong style="font-family:var(--font-display);font-size:1rem;color:${isSel?'var(--red)':'var(--brown-mid)'}">${it.item}</strong>${extras.length?`<br><small style="color:var(--brown-mid);font-weight:700;">${extras.join(" | ")}</small>`:""}<br><span style="color:${isSel?'var(--red)':'var(--brown-mid)'};font-weight:800;">&#8369;${it.price}</span>
+      </div>
       <div style="display:flex;align-items:center;background:var(--cream);border:2px solid var(--brown);border-radius:8px;overflow:hidden;">
-        <button style="background:var(--yellow);border:none;width:30px;height:30px;font-weight:900;cursor:pointer;font-size:1rem;" onclick="changeQty('${k}',-1)">-</button>
+        <button style="background:var(--yellow);border:none;width:30px;height:30px;font-weight:900;cursor:pointer;font-size:1rem;" onclick="changeQty('${ek}',-1)">-</button>
         <span style="width:32px;text-align:center;font-weight:800;">${it.qty}</span>
         ${plusBtn}
       </div>
     </div>`;
   });
-  tv.innerHTML="&#8369;"+total;cv.innerText=totalItems;
+  tv.innerHTML="&#8369;"+selectedTotal;cv.innerText=totalItems;
+  syncSelectAllState();
 }
 
 // Navbar interactions

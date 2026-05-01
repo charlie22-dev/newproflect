@@ -484,6 +484,63 @@
         animation: none !important;
       }
     }
+    /* ── Auth Tabs ─────────────────────────────────────────── */
+    .auth-tabs {
+      display: flex;
+      background: var(--cream);
+      border: 2.5px solid var(--brown);
+      border-radius: 50px;
+      padding: 4px;
+      margin-bottom: 1.8rem;
+      gap: 4px;
+    }
+    .auth-tab {
+      flex: 1;
+      height: 36px;
+      border: none;
+      border-radius: 50px;
+      font-family: var(--font-display);
+      font-size: 0.92rem;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      background: transparent;
+      color: var(--brown-mid);
+      transition: background 200ms var(--ease-out), color 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
+    }
+    .auth-tab.active { background: var(--red); color: var(--white); box-shadow: 2px 2px 0 var(--brown); }
+    .auth-tab:active { transform: scale(0.97); }
+    /* ── Auth Panels ─────────────────────────────────────────── */
+    .auth-panel { display: none; }
+    .auth-panel.active { display: block; animation: panel-in 220ms var(--ease-out) both; }
+    @keyframes panel-in { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    /* ── Password wrapper ─────────────────────────────────────── */
+    .pw-wrap { position: relative; }
+    .pw-wrap input { padding-right: 3rem; }
+    .pw-toggle {
+      position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%);
+      width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+      background: none; border: none; cursor: pointer; color: var(--brown-mid);
+      border-radius: 8px; transition: color 160ms var(--ease-out), background 160ms var(--ease-out);
+    }
+    .pw-toggle:hover { color: var(--brown); background: rgba(59,26,8,0.06); }
+    .pw-toggle:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+    /* ── Forgot link ─────────────────────────────────────────── */
+    .forgot-link-wrap { text-align: right; margin-top: -0.7rem; margin-bottom: 1.2rem; }
+    .forgot-link {
+      background: none; border: none; cursor: pointer; font-size: 0.82rem;
+      font-weight: 700; color: var(--brown-mid); transition: color 160ms var(--ease-out); padding: 0;
+    }
+    .forgot-link:hover { color: var(--red); }
+    /* ── Inline errors ─────────────────────────────────────────── */
+    .inline-err { font-size: 0.75rem; color: var(--red); font-weight: 700; display: block; margin-top: 0.3rem; min-height: 1rem; }
+    /* ── Forgot success ─────────────────────────────────────────── */
+    .forgot-success-box {
+      background: #e8f7ed; border: 2px solid #2d8c4e; border-radius: 12px;
+      padding: 1rem; text-align: center; font-weight: 700; color: #154d1d;
+      font-size: 0.9rem; margin-bottom: 1rem;
+    }
+    .forgot-back { background:none; border:none; cursor:pointer; font-size:0.85rem; font-weight:700; color:var(--brown-mid); margin-top:0.5rem; display:block; text-align:center; transition:color 160ms var(--ease-out); }
+    .forgot-back:hover { color:var(--red); }
   </style>
 </head>
 
@@ -491,7 +548,12 @@
 
   <!-- Redirect if already logged in -->
   <script>
-    if (localStorage.getItem('loggedIn') === 'true') window.location.href = 'home.html';
+    (function(){
+      if(localStorage.getItem('loggedIn')==='true'){
+        var p=new URLSearchParams(location.search).get('to');
+        location.replace(p||'home.html');
+      }
+    })();
   </script>
 
   <div class="login-wrap">
@@ -502,28 +564,91 @@
     <div class="login-form-side">
       <div class="auth-card">
 
-        <!-- Mini brand mark -->
+        <!-- Brand mark -->
         <div class="form-brand-mark">
           <a href="index.html" class="logo-small">MIMALICIOUS</a>
           <span class="badge-pill">EST. 2026</span>
         </div>
 
-        <h2>Welcome Back!</h2>
-        <p>Sign in to start your order</p>
+        <!-- Tab switcher -->
+        <div class="auth-tabs" role="tablist">
+          <button class="auth-tab active" id="tab-login" role="tab" aria-selected="true" onclick="switchTab('login')">LOGIN</button>
+          <button class="auth-tab" id="tab-signup" role="tab" aria-selected="false" onclick="switchTab('signup')">SIGN UP</button>
+        </div>
 
-        <form id="authForm">
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input id="email" type="email" placeholder="you@example.com" required>
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input id="password" type="password" placeholder="••••••••" required>
-          </div>
-          <button type="submit" class="submit-btn" id="login-submit-btn">LOGIN / SIGN UP</button>
-        </form>
+        <!-- ── LOGIN PANEL ── -->
+        <div class="auth-panel active" id="panel-login" role="tabpanel">
+          <h2>Welcome Back!</h2>
+          <p>Sign in to start your order</p>
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="l-email">Email Address</label>
+              <input id="l-email" type="email" placeholder="you@example.com" required autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label for="l-password">Password</label>
+              <div class="pw-wrap">
+                <input id="l-password" type="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" required autocomplete="current-password">
+                <button type="button" class="pw-toggle" onclick="togglePw('l-password',this)" aria-label="Show password" id="toggle-l-pw"></button>
+              </div>
+            </div>
+            <div class="forgot-link-wrap">
+              <button type="button" class="forgot-link" onclick="showPanel('forgot')">Forgot Password?</button>
+            </div>
+            <button type="submit" class="submit-btn" id="login-submit-btn">LOGIN</button>
+          </form>
+        </div>
 
-        <a href="index.html" class="back-link">← Back to Landing</a>
+        <!-- ── SIGN UP PANEL ── -->
+        <div class="auth-panel" id="panel-signup" role="tabpanel">
+          <h2>Join Mimalicious!</h2>
+          <p>Create your account and start ordering</p>
+          <form id="signupForm">
+            <div class="form-group">
+              <label for="s-name">Full Name</label>
+              <input id="s-name" type="text" placeholder="Juan dela Cruz" required autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label for="s-email">Email Address</label>
+              <input id="s-email" type="email" placeholder="you@example.com" required autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label for="s-password">Password</label>
+              <div class="pw-wrap">
+                <input id="s-password" type="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" required autocomplete="new-password">
+                <button type="button" class="pw-toggle" onclick="togglePw('s-password',this)" aria-label="Show password" id="toggle-s-pw"></button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="s-confirm">Confirm Password</label>
+              <div class="pw-wrap">
+                <input id="s-confirm" type="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" required autocomplete="new-password">
+                <button type="button" class="pw-toggle" onclick="togglePw('s-confirm',this)" aria-label="Show confirm password" id="toggle-s-cf"></button>
+              </div>
+              <span class="inline-err" id="pw-match-err"></span>
+            </div>
+            <button type="submit" class="submit-btn">CREATE ACCOUNT</button>
+          </form>
+        </div>
+
+        <!-- ── FORGOT PASSWORD PANEL ── -->
+        <div class="auth-panel" id="panel-forgot" role="tabpanel">
+          <h2>Reset Password</h2>
+          <p>Enter your email and we'll send a reset link.</p>
+          <div class="forgot-success-box" id="forgot-success" style="display:none">
+            Check your inbox! If that email is registered, you'll receive a reset link shortly.
+          </div>
+          <form id="forgotForm">
+            <div class="form-group">
+              <label for="f-email">Email Address</label>
+              <input id="f-email" type="email" placeholder="you@example.com" required autocomplete="email">
+            </div>
+            <button type="submit" class="submit-btn">SEND RESET LINK</button>
+          </form>
+          <button type="button" class="forgot-back" onclick="switchTab('login')">&#8592; Back to Login</button>
+        </div>
+
+        <a href="index.html" class="back-link">&#8592; Back to Landing</a>
       </div>
     </div>
 
@@ -626,14 +751,64 @@
 
 
   <script>
-    /* ── Login form ──────────────────────────────────────────────── */
-    document.getElementById('authForm').addEventListener('submit', function (e) {
+    /* ── SVG Icons ──────────────────────────────────────────── */
+    const EYE_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+    const EYEOFF_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`;
+
+    /* Init eye icons */
+    document.querySelectorAll('.pw-toggle').forEach(btn => btn.innerHTML = EYE_SVG);
+
+    /* ── Panel / Tab switching ────────────────────────────────── */
+    function showPanel(name) {
+      document.querySelectorAll('.auth-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + name).classList.add('active');
+    }
+    function switchTab(name) {
+      document.querySelectorAll('.auth-tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+      const tab = document.getElementById('tab-' + name);
+      if (tab) { tab.classList.add('active'); tab.setAttribute('aria-selected','true'); }
+      showPanel(name);
+    }
+
+    /* ── Password toggle ─────────────────────────────────────── */
+    function togglePw(inputId, btn) {
+      const inp = document.getElementById(inputId);
+      const isHidden = inp.type === 'password';
+      inp.type = isHidden ? 'text' : 'password';
+      btn.innerHTML = isHidden ? EYEOFF_SVG : EYE_SVG;
+      btn.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+    }
+
+    /* ── Redirect helper ─────────────────────────────────────── */
+    function getRedirect(){ var p=new URLSearchParams(location.search).get('to'); return p||'home.html'; }
+
+    /* ── Login form ──────────────────────────────────────────── */
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
       localStorage.setItem('loggedIn', 'true');
-      window.location.href = 'home.html';
+      window.location.href = getRedirect();
     });
 
-    /* ── Testimonial carousel ────────────────────────────────────── */
+    /* ── Sign Up form ────────────────────────────────────────── */
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const pw = document.getElementById('s-password').value;
+      const cf = document.getElementById('s-confirm').value;
+      const err = document.getElementById('pw-match-err');
+      if (pw !== cf) { err.textContent = 'Passwords do not match.'; document.getElementById('s-confirm').focus(); return; }
+      err.textContent = '';
+      localStorage.setItem('loggedIn', 'true');
+      window.location.href = getRedirect();
+    });
+
+    /* ── Forgot password form ────────────────────────────────── */
+    document.getElementById('forgotForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('forgot-success').style.display = 'block';
+      document.getElementById('forgotForm').style.display = 'none';
+    });
+
+    /* ── Testimonial carousel ────────────────────────────────── */
     const AUTOPLAY_MS = 4000;  // rotate every 4 s
     const TRANSITION_MS = 500;  // must match CSS transition duration
 

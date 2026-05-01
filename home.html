@@ -22,13 +22,16 @@
     /* BURGER TOP BUN (STATS SECTION) */
     .top-bun {
       position: relative;
-      background: linear-gradient(180deg, #e8a335 0%, #c27d1a 100%) !important; /* Golden baked bun */
+      background: linear-gradient(180deg, #e8a335 0%, #c27d1a 100%) !important;
+      /* Golden baked bun */
       border-radius: 50% 50% 0 0 / 100px 100px 0 0 !important;
       overflow: hidden;
-      box-shadow: inset 0 20px 40px rgba(255,255,255,0.25), 0 -10px 20px rgba(0,0,0,0.1) !important;
+      box-shadow: inset 0 20px 40px rgba(255, 255, 255, 0.25), 0 -10px 20px rgba(0, 0, 0, 0.1) !important;
       z-index: 20;
-      padding-top: 5rem !important; /* Extra padding for curve */
-      margin-top: -100px; /* Pulls exactly up by the radius to hide the red background corners */
+      padding-top: 5rem !important;
+      /* Extra padding for curve */
+      margin-top: -100px;
+      /* Pulls exactly up by the radius to hide the red background corners */
     }
 
     /* Organic Sesame Seeds Overlay via SVG */
@@ -47,10 +50,12 @@
       position: relative;
       z-index: 2;
     }
+
     #stats.top-bun .stat-number {
       color: #fff !important;
       text-shadow: 3px 3px 0 var(--brown) !important;
     }
+
     #stats.top-bun .stat-label {
       color: var(--brown) !important;
       font-weight: 900 !important;
@@ -154,7 +159,7 @@
       box-shadow: none;
       transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1), background-color 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
     }
-    
+
     .hero-top-nav.nav-scrolled {
       background: var(--red);
       padding: 1.2rem 6%;
@@ -235,8 +240,15 @@
 
     /* DAILY DEALS - THE PATTY */
     @keyframes sizzlePatty {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(3px) scale(0.995); }
+
+      0%,
+      100% {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(3px) scale(0.995);
+      }
     }
 
     .daily-deals {
@@ -244,10 +256,12 @@
       text-align: center;
       background: #3b1a08;
       position: relative;
-      border-radius: 0; /* Make full width */
-      margin: 0; /* Remove side margins */
+      border-radius: 0;
+      /* Make full width */
+      margin: 0;
+      /* Remove side margins */
       z-index: 10;
-      box-shadow: inset 0 -10px 25px rgba(0,0,0,0.9), inset 0 10px 25px rgba(0,0,0,0.9);
+      box-shadow: inset 0 -10px 25px rgba(0, 0, 0, 0.9), inset 0 10px 25px rgba(0, 0, 0, 0.9);
       animation: sizzlePatty 3s infinite ease-in-out;
     }
 
@@ -255,10 +269,11 @@
       content: '';
       position: absolute;
       inset: 0;
-      border-radius: 0; /* Full width */
-      background-image: 
-        linear-gradient(45deg, rgba(0,0,0,0.3) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.3) 75%, transparent 75%, transparent),
-        radial-gradient(circle at 50% 50%, rgba(0,0,0,0.5) 2px, transparent 3px);
+      border-radius: 0;
+      /* Full width */
+      background-image:
+        linear-gradient(45deg, rgba(0, 0, 0, 0.3) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.3) 75%, transparent 75%, transparent),
+        radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.5) 2px, transparent 3px);
       background-size: 80px 80px, 20px 20px;
       pointer-events: none;
       z-index: 1;
@@ -269,18 +284,26 @@
       position: relative;
       width: 100%;
       height: 75px;
-      margin-top: -10px; /* Overlap with top bun */
-      margin-bottom: -65px; /* Slide patty up under it */
+      margin-top: -10px;
+      /* Overlap with top bun */
+      margin-bottom: -65px;
+      /* Slide patty up under it */
       background-image: url("data:image/svg+xml,%3Csvg width='400' height='75' viewBox='0 0 400 75' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0,0 L 0,40 C 10,40 15,10 25,10 C 35,10 45,50 60,50 C 75,50 85,20 100,20 C 115,20 125,60 140,60 C 155,60 165,15 180,15 C 195,15 205,50 220,50 C 235,50 245,25 260,25 C 275,25 290,65 310,65 C 330,65 345,15 360,15 C 375,15 385,40 400,40 L 400,0 Z' fill='%232e5a1c'/%3E%3Cpath d='M 0,0 L 0,25 C 15,25 20,60 35,60 C 50,60 60,15 75,15 C 90,15 100,55 115,55 C 130,55 140,25 155,25 C 170,25 185,70 205,70 C 225,70 235,30 250,30 C 265,30 275,60 290,60 C 305,60 315,20 330,20 C 345,20 360,75 380,75 C 390,75 395,25 400,25 L 400,0 Z' fill='%234d8f33'/%3E%3Cpath d='M 0,0 L 0,55 C 10,55 20,25 30,25 C 40,25 50,45 60,45 C 70,45 80,10 95,10 C 110,10 120,65 135,65 C 150,65 160,35 175,35 C 190,35 200,45 210,45 C 220,45 235,15 255,15 C 275,15 285,55 300,55 C 315,55 325,35 340,35 C 355,35 365,65 380,65 C 390,65 395,55 400,55 L 400,0 Z' fill='%2370B354' stroke='%23A5D6A7' stroke-width='1.5'/%3E%3C/svg%3E");
       background-size: 400px 75px;
       z-index: 15;
       animation: swayLettuce 15s infinite ease-in-out alternate;
-      filter: drop-shadow(0 6px 8px rgba(0,0,0,0.4));
+      filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.4));
       pointer-events: none;
     }
+
     @keyframes swayLettuce {
-      from { background-position: 0 0; }
-      to { background-position: -400px 0; }
+      from {
+        background-position: 0 0;
+      }
+
+      to {
+        background-position: -400px 0;
+      }
     }
 
     /* Premium Animated Cheese Melt (Bottom of Patty) */
@@ -288,18 +311,27 @@
       position: relative;
       width: 100%;
       height: 120px;
-      margin-top: -2px; /* Overlap patty slightly to hide seams */
-      margin-bottom: -118px; /* Let bottom bun (footer) slide up exactly to the patty */
+      margin-top: -2px;
+      /* Overlap patty slightly to hide seams */
+      margin-bottom: -118px;
+      /* Let bottom bun (footer) slide up exactly to the patty */
       background-image: url("data:image/svg+xml,%3Csvg width='400' height='120' viewBox='0 0 400 95' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='cheeseGrad' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%23FFE57F'/%3E%3Cstop offset='20%25' stop-color='%23FFCA28'/%3E%3Cstop offset='50%25' stop-color='%23FFB300'/%3E%3Cstop offset='85%25' stop-color='%23FF8F00'/%3E%3Cstop offset='100%25' stop-color='%23E65100'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M 0,0 L 0,80 C 10,80 15,30 25,30 C 35,30 40,65 50,65 C 60,65 65,20 80,20 C 95,20 105,75 120,75 C 135,75 145,15 160,15 C 175,15 185,55 195,55 C 205,55 210,35 220,35 C 230,35 240,85 255,85 C 270,85 285,25 300,25 C 315,25 325,50 335,50 C 345,50 355,20 365,20 C 375,20 380,80 400,80 L 400,0 Z' fill='url(%23cheeseGrad)'/%3E%3Cpath d='M 0,0 L 0,77 C 10,77 15,27 25,27 C 35,27 40,62 50,62 C 60,62 65,17 80,17 C 95,17 105,72 120,72 C 135,72 145,12 160,12 C 175,12 185,52 195,52 C 205,52 210,32 220,32 C 230,32 240,82 255,82 C 270,82 285,22 300,22 C 315,22 325,47 335,47 C 345,47 355,17 365,17 C 375,17 380,77 400,77 L 400,0 Z' fill='none' stroke='%23FFF8E1' stroke-width='2' stroke-opacity='0.6'/%3E%3C/svg%3E");
       background-size: 400px 120px;
-      z-index: 15; /* Above bottom bun */
+      z-index: 15;
+      /* Above bottom bun */
       animation: dripCheese 20s infinite ease-in-out alternate;
-      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+      filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5));
       pointer-events: none;
     }
+
     @keyframes dripCheese {
-      from { background-position: 0 0; }
-      to { background-position: 400px 0; }
+      from {
+        background-position: 0 0;
+      }
+
+      to {
+        background-position: 400px 0;
+      }
     }
 
     .daily-deals .section-title {
@@ -324,7 +356,7 @@
       background: rgba(255, 250, 240, 0.95);
       border: 1px solid rgba(255, 255, 255, 0.5);
       border-radius: 2rem;
-      box-shadow: 0 20px 40px -10px rgba(0,0,0,0.6), inset 0 2px 0 rgba(255,255,255,0.8);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), inset 0 2px 0 rgba(255, 255, 255, 0.8);
       color: var(--brown);
       transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 300ms cubic-bezier(0.23, 1, 0.32, 1);
       position: relative;
@@ -340,7 +372,7 @@
 
     .deal-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 30px 50px -15px rgba(0,0,0,0.7), inset 0 2px 0 rgba(255,255,255,1);
+      box-shadow: 0 30px 50px -15px rgba(0, 0, 0, 0.7), inset 0 2px 0 rgba(255, 255, 255, 1);
     }
 
     /* Premium Ribbon Tag */
@@ -367,7 +399,7 @@
       line-height: 1.1;
       letter-spacing: -0.02em;
     }
-    
+
     .deal-card p {
       color: #6D4C41;
       font-size: 0.95rem;
@@ -400,14 +432,14 @@
       letter-spacing: 0.05em;
       cursor: pointer;
       transition: background 200ms ease, color 200ms ease, transform 160ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 200ms ease;
-      box-shadow: 0 6px 15px rgba(255, 179, 0, 0.3), inset 0 2px 0 rgba(255,255,255,0.4);
+      box-shadow: 0 6px 15px rgba(255, 179, 0, 0.3), inset 0 2px 0 rgba(255, 255, 255, 0.4);
     }
 
     .grab-btn:hover {
       background: #FFA000;
       color: #1A1009;
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(255, 160, 0, 0.4), inset 0 2px 0 rgba(255,255,255,0.4);
+      box-shadow: 0 8px 20px rgba(255, 160, 0, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.4);
     }
 
     .grab-btn:active {
@@ -417,13 +449,15 @@
 
     .home-footer-note {
       text-align: center;
-      padding: 6rem 2rem 2.5rem; /* Increased top padding to avoid overlap with cheese drips */
+      padding: 6rem 2rem 2.5rem;
+      /* Increased top padding to avoid overlap with cheese drips */
       font-weight: 800;
       font-size: 0.85rem;
       color: var(--brown);
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      margin-top: 0; /* Let it sit flush under the patty, cheese overlaps via its margin */
+      margin-top: 0;
+      /* Let it sit flush under the patty, cheese overlaps via its margin */
       background: linear-gradient(180deg, #e8a335 0%, #c27d1a 100%);
       border-radius: 20px 20px 50% 50% / 20px 20px 80px 80px;
       position: relative;
@@ -440,6 +474,14 @@
 </head>
 
 <body>
+  <!-- Auth guard — must be first -->
+  <script>
+    (function(){
+      if(localStorage.getItem('loggedIn')!=='true'){
+        location.replace('login.html?to='+encodeURIComponent(location.pathname.split('/').pop()||'home.html'));
+      }
+    })();
+  </script>
 
   <!-- Floating top nav bar -->
   <nav class="hero-top-nav" id="mainNav">
@@ -449,7 +491,7 @@
       <li><a href="menu.html" id="nav-menu">MENU</a></li>
       <li><a href="about.html" id="nav-about">ABOUT</a></li>
       <li><a href="contact us.html" id="nav-contact">CONTACT</a></li>
-      <li><a href="history.html" id="nav-history">HISTORY</a></li>
+      <li><a href="history.html" id="nav-history">ORDERS</a></li>
     </ul>
     <a class="nav-button" href="index.html" onclick="return logoutAndResetHistory(event)" id="logout-btn">LOGOUT</a>
   </nav>
@@ -471,7 +513,8 @@
         <span style="color: var(--yellow); text-transform: uppercase;">BACK!</span>
       </h1>
       <p>Ang tagal mong nawala, muntik nang lumamig ang patties namin. Order na!</p>
-      <button class="order-btn" onclick="window.location.href='menu.html'" id="feed-hunger-btn">FEED MY HUNGER <i class="fa-solid fa-fire"></i></button>
+      <button class="order-btn" onclick="window.location.href='menu.html'" id="feed-hunger-btn">FEED MY HUNGER <i
+          class="fa-solid fa-fire"></i></button>
     </div>
 
     <div class="carousel-dots" id="carouselDots">
@@ -557,7 +600,8 @@
       if (event) event.preventDefault();
       localStorage.removeItem(ORDER_HISTORY_KEY);
       sessionStorage.removeItem(ORDER_HISTORY_KEY);
-      window.location.href = 'index.html';
+      localStorage.removeItem('loggedIn');
+      window.location.href = 'login.html';
       return false;
     }
 
@@ -583,7 +627,7 @@
 
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
-      
+
       // Parallax
       if (window.matchMedia('(pointer: fine)').matches) {
         carousel.style.transform = `translateY(${scrollY * 0.4}px)`;
