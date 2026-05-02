@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState('');
 
   useEffect(() => {
     const obs = new IntersectionObserver(entries => entries.forEach(e => {
@@ -13,11 +13,28 @@ export default function Contact() {
     return () => obs.disconnect();
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
-    e.target.reset();
+    setStatus('sending');
+    const form = e.target;
+    const data = new FormData(form);
+    
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (response.ok) {
+        setStatus('success');
+        form.reset();
+        setTimeout(() => setStatus(''), 5000);
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      setStatus('error');
+    }
   };
 
   return (
@@ -66,21 +83,25 @@ export default function Contact() {
 
           <div className="contact-form-side">
             <h3>Drop a Message</h3>
-            <form onSubmit={handleSubmit}>
+            <form action="https://formspree.io/f/xwvngydg" method="POST" onSubmit={handleFormSubmit}>
               <div className="form-group">
                 <label>Your Name</label>
-                <input type="text" placeholder="Hungry Customer #1" required />
+                <input type="text" name="name" placeholder="Hungry Customer #1" required />
               </div>
               <div className="form-group">
                 <label>Email Address</label>
-                <input type="email" placeholder="Mimalicious@email.com" required />
+                <input type="email" name="email" placeholder="Mimalicious@email.com" required />
               </div>
               <div className="form-group">
                 <label>Special Requests / Feedback</label>
-                <textarea placeholder="Tell us what's on your mind..." style={{ minHeight: '120px' }} required></textarea>
+                <textarea name="message" placeholder="Tell us what's on your mind..." style={{ minHeight: '120px' }} required></textarea>
               </div>
-              <button className="submit-btn" type="submit" id="contact-send-btn">SEND IT <i className="fa-solid fa-paper-plane"></i></button>
-              {submitted && <div className="success-msg">Message received! We'll get back to you soon. 🍔</div>}
+              <button className="submit-btn" type="submit" id="contact-send-btn" disabled={status === 'sending'}>
+                {status === 'sending' ? 'SENDING...' : <>SEND IT <i className="fa-solid fa-paper-plane"></i></>}
+              </button>
+              
+              {status === 'success' && <div className="success-msg">Message received! We'll get back to you soon. 🍔</div>}
+              {status === 'error' && <div className="success-msg" style={{background: '#fde8e8', color: '#c0392b', borderColor: '#c0392b'}}>Oops! Something went wrong. Try again.</div>}
             </form>
           </div>
         </div>

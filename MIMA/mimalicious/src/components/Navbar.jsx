@@ -59,7 +59,24 @@ export default function Navbar({ cartCount, onCartToggle, showCart }) {
 
   return (
     <nav className="navbar" id="mainNav" ref={navRef} style={isMenu ? { display: 'flex', justifyContent: 'space-between' } : {}}>
-      <NavLink to="/home" className="logo">MIMALICIOUS</NavLink>
+      <NavLink to="/home" className="logo" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+        <img
+          src="/images/mima_logo1.png"
+          alt="Mimalicious Logo"
+          style={{
+            height: '100px',
+            width: 'auto',
+            display: 'block',
+            transition: 'transform 160ms cubic-bezier(0.23, 1, 0.32, 1)',
+            willChange: 'transform',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.08) rotate(-3deg)'; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1) rotate(0deg)'; }}
+          onMouseDown={e => { e.currentTarget.style.transform = 'scale(0.95) rotate(-1deg)'; }}
+          onMouseUp={e => { e.currentTarget.style.transform = 'scale(1.08) rotate(-3deg)'; }}
+        />
+        MIMALICIOUS
+      </NavLink>
       <ul className="nav-links">
         <li><NavLink to="/home" className={({ isActive }) => isActive ? 'active' : ''}>HOME</NavLink></li>
         <li><NavLink to="/menu" className={({ isActive }) => isActive ? 'active' : ''}>MENU</NavLink></li>

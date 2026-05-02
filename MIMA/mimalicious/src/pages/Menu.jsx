@@ -234,7 +234,7 @@ export default function Menu() {
   /* ── Checkout ────────────────────────────────────────────── */
   function processCheckout() {
     const checked = cartKeys.filter(k => selected.has(k));
-    if (checked.length === 0) { alert("Select at least one item to checkout!"); return; }
+    if (checked.length === 0) { addToast("Select at least one item to checkout!"); return; }
     setCartOpen(false);
     setPayOpen(true);
   }
@@ -270,7 +270,7 @@ export default function Menu() {
     setCart(prev => { const next = {...prev}; checked.forEach(k => delete next[k]); return next; });
     setSelected(new Set());
     setPayOpen(false);
-    alert("Order confirmed via " + payMethod + "! Grilling in progress...");
+    addToast("Order confirmed via " + payMethod + "! Grilling in progress...");
   }
 
   const checkedKeys = cartKeys.filter(k => selected.has(k));
@@ -380,7 +380,7 @@ export default function Menu() {
                     checked={isChecked}
                     onChange={() => toggleAddon(k)} />
                   <strong>{k}</strong>
-                  <span className="size-price">{v === 0 ? "&#8369;0" : "+" + v}</span>
+                  {v !== 0 && <span className="size-price">+{v}</span>}
                 </label>
               );
             })}

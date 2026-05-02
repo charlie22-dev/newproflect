@@ -3,10 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 
 const REVIEWS = [
-  { initial: 'M', quote: '"Grabe yung Big Mima, kaya na nyang pumalit sa aking ex! Hindi ako nag-regret kahit isang segundo. Solid ang lasa, bes — babalik na naman ako bukas!"', name: 'Marvie Santos', tag: 'Verified Burger Addict • Quezon City' },
-  { initial: 'K', quote: '"Yung Mima Cheesy Overload? Bro, four layers ng cheese. FOUR. I called my mom after just to tell her I\'m okay. Kinain ko ulit pagkatapos. 10/10 no regrets."', name: 'Karlo Reyes', tag: 'Regular Customer • Makati' },
-  { initial: 'L', quote: '"Pina-order ko \'tong Mima BBQ Blast sa first date ko. Third date na kami ngayon, and he said \'the burger sealed the deal.\' Hindi ko sure kung ako yung ibig sabihin — basta ayaw ko malaman."', name: 'Lovely Dela Cruz', tag: 'Suki ng Mimalicious • Pasig' },
-  { initial: 'A', quote: '"Tinry ko yung Mima Fire Crunch isang beses. Isang beses lang — kasi every day na ako mag-uuwi ng lima. Doc said my blood type is now BBQ. Absolutely worth it."', name: 'Andro Bautista', tag: 'Power Customer • Mandaluyong' },
+  { img: 'kween.jpg', initial: 'K', quote: '"Grabe yung Big Mima, kaya na nyang pumalit sa aking ex! Hindi ako nag-regret kahit isang segundo. Solid ang lasa, bes — babalik na naman ako bukas!"', name: 'Kween Yasmin', tag: 'Verified Burger Addict • Quezon City' },
+  { img: 'toni.png', initial: 'T', quote: '"Yung Mima Cheesy Overload? Bro, four layers ng cheese. FOUR. I called my mom after just to tell her I\'m okay. Kinain ko ulit pagkatapos. 10/10 no regrets."', name: 'Toni Fowler', tag: 'Regular Customer • Makati' },
+  { img: 'sassa.jpg', initial: 'S', quote: '"Pina-order ko \'tong Mima BBQ Blast sa first date ko. Third date na kami ngayon, and he said \'the burger sealed the deal.\' Hindi ko sure kung ako yung ibig sabihin — basta ayaw ko malaman."', name: 'Sassa Gurl', tag: 'Suki ng Mimalicious • Pasig' },
+  { img: 'kingtesti.jpg', initial: 'KY', quote: '"Tinry ko yung Mima Fire Crunch isang beses. Isang beses lang — kasi every day na ako mag-uuwi ng lima. Doc said my blood type is now BBQ. Absolutely worth it."', name: 'King Yuan Nadala', tag: 'Power Customer • Mandaluyong' },
 ];
 
 const AUTOPLAY_MS = 5000;
@@ -176,7 +176,9 @@ export default function Landing() {
               <span className="rev-stars" aria-label="5 out of 5 stars">★★★★★</span>
               <p className="rev-text">{r.quote}</p>
               <div className="rev-customer">
-                <div className="rev-avatar" aria-hidden="true">{r.initial}</div>
+                <div className="rev-avatar" aria-hidden="true">
+                  {r.img ? <img src={`/images/${r.img}`} alt={r.name} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} /> : r.initial}
+                </div>
                 <div>
                   <span className="rev-name">{r.name}</span>
                   <span className="rev-tag">{r.tag}</span>
